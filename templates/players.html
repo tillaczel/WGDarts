@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Players List</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>All Players</title>
 </head>
 <body>
-    <div class="player-container">
+    <h1>All Players</h1>
+    <div class="player-list">
         {% for player in players %}
-        <div class="player-card">
-            <img src="{{ url_for('static', filename=player.image) }}" alt="Player Image" class="player-image">
-            <h2 class="player-name">{{ player.name }}</h2>
-            <p class="player-rating">{{ player.elo_rating }}</p>
-        </div>
+            <div class="player-card">
+                <img src="{{ player.image }}" alt="Player Image" width="250" height="250">
+                <h3>{{ player.name }}</h3>
+                <p>Elo Rating: {{ player.elo_rating }}</p>
+            </div>
         {% endfor %}
     </div>
 </body>

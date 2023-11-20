@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Record Game Result</title>
+</head>
+<body>
+    <h1>Record Game Result</h1>
+    <form action="{{ url_for('record_game') }}" method="post">
+        <label for="winner_id">Winner:</label>
+        <select name="winner_id" id="winner_id">
+            {% for player in players %}
+            <option value="{{ player.id }}">{{ player.name }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="loser_id">Loser:</label>
+        <select name="loser_id" id="loser_id">
+            {% for player in players %}
+            <option value="{{ player.id }}">{{ player.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Record Game">
+    </form>
+</body>
+</html>
