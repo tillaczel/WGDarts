@@ -1,2 +1,2 @@
 # DartChampions
-Elo Point
+Elo Point System for Prfessional WG Darts
