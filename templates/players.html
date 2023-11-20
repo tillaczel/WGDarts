@@ -2,18 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>All Players</title>
+    <title>Players</title>
+    <script>
+        function selectPlayer(playerId) {
+            var card = document.getElementById('player-card-' + playerId);
+            card.classList.toggle('selected');
+            // Add further logic to handle player selection for a game
+        }
+    </script>
+    <style>
+        .player-card {
+            border: 1px solid black;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .selected {
+            border: 3px solid green;
+        }
+    </style>
 </head>
 <body>
-    <h1>All Players</h1>
+    <h1>Players</h1>
     <div class="player-list">
         {% for player in players %}
-            <div class="player-card">
-                <img src="{{ player.image }}" alt="Player Image" width="250" height="250">
+            <div class="player-card" id="player-card-{{ player.id }}" onclick="selectPlayer('{{ player.id }}')">
+                <img src="{{ player.image }}" alt="Player Image" width="100" height="100">
                 <h3>{{ player.name }}</h3>
                 <p>Elo Rating: {{ player.elo_rating }}</p>
             </div>
         {% endfor %}
     </div>
+
+    <div class="player-container">
+    {% for player in players %}
+        <div class="player-card" id="player-card-{{ player.id }}" onclick="selectPlayer('{{ player.id }}')">
+            <!-- Player details here -->
+        </div>
+    {% endfor %}
+</div>
+    <!-- Add further HTML for starting a game and inputting results -->
 </body>
 </html>
