@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elo Rating App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Welcome to the Elo Rating App</h1>
+    
+    <!-- Form to add a player -->
+    <form action="/add_player" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Player name" required>
+        <input type="file" name="image" accept="image/*">
+        <input type="submit" value="Add Player">
+    </form>
+
+    <!-- Form to remove a player -->
+    <form action="/remove_player" method="post">
+        <input type="text" name="name" placeholder="Player name" required>
+        <input type="submit" value="Remove Player">
+    </form>
+
+    <!-- Displaying players -->
+    <div>
+        {% for name, info in players.items() %}
+            <div>
+                <h2>{{ name }}</h2>
+                <img src="{{ info['image'] }}" alt="{{ name }}">
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

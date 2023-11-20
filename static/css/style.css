@@ -1,0 +1,7 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+input[type="text"], input[type="file"], input[type="submit"] {
+    margin: 10px 0;
+}
