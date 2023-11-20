@@ -1,0 +1,6 @@
+Flask
+Werkzeug
+Pillow==8.2.0
+
+# Any other dependencies you have
+

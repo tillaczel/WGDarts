@@ -5,3 +5,32 @@ body {
 input[type="text"], input[type="file"], input[type="submit"] {
     margin: 10px 0;
 }
+.player-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.player-card {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.player-image {
+    width: 120px; /* Adjust as necessary */
+    height: 120px; /* Adjust as necessary */
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FF0099, #493240); /* Example gradient */
+    padding: 10px;
+}
+
+.player-name {
+    margin-top: 10px;
+    font-size: 1.5em;
+}
+
+.player-rating {
+    font-size: 1em;
+    color: #555;
+}

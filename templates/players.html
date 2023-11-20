@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Players List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="player-container">
+        {% for player in players %}
+        <div class="player-card">
+            <img src="{{ url_for('static', filename=player.image) }}" alt="Player Image" class="player-image">
+            <h2 class="player-name">{{ player.name }}</h2>
+            <p class="player-rating">{{ player.elo_rating }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
