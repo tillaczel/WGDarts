@@ -4,33 +4,41 @@
     <meta charset="UTF-8">
     <title>WG Darts</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
 </head>
+
 <body>
     <h1>WG Darts</h1>
+    <h2>Players List</h2>
+    <div class="player-container">
+        {% for player in players %}
+        <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleSelection('{{ player.id }}')">
+            <img src="{{ player.image }}" alt="Player Image" class="player-image">
+            <h3 class="player-name">{{ player.name }}</h3>
+            <p class="player-rating">{{ player.elo_rating }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Form to Start Game -->
+    <form action="{{ url_for('start_game') }}" method="post">
+        <button type="submit">Start Game</button>
+    </form>
 
     <!-- Form to Add a New Player -->
     <h2>Add New Player</h2>
-<form action="{{ url_for('add_player') }}" method="post" enctype="multipart/form-data">
-    <input type="text" name="name" placeholder="Player Name" required>
-    <input type="file" name="image" accept="image/*">
-    <input type="submit" value="Add Player">
-</form>
+    <form action="{{ url_for('add_player') }}" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Player Name" required>
+        <input type="file" name="image" accept="image/*">
+        <input type="submit" value="Add Player">
+    </form>
 
-    <!-- List of Players -->
-    <h2>Players List</h2>
+    <!-- Form to Remove a Player (placed below Add Player) -->
+    <h2>Remove Player</h2>
     {% for player in players %}
-    <div>
-        <img src="{{ player.image }}" alt="Player Image" width="100" height="100">
-        <p>Name: {{ player.name }}</p>
-        <p>Elo Rating: {{ player.elo_rating }}</p>
-
-        <!-- Form to Remove a Player -->
-        <form action="{{ url_for('remove_player') }}" method="post">
-            <input type="hidden" name="player_id" value="{{ player.id }}">
-            <input type="submit" value="Remove Player">
-        </form>
-    </div>
+    <form action="{{ url_for('remove_player') }}" method="post">
+        <input type="hidden" name="player_id" value="{{ player.id }}">
+        <button type="submit">Remove {{ player.name }}</button>
+    </form>
     {% endfor %}
 </body>
 </html>

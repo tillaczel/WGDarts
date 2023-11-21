@@ -38,7 +38,20 @@ def remove_player():
         players.pop(player_name)
     return redirect(url_for('index'))
 
-# Add other routes as necessary
+
+@app.route('/start_game', methods=['POST'])
+def start_game():
+    # You will need to implement logic to determine which players were selected
+    # For now, this just redirects to a new 'game.html' template
+    return render_template('game.html', players=selected_players)
+
+
+@app.route('/record_results', methods=['POST'])
+def record_results():
+    # Logic to process game results goes here
+
+    # After processing, redirect back to the index
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

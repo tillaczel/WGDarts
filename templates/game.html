@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... -->
+</head>
+<body>
+    <h1>Game On!</h1>
+    <div class="game-container">
+        <!-- Loop through the selected players and display their cards -->
+        {% for player in players %}
+        <div class="player-card">
+            <!-- Player details -->
+            <p>Win Probability: {{ player.probability }}%</p>
+        </div>
+        <!-- Include 'VS' text between players if more than one player is selected -->
+        {% if not loop.last %}
+        <div class="versus">VS</div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Input for the order of finish -->
+    <form action="{{ url_for('record_results') }}" method="post">
+        {% for player in players %}
+        <label for="player-{{ player.id }}-finish">Finish for {{ player.name }}:</label>
+        <input type="number" id="player-{{ player.id }}-finish" name="player-{{ player.id }}-finish">
+        {% endfor %}
+        <button type="submit">Record Results</button>
+    </form>
+
+<!-- Finish Game button -->
+<a href="{{ url_for('index') }}" class="finish-game-btn">Finish Game</a>
+
+</body>
+</html>

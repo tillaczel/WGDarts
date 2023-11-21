@@ -34,12 +34,28 @@
         {% endfor %}
     </div>
 
-    <div class="player-container">
+<!-- ... existing HTML ... -->
+
+<div class="player-container">
     {% for player in players %}
-        <div class="player-card" id="player-card-{{ player.id }}" onclick="selectPlayer('{{ player.id }}')">
-            <!-- Player details here -->
+        <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleSelection('{{ player.id }}')">
+            <img src="{{ player.image }}" alt="{{ player.name }}" class="player-image">
+            <h3 class="player-name">{{ player.name }}</h3>
+            <p class="player-rating"><strong>{{ player.elo_rating }}</strong></p> <!-- Points in bold -->
         </div>
     {% endfor %}
+</div>
+
+<!-- ... rest of the HTML ... -->
+
+<script>
+    function toggleSelection(playerId) {
+        var card = document.getElementById('player-card-' + playerId);
+        card.classList.toggle('selected');
+        // Additional logic for starting the game with selected players can be added here
+    }
+</script>
+
 </div>
     <!-- Add further HTML for starting a game and inputting results -->
 </body>
