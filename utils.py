@@ -12,11 +12,13 @@ def update_rating(rating, expected_score, actual_score, k_factor=32):
     return rating + k_factor * (actual_score - expected_score)
 
 
-def add_player(name, img_path):
+def add_player(name):
     players = load_players()
+    img_path = f"{len(players)}.png"
     new_row = {"name": name, "img_path": img_path, "elo": 1000}
     players = players.append(new_row, ignore_index=True)
     save_players(players)
+    return img_path
 
 
 def load_players():
