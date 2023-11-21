@@ -16,7 +16,7 @@ def add_player(name, img_path):
     players = load_players()
     new_row = {"name": name, "img_path": img_path, "elo": 1000}
     players = players.append(new_row, ignore_index=True)
-    load_players(players)
+    save_players(players)
 
 
 def load_players():
