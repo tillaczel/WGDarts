@@ -4,24 +4,52 @@
     <meta charset="UTF-8">
     <title>WG Darts</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+    <script>
+        var selectedPlayers = {};
 
+        function toggleSelection(playerId) {
+            var card = document.getElementById('player-card-' + playerId);
+            if (selectedPlayers[playerId]) {
+                delete selectedPlayers[playerId];
+                card.classList.remove('selected');
+            } else {
+                selectedPlayers[playerId] = true;
+                card.classList.add('selected');
+            }
+        }
+
+        function startGame() {
+            var selectedPlayerIds = Object.keys(selectedPlayers);
+            if (selectedPlayerIds.length < 2) {
+                alert('Please select at least two players to start the game.');
+                return false;
+            }
+            // Submit the form with selected player IDs
+            document.getElementById('start-game-form').submit();
+        }
+    </script>
+</head>
 <body>
     <h1>WG Darts</h1>
+
+    <!-- Players List -->
     <h2>Players List</h2>
     <div class="player-container">
         {% for player in players %}
-        <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleSelection('{{ player.id }}')">
-            <img src="{{ player.image }}" alt="Player Image" class="player-image">
-            <h3 class="player-name">{{ player.name }}</h3>
-            <p class="player-rating">{{ player.elo_rating }}</p>
-        </div>
+            <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleSelection('{{ player.id }}')">
+                <img src="{{ player.image }}" alt="Player Image" class="player-image">
+                <h3 class="player-name">{{ player.name }}</h3>
+                <p class="player-rating">{{ player.elo_rating }}</p>
+            </div>
         {% endfor %}
     </div>
 
     <!-- Form to Start Game -->
-    <form action="{{ url_for('start_game') }}" method="post">
-        <button type="submit">Start Game</button>
+    <form id="start-game-form" action="{{ url_for('start_game') }}" method="post">
+        {% for player in players %}
+            <input type="hidden" name="selected_players" id="input-player-{{ player.id }}">
+        {% endfor %}
+        <button type="button" onclick="startGame()">Start Game</button>
     </form>
 
     <!-- Form to Add a New Player -->
@@ -32,13 +60,13 @@
         <input type="submit" value="Add Player">
     </form>
 
-    <!-- Form to Remove a Player (placed below Add Player) -->
+    <!-- Form to Remove a Player -->
     <h2>Remove Player</h2>
     {% for player in players %}
-    <form action="{{ url_for('remove_player') }}" method="post">
-        <input type="hidden" name="player_id" value="{{ player.id }}">
-        <button type="submit">Remove {{ player.name }}</button>
-    </form>
+        <form action="{{ url_for('remove_player') }}" method="post">
+            <input type="hidden" name="player_id" value="{{ player.id }}">
+            <button type="submit">Remove {{ player.name }}</button>
+        </form>
     {% endfor %}
 </body>
 </html>

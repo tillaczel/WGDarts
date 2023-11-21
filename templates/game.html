@@ -5,19 +5,17 @@
 </head>
 <body>
     <h1>Game On!</h1>
-    <div class="game-container">
-        <!-- Loop through the selected players and display their cards -->
-        {% for player in players %}
+  <div class="game-container">
+    {% for player_id, player in players.items() %}
         <div class="player-card">
-            <!-- Player details -->
-            <p>Win Probability: {{ player.probability }}%</p>
+            <!-- Player details and calculated probabilities -->
         </div>
-        <!-- Include 'VS' text between players if more than one player is selected -->
+        <!-- 'VS' between players -->
         {% if not loop.last %}
         <div class="versus">VS</div>
         {% endif %}
-        {% endfor %}
-    </div>
+    {% endfor %}
+</div>
 
     <!-- Input for the order of finish -->
     <form action="{{ url_for('record_results') }}" method="post">
@@ -27,6 +25,7 @@
         {% endfor %}
         <button type="submit">Record Results</button>
     </form>
+
 
 <!-- Finish Game button -->
 <a href="{{ url_for('index') }}" class="finish-game-btn">Finish Game</a>

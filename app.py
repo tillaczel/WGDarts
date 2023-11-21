@@ -35,13 +35,16 @@ def remove_player():
         players.pop(player_name)
     return redirect(url_for('index'))
 
-
 @app.route('/start_game', methods=['POST'])
 def start_game():
-    # You will need to implement logic to determine which players were selected
-    # For now, this just redirects to a new 'game.html' template
+    selected_player_ids = request.form.getlist('selected_players')
+    # Load all players
+    players = load_players()
+    # Filter to only include selected players
+    selected_players = {pid: players[pid] for pid in selected_player_ids if pid in players}
+    # Calculate probabilities, implement your logic or method here
+    # ...
     return render_template('game.html', players=selected_players)
-
 
 @app.route('/record_results', methods=['POST'])
 def record_results():
