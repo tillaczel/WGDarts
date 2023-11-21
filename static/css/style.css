@@ -1,20 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+/* Import the Castellar font from Google Fonts or use a similar web-safe font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,700;1,400&display=swap');
 
 body {
-    font-family: 'Roboto', serif; /* Placeholder for Castellar if available */
+    font-family: 'Roboto', serif; /* This is a placeholder, replace with 'Castellar' if available */
     background-color: #D4F1F4; /* Baby Blue */
     color: #05445E; /* Navy Blue */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-}
-
-h1 {
-    color: #05445E; /* Navy Blue */
-    margin: 20px 0;
 }
 
 /* ... existing styles ... */
