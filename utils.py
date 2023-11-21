@@ -42,6 +42,15 @@ def save_games(games):
         json.dump(games, json_file)
 
 
+def load_ratings():
+    return np.genfromtxt('static/tmp/ratings.csv', delimiter=',')
+
+
+def save_ratings(ratings):
+    np.savetxt('static/tmp/ratings.csv', ratings, delimiter=',')
+
+
+
 def register_game(player_ids, result):
     assert len(player_ids) == len(result)
     games = load_games()
@@ -74,7 +83,7 @@ def calculate_ratings():
                 ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
                 ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
 
-    np.savetxt('static/tmp/ratings.csv', ratings, delimiter=',')
+    save_ratings(ratings)
 
 
 

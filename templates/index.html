@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <title>WG Darts</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .selected {
+            border: 20px solid #3498db; /* Change border color to indicate selection */
+            background-color: #ecf0f1; /* Change background color to indicate selection */
+        }
+
+        #start-game-button {
+            margin-top: 100px; /* Add some top margin for spacing */
+            font-size: 20px; /* Adjust the font size to make it bigger */
+            padding: 10px 20px; /* Add padding for better visual appearance */
+        }
+    </style>
     <script>
         var selectedPlayers = {};
 
@@ -39,7 +51,7 @@
             <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleSelection('{{ player.id }}')">
                 <img src="static/uploads/{{ player.img_path }}" alt="Player Image" class="player-image">
                 <h3 class="player-name">{{ player.name }}</h3>
-                <p class="player-rating">{{ player.elo_rating }}</p>
+                <p class="player-rating">{{ player.rating }}</p>
             </div>
         {% endfor %}
     </div>
@@ -49,24 +61,9 @@
         {% for player in players %}
             <input type="hidden" name="selected_players" id="input-player-{{ player.id }}">
         {% endfor %}
-        <button type="button" onclick="startGame()">Start Game</button>
     </form>
 
-    <!-- Form to Add a New Player -->
-    <h2>Add New Player</h2>
-    <form action="{{ url_for('add_player') }}" method="post" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Player Name" required>
-        <input type="file" name="image" accept="image/*">
-        <input type="submit" value="Add Player">
-    </form>
-
-    <!-- Form to Remove a Player -->
-    <h2>Remove Player</h2>
-    {% for player in players %}
-        <form action="{{ url_for('remove_player') }}" method="post">
-            <input type="hidden" name="player_id" value="{{ player.id }}">
-            <button type="submit">Remove {{ player.name }}</button>
-        </form>
-    {% endfor %}
+    <!-- "Start Game" button at the bottom of the page -->
+    <button id="start-game-button" type="button" onclick="startGame()">Start Game</button>
 </body>
 </html>

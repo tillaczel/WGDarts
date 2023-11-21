@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, url_for, render_template
 import os
 from werkzeug.utils import secure_filename
 import utils
+import numpy as np
 
 # Configure your application and upload folder
 app = Flask(__name__)
@@ -10,7 +11,14 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Dictionary to store player data
-players = utils.load_players().to_dict(orient='records')
+players = utils.load_players()
+utils.calculate_ratings()
+ratings = utils.load_ratings()
+players = players.to_dict(orient='records')
+for id, (player, rating) in enumerate(zip(players, ratings)):
+    player['id'] = id
+    player['rating'] = round(rating, 2)
+players = [players[i] for i in np.argsort(ratings)[::-1]]
 print(players)
 
 def allowed_file(filename):
@@ -36,11 +44,11 @@ def remove_player():
         players.pop(player_name)
     return redirect(url_for('index'))
 
+
 @app.route('/start_game', methods=['POST'])
 def start_game():
     selected_player_ids = request.form.getlist('selected_players')
-    # Load all players
-    players = load_players()
+    print(request.form)
     # Filter to only include selected players
     selected_players = {pid: players[pid] for pid in selected_player_ids if pid in players}
     # Calculate probabilities, implement your logic or method here
