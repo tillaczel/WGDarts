@@ -2,10 +2,12 @@
 
 import math
 import pandas as pd
+import json
+import numpy as np
 
 
 def calculate_expected_score(rating_a, rating_b):
-    return 1 / (1 + 10 ** ((rating_b - rating_a) / 400))
+    return 1 / (1 + 10 ** ((rating_a - rating_b) / 400))
 
 
 def update_rating(rating, expected_score, actual_score, k_factor=32):
@@ -15,7 +17,7 @@ def update_rating(rating, expected_score, actual_score, k_factor=32):
 def add_player(name):
     players = load_players()
     img_path = f"{len(players)}.png"
-    new_row = {"name": name, "img_path": img_path, "elo": 1000}
+    new_row = {"name": name, "img_path": img_path}
     players = players.append(new_row, ignore_index=True)
     save_players(players)
     return img_path
@@ -29,11 +31,51 @@ def save_players(players):
     players.to_csv('static/players.csv', index=False)
 
 
+def load_games():
+    with open('static/games.json', 'r') as json_file:
+        games = json.load(json_file)
+    return games
+
+
+def save_games(games):
+    with open('static/games.json', 'w') as json_file:
+        json.dump(games, json_file)
+
 
 def register_game(player_ids, result):
     assert len(player_ids) == len(result)
-    n_players = len(player_ids)
-    for i in range(n_players-1):
-        for j in range(i+1, n_players):
-            pass
+    games = load_games()
+    games.append({"player_ids": player_ids, "result": result})
+    save_games(games)
+    calculate_ratings()
+
+
+def calculate_ratings():
+    players = load_players()
+    ratings = [1000 for _ in range(len(players))]
+    games = load_games()
+
+    for game in games:
+        player_ids = game["player_ids"]
+        result = game["result"]
+        n_players = len(player_ids)
+        for i in range(n_players-1):
+            for j in range(i+1, n_players):
+                if result[i] == result[j]:
+                    actual_score = 0.5
+                elif result[i] < result[j]:
+                    actual_score = 1
+                else:
+                    actual_score = 0
+
+                player_id_i, player_id_j = player_ids[i], player_ids[j]
+                rating_i, rating_j = ratings[player_id_i], ratings[player_id_j]
+                exp_score = calculate_expected_score(rating_i, rating_j)
+                ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
+                ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
+
+    np.savetxt('static/tmp/ratings.csv', ratings, delimiter=',')
+
+
+
 
