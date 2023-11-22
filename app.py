@@ -3,6 +3,7 @@ import os
 from werkzeug.utils import secure_filename
 import utils
 import numpy as np
+import random
 
 # Configure your application and upload folder
 app = Flask(__name__)
@@ -36,12 +37,11 @@ def add_player():
 @app.route('/start_game', methods=['POST'])
 def start_game():
     selected_player_ids = request.form.getlist('selected_players')
-    # Filter to only include selected players
 
     players_list = utils.load_players_ordered_list()
     selected_players = [player for player in players_list if str(player['id']) in selected_player_ids]
-    # Calculate probabilities, implement your logic or method here
-    # ...
+    random.shuffle(selected_players)
+
     return render_template('game.html', players=selected_players)
 
 @app.route('/record_results', methods=['POST'])

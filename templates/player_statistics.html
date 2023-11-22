@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Player Statistics</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            background-color: #2c3e50; /* Darker background color matching graph's background */
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #rating-history-plot {
+            margin-top: 20px;
+        }
+        h1, p, a {
+            color: #fff;
+        }
+    </style>
     <!-- Add any additional styles or scripts as needed -->
 </head>
 <body>
     <h1>Player Statistics</h1>
     <div class="game-container">
-        <p>Player ID: {{ player_id }}</p>
 
         <!-- Add more content to display specific player statistics -->
         <!-- For example: -->
@@ -20,12 +35,11 @@
         <!-- Plot the player's rating history -->
         <div id="rating-history-plot"></div>
 
-        <a href="{{ url_for('index') }}">Back to Home</a>
+        <a href="{{ url_for('index') }}" style="color: #fff;">Back to Home</a>
         <!-- You might want to provide a link to navigate back to the home page or another relevant page -->
     </div>
 
     <!-- Add script to plot the rating history -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
         // Extract the player's rating history from the ratings_history variable
         var playerRatingHistory = {{ ratings_history | tojson }};
@@ -36,14 +50,25 @@
             y: playerRatingHistory,
             type: 'line',
             mode: 'lines+markers',
-            marker: {color: 'blue'},
+            marker: {color: '#fff'}, // Blue color
         };
 
         var layout = {
-            title: 'Player Rating History',
-            xaxis: {title: 'Game Number'},
-            yaxis: {title: 'Rating'},
-            width: 800,  // Adjust the width as needed
+            title: {
+                text: "{{ player.name }}",
+                font: {
+                    family: 'Arial, sans-serif',
+                    size: 24, // Adjust the font size as needed
+                    color: '#fff',
+                    weight: 'bold',
+                },
+            },
+            xaxis: {title: 'Game Number', color: '#fff'},
+            yaxis: {title: 'Rating', color: '#fff'},
+            plot_bgcolor: '#2c3e50', // Darker background color
+            paper_bgcolor: '#2c3e50', // Darker background color
+            width: 1600,  // Adjust the width as needed
+            height: 600,  // Adjust the height as needed
         };
 
         Plotly.newPlot('rating-history-plot', [trace], layout);
