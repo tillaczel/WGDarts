@@ -37,21 +37,13 @@ def add_player():
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
     return redirect(url_for('index'))
 
-@app.route('/remove_player', methods=['POST'])
-def remove_player():
-    # Remove player logic
-    player_name = request.form['name']
-    if player_name in players:
-        players.pop(player_name)
-    return redirect(url_for('index'))
-
 
 @app.route('/start_game', methods=['POST'])
 def start_game():
     selected_player_ids = request.form.getlist('selected_players')
-    print(request.form)
     # Filter to only include selected players
-    selected_players = {pid: players[pid] for pid in selected_player_ids if pid in players}
+
+    selected_players = [player for player in players if str(player['id']) in selected_player_ids]
     # Calculate probabilities, implement your logic or method here
     # ...
     return render_template('game.html', players=selected_players)
