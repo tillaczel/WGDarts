@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ... -->
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <h1>Game On!</h1>
-  <div class="game-container">
-    {% for player_id, player in players.items() %}
-        <div class="player-card">
-            <!-- Player details and calculated probabilities -->
-        </div>
-        <!-- 'VS' between players -->
-        {% if not loop.last %}
-        <div class="versus">VS</div>
-        {% endif %}
-    {% endfor %}
-</div>
-
-    <!-- Input for the order of finish -->
-    <form action="{{ url_for('record_results') }}" method="post">
+     <div class="game-container">
         {% for player in players %}
-        <label for="player-{{ player.id }}-finish">Finish for {{ player.name }}:</label>
-        <input type="number" id="player-{{ player.id }}-finish" name="player-{{ player.id }}-finish">
+            <div class="player-card">
+                <img src="{{ url_for('static', filename='uploads/' + player.img_path) }}" alt="{{ player.name }}" class="player-image">
+                <h3 class="player-name">{{ player.name }}</h3>
+                <h3 class="player-rating">{{ player.rating }}</h3>
+            </div>
+            {% if not loop.last %}
+                <img src="{{ url_for('static', filename='uploads/vs.png') }}" alt="VS" class="versus-image">
+            {% endif %}
         {% endfor %}
-        <button type="submit">Record Results</button>
+    </div>
+
+    <form action="{{ url_for('record_results') }}" method="post">
+        <h3>Game Results</h3>
+        {% for player in players %}
+            <label for="finish-order-{{ player.id }}">{{ player.name }} finished:</label>
+            <select name="finish_order_{{ player.id }}" id="finish-order-{{ player.id }}">
+                {% for i in range(1, players|length + 1) %}
+                    <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+        {% endfor %}
+        <button type="submit">Submit Results</button>
     </form>
-
-
-<!-- Finish Game button -->
-<a href="{{ url_for('index') }}" class="finish-game-btn">Finish Game</a>
-
 </body>
 </html>

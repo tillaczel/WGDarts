@@ -22,7 +22,7 @@
         function toggleSelection(playerId) {
             var card = document.getElementById('player-card-' + playerId);
             if (selectedPlayers[playerId]) {
-                selectedPlayers[playerId] = false;
+                delete selectedPlayers[playerId];
                 card.classList.remove('selected');
             } else {
                 selectedPlayers[playerId] = true;
@@ -30,15 +30,29 @@
             }
         }
 
+
         function startGame() {
             var selectedPlayerIds = Object.keys(selectedPlayers);
             if (selectedPlayerIds.length < 2) {
                 alert('Please select at least two players to start the game.');
                 return false;
             }
-            // Submit the form with selected player IDs
-            document.getElementById('start-game-form').submit();
+
+            var form = document.getElementById('start-game-form');
+            // Clear any previous inputs
+            form.innerHTML = '';
+
+            selectedPlayerIds.forEach(function(id) {
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'selected_players';
+                input.value = id;
+                form.appendChild(input);
+            });
+
+            form.submit();
         }
+
     </script>
 </head>
 <body>
