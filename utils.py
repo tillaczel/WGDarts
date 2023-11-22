@@ -17,7 +17,7 @@ def update_rating(rating, expected_score, actual_score, k_factor=32):
 def add_player(name, default_img=False):
     players = load_players()
     if default_img:
-        img_path = f"default.jpg"
+        img_path = f"default.png"
     else:
         img_path = f"{len(players)}.png"
     new_row = {"name": name, "img_path": img_path}
