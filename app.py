@@ -10,24 +10,16 @@ UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Dictionary to store player data
-players = utils.load_players()
+
 utils.calculate_ratings()
-ratings = utils.load_ratings()
-ratings_history = utils.load_ratings_history()
-players = players.to_dict(orient='records')
-for id, (player, rating) in enumerate(zip(players, ratings)):
-    player['id'] = id
-    player['rounded_rating'] = round(rating)
-players = [players[i] for i in np.argsort(ratings)[::-1]]
-print(players)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def index():
-    return render_template('index.html', players=players)
+    players_list = utils.load_players_ordered_list()
+    return render_template('index.html', players=players_list)
 
 @app.route('/add_player', methods=['POST'])
 def add_player():
@@ -43,7 +35,8 @@ def start_game():
     selected_player_ids = request.form.getlist('selected_players')
     # Filter to only include selected players
 
-    selected_players = [player for player in players if str(player['id']) in selected_player_ids]
+    players_list = utils.load_players_ordered_list()
+    selected_players = [player for player in players_list if str(player['id']) in selected_player_ids]
     # Calculate probabilities, implement your logic or method here
     # ...
     return render_template('game.html', players=selected_players)
@@ -52,6 +45,7 @@ def start_game():
 def record_results():
     # Access form data
     result = {}
+    players = utils.load_players_dict()
     for player in players:
         finish_order_key = f"finish_order_{player['id']}"
         finish_order_value = request.form.get(finish_order_key)
@@ -67,7 +61,9 @@ def record_results():
 @app.route('/player_statistics/<int:player_id>')
 def player_statistics(player_id):
     # Add your logic to fetch and display player statistics here
-    return render_template('player_statistics.html', player_id=player_id, player=players[id], ratings_history=ratings_history[player_id])
+    players = utils.load_players_dict()
+    ratings_history = utils.load_ratings_history()
+    return render_template('player_statistics.html', player_id=player_id, player=players[player_id], ratings_history=ratings_history[player_id])
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -52,13 +52,13 @@ def save_ratings(ratings):
 
 def load_ratings_history():
     with open('static/tmp/ratings_history.json', 'r') as json_file:
-        games = json.load(json_file)
-    return games
+        ratings_history = json.load(json_file)
+    return ratings_history
 
 
-def save_ratings_history(ratings):
+def save_ratings_history(ratings_history):
     with open('static/tmp/ratings_history.json', 'w') as json_file:
-        json.dump(ratings, json_file)
+        json.dump(ratings_history, json_file)
 
 
 
@@ -84,7 +84,7 @@ def calculate_ratings():
             for j in range(i+1, n_players):
                 if result[i] == result[j]:
                     actual_score = 0.5
-                elif result[i] < result[j]:
+                elif result[i] > result[j]:
                     actual_score = 1
                 else:
                     actual_score = 0
@@ -94,11 +94,27 @@ def calculate_ratings():
                 exp_score = calculate_expected_score(rating_i, rating_j)
                 ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
                 ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
-                ratings_history[player_id_i].append(ratings[player_id_i])
-                ratings_history[player_id_j].append(ratings[player_id_j])
+        for player_id in range(n_players):
+            ratings_history[player_id].append(ratings[player_id])
 
     save_ratings(ratings)
     save_ratings_history(ratings_history)
+
+
+def load_players_dict():
+    players = load_players()
+    ratings = load_ratings()
+    players = players.to_dict(orient='records')
+    for id, (player, rating) in enumerate(zip(players, ratings)):
+        player['id'] = id
+        player['rounded_rating'] = round(rating)
+    return players
+
+
+def load_players_ordered_list():
+    players = load_players_dict()
+    ratings = load_ratings()
+    return [players[i] for i in np.argsort(ratings)[::-1]]
 
 
 
