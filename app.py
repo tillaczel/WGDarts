@@ -54,7 +54,6 @@ def record_results():
         finish_order_value = request.form.get(finish_order_key)
         if finish_order_value is not None:
             result[player['id']] = int(finish_order_value)
-    print(result)
     utils.register_game(list(result.keys()), list(result.values()))
 
     # After processing, redirect back to the index

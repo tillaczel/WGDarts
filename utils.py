@@ -99,7 +99,6 @@ def calculate_ratings():
                 ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
                 ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
         for player_id in player_ids:
-            print(player_id, ratings[player_id])
             ratings_history[player_id].append(ratings[player_id])
 
     save_ratings(ratings)
