@@ -17,12 +17,12 @@
         }
     </style>
     <script>
-        var selectedPlayers = {};
+        var selectedPlayers = new Array(5).fill(false);
 
         function toggleSelection(playerId) {
             var card = document.getElementById('player-card-' + playerId);
             if (selectedPlayers[playerId]) {
-                delete selectedPlayers[playerId];
+                selectedPlayers[playerId] = false;
                 card.classList.remove('selected');
             } else {
                 selectedPlayers[playerId] = true;
@@ -65,5 +65,22 @@
 
     <!-- "Start Game" button at the bottom of the page -->
     <button id="start-game-button" type="button" onclick="startGame()">Start Game</button>
+
+        <!-- Form to Add a New Player -->
+    <h2>Add New Player</h2>
+    <form action="{{ url_for('add_player') }}" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Player Name" required>
+        <input type="file" name="image" accept="image/*">
+        <input type="submit" value="Add Player">
+    </form>
+
+    <!-- Form to Remove a Player -->
+    <h2>Remove Player</h2>
+    {% for player in players %}
+        <form action="{{ url_for('remove_player') }}" method="post">
+            <input type="hidden" name="player_id" value="{{ player.id }}">
+            <button type="submit">Remove {{ player.name }}</button>
+        </form>
+    {% endfor %}
 </body>
 </html>
