@@ -17,7 +17,7 @@ ratings = utils.load_ratings()
 players = players.to_dict(orient='records')
 for id, (player, rating) in enumerate(zip(players, ratings)):
     player['id'] = id
-    player['rating'] = round(rating, 2)
+    player['rounded_rating'] = round(rating)
 players = [players[i] for i in np.argsort(ratings)[::-1]]
 print(players)
 
@@ -61,6 +61,12 @@ def record_results():
 
     # After processing, redirect back to the index
     return redirect(url_for('index'))
+
+
+@app.route('/player_statistics/<int:player_id>')
+def player_statistics(player_id):
+    # Add your logic to fetch and display player statistics here
+    return render_template('player_statistics.html', player_id=player_id)
 
 if __name__ == '__main__':
     app.run(debug=True)

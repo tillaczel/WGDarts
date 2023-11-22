@@ -50,6 +50,17 @@ def save_ratings(ratings):
     np.savetxt('static/tmp/ratings.csv', ratings, delimiter=',')
 
 
+def load_ratings_history():
+    with open('static/tmp/ratings_history.json', 'r') as json_file:
+        games = json.load(json_file)
+    return games
+
+
+def save_ratings_history(ratings):
+    with open('static/tmp/ratings_history.json', 'w') as json_file:
+        json.dump(ratings, json_file)
+
+
 
 def register_game(player_ids, result):
     assert len(player_ids) == len(result)
@@ -62,6 +73,7 @@ def register_game(player_ids, result):
 def calculate_ratings():
     players = load_players()
     ratings = [1000 for _ in range(len(players))]
+    ratings_history = [[1000] for _ in range(len(players))]
     games = load_games()
 
     for game in games:
@@ -82,8 +94,11 @@ def calculate_ratings():
                 exp_score = calculate_expected_score(rating_i, rating_j)
                 ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
                 ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
+                ratings_history[player_id_i].append(ratings[player_id_i])
+                ratings_history[player_id_j].append(ratings[player_id_j])
 
     save_ratings(ratings)
+    save_ratings_history(ratings_history)
 
 
 

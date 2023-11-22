@@ -62,10 +62,15 @@
     <h2>Players List</h2>
     <div class="player-container">
         {% for player in players %}
-            <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleSelection('{{ player.id }}')">
+            <div class="player-card" id="player-card-{{ player.id }}">
                 <img src="static/uploads/{{ player.img_path }}" alt="Player Image" class="player-image">
                 <h3 class="player-name">{{ player.name }}</h3>
-                <h3 class="player-rating">{{ player.rating }}</h3>
+                <h3 class="player-rating">{{ player.rounded_rating }}</h3>
+
+                <!-- Button to go to player statistics -->
+                <form action="{{ url_for('player_statistics', player_id=player.id) }}" method="get">
+                    <button type="submit">View Statistics</button>
+                </form>
             </div>
         {% endfor %}
     </div>
