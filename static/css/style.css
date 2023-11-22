@@ -62,14 +62,14 @@ h1, h2 {
     color: #05445E; /* Navy Blue */
     font-size: 1.5rem; /* Slightly larger font size for name */
     font-weight: bold; /* Bold font weight for name */
-    margin: 10px 0 5px; /* Spacing around the name */
+    margin: 1px 0 1px; /* Spacing around the name */
 }
 
 .player-rating {
     color: #05445E; /* Navy Blue */
-    font-size: 2rem; /* Larger font size for rating */
+    font-size: 1.5rem; /* Larger font size for rating */
     font-weight: bold; /* Bold font weight for rating */
-    margin-bottom: 10px; /* Spacing below the rating */
+    margin: 1px 0 1px; /* Spacing below the rating */
 }
 
 /* Styles for form and buttons */
