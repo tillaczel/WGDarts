@@ -14,6 +14,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 players = utils.load_players()
 utils.calculate_ratings()
 ratings = utils.load_ratings()
+ratings_history = utils.load_ratings_history()
 players = players.to_dict(orient='records')
 for id, (player, rating) in enumerate(zip(players, ratings)):
     player['id'] = id
@@ -66,7 +67,7 @@ def record_results():
 @app.route('/player_statistics/<int:player_id>')
 def player_statistics(player_id):
     # Add your logic to fetch and display player statistics here
-    return render_template('player_statistics.html', player_id=player_id)
+    return render_template('player_statistics.html', player_id=player_id, player=players[id], ratings_history=ratings_history[player_id])
 
 if __name__ == '__main__':
     app.run(debug=True)

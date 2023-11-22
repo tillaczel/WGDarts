@@ -2,20 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Player Statistics</title>
     <!-- Add any additional styles or scripts as needed -->
 </head>
 <body>
     <h1>Player Statistics</h1>
-    <p>Player ID: {{ player_id }}</p>
+    <div class="game-container">
+        <p>Player ID: {{ player_id }}</p>
 
-    <!-- Add more content to display specific player statistics -->
-    <!-- For example: -->
-    <!-- <p>Player Name: {{ player_name }}</p> -->
-    <!-- <p>Player Score: {{ player_score }}</p> -->
-    <!-- <p>Other Stats: {{ other_stats }}</p> -->
+        <!-- Add more content to display specific player statistics -->
+        <!-- For example: -->
+        <!-- <p>Player Name: {{ player_name }}</p> -->
+        <!-- <p>Player Score: {{ player_score }}</p> -->
+        <!-- <p>Other Stats: {{ other_stats }}</p> -->
 
-    <a href="{{ url_for('index') }}">Back to Home</a>
-    <!-- You might want to provide a link to navigate back to the home page or another relevant page -->
+        <!-- Plot the player's rating history -->
+        <div id="rating-history-plot"></div>
+
+        <a href="{{ url_for('index') }}">Back to Home</a>
+        <!-- You might want to provide a link to navigate back to the home page or another relevant page -->
+    </div>
+
+    <!-- Add script to plot the rating history -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        // Extract the player's rating history from the ratings_history variable
+        var playerRatingHistory = {{ ratings_history | tojson }};
+
+        // Create a simple line plot using Plotly
+        var trace = {
+            x: Array.from({ length: playerRatingHistory.length }, (_, i) => i + 1),
+            y: playerRatingHistory,
+            type: 'line',
+            mode: 'lines+markers',
+            marker: {color: 'blue'},
+        };
+
+        var layout = {
+            title: 'Player Rating History',
+            xaxis: {title: 'Game Number'},
+            yaxis: {title: 'Rating'},
+            width: 800,  // Adjust the width as needed
+        };
+
+        Plotly.newPlot('rating-history-plot', [trace], layout);
+    </script>
 </body>
 </html>
