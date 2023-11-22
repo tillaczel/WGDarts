@@ -14,11 +14,15 @@ def update_rating(rating, expected_score, actual_score, k_factor=32):
     return rating + k_factor * (actual_score - expected_score)
 
 
-def add_player(name):
+def add_player(name, default_img=False):
     players = load_players()
-    img_path = f"{len(players)}.png"
+    if default_img:
+        img_path = f"default.jpg"
+    else:
+        img_path = f"{len(players)}.png"
     new_row = {"name": name, "img_path": img_path}
-    players = players.append(new_row, ignore_index=True)
+    new_player = pd.DataFrame([new_row])
+    players = pd.concat([players, new_player], ignore_index=True)
     save_players(players)
     return img_path
 
@@ -94,7 +98,8 @@ def calculate_ratings():
                 exp_score = calculate_expected_score(rating_i, rating_j)
                 ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
                 ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
-        for player_id in range(n_players):
+        for player_id in player_ids:
+            print(player_id, ratings[player_id])
             ratings_history[player_id].append(ratings[player_id])
 
     save_ratings(ratings)

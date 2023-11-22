@@ -24,9 +24,12 @@ def index():
 @app.route('/add_player', methods=['POST'])
 def add_player():
     player_name = request.form['name']
-    image_path = utils.add_player(player_name)
     file = request.files['image']
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
+    if len(file.filename) > 0:
+        image_path = utils.add_player(player_name)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
+    else:
+        utils.add_player(player_name, default_img=True)
     return redirect(url_for('index'))
 
 
