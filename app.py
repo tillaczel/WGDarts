@@ -50,7 +50,15 @@ def start_game():
 
 @app.route('/record_results', methods=['POST'])
 def record_results():
-    # Logic to process game results goes here
+    # Access form data
+    result = {}
+    for player in players:
+        finish_order_key = f"finish_order_{player['id']}"
+        finish_order_value = request.form.get(finish_order_key)
+        if finish_order_value is not None:
+            result[player['id']] = int(finish_order_value)
+    print(result)
+    utils.register_game(list(result.keys()), list(result.values()))
 
     # After processing, redirect back to the index
     return redirect(url_for('index'))

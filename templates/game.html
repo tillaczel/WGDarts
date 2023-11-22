@@ -3,6 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        function onSubmit() {
+            // Get values from the selects and perform your desired actions
+            {% for player in players %}
+                var finishOrder{{ player.id }} = document.getElementById('finish-order-{{ player.id }}').value;
+                // Perform actions with the value, for example, log it
+                console.log('{{ player.name }} finished: ' + finishOrder{{ player.id }});
+            {% endfor %}
+
+            // Optionally, prevent the form from submitting (useful if you want to handle submission with AJAX)
+            // return false;
+        }
+    </script>
 </head>
 <body>
     <h1>Game On!</h1>
@@ -19,7 +32,7 @@
         {% endfor %}
     </div>
 
-    <form action="{{ url_for('record_results') }}" method="post">
+    <form action="{{ url_for('record_results') }}" method="post" onsubmit="onSubmit()">
         <h3>Game Results</h3>
         {% for player in players %}
             <label for="finish-order-{{ player.id }}">{{ player.name }} finished:</label>
