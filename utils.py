@@ -4,6 +4,7 @@ import math
 import pandas as pd
 import json
 import numpy as np
+import os
 
 
 def calculate_expected_score(rating_a, rating_b):
