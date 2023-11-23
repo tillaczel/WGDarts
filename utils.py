@@ -5,6 +5,7 @@ import pandas as pd
 import json
 import numpy as np
 import os
+import trueskill
 
 
 def calculate_expected_score(rating_a, rating_b):
@@ -81,33 +82,55 @@ def register_game(player_ids, result):
 
 def calculate_ratings():
     players = load_players()
-    ratings = [1000 for _ in range(len(players))]
+    ratings = [trueskill.Rating() for _ in range(len(players))]
     ratings_history = [[1000] for _ in range(len(players))]
     games = load_games()
 
     for game in games:
         player_ids = game["player_ids"]
         result = game["result"]
-        n_players = len(player_ids)
-        for i in range(n_players-1):
-            for j in range(i+1, n_players):
-                if result[i] == result[j]:
-                    actual_score = 0.5
-                elif result[i] > result[j]:
-                    actual_score = 1
-                else:
-                    actual_score = 0
 
-                player_id_i, player_id_j = player_ids[i], player_ids[j]
-                rating_i, rating_j = ratings[player_id_i], ratings[player_id_j]
-                exp_score = calculate_expected_score(rating_i, rating_j)
-                ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
-                ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
+        new_ratings = trueskill.rate([[ratings[id]] for id in player_ids], ranks=result)
+
+        for i, player_id in enumerate(player_ids):
+            ratings[player_id] = new_ratings[i][0]
+
         for player_id in player_ids:
-            ratings_history[player_id].append(ratings[player_id])
+            ratings_history[player_id].append(ratings[player_id].mu * 40)
 
-    save_ratings(ratings)
+    save_ratings([x[-1] for x in ratings_history])
     save_ratings_history(ratings_history)
+
+
+# def calculate_ratings():
+#     players = load_players()
+#     ratings = [1000 for _ in range(len(players))]
+#     ratings_history = [[1000] for _ in range(len(players))]
+#     games = load_games()
+#
+#     for game in games:
+#         player_ids = game["player_ids"]
+#         result = game["result"]
+#         n_players = len(player_ids)
+#         for i in range(n_players-1):
+#             for j in range(i+1, n_players):
+#                 if result[i] == result[j]:
+#                     actual_score = 0.5
+#                 elif result[i] > result[j]:
+#                     actual_score = 1
+#                 else:
+#                     actual_score = 0
+#
+#                 player_id_i, player_id_j = player_ids[i], player_ids[j]
+#                 rating_i, rating_j = ratings[player_id_i], ratings[player_id_j]
+#                 exp_score = calculate_expected_score(rating_i, rating_j)
+#                 ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
+#                 ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
+#         for player_id in player_ids:
+#             ratings_history[player_id].append(ratings[player_id])
+#
+#     save_ratings(ratings)
+#     save_ratings_history(ratings_history)
 
 
 def load_players_dict():

@@ -2,6 +2,7 @@ Flask
 Werkzeug
 Pillow==8.2.0
 pandas
+trueskill
 
 
 # Any other dependencies you have
