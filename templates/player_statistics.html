@@ -46,7 +46,7 @@
 
         // Create a simple line plot using Plotly
         var trace = {
-            x: Array.from({ length: playerRatingHistory.length }, (_, i) => i + 1),
+            x: Array.from({ length: playerRatingHistory.length }, (_, i) => i),
             y: playerRatingHistory,
             type: 'line',
             mode: 'lines+markers',

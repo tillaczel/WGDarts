@@ -19,7 +19,7 @@
 </head>
 <body>
     <h1>Game On!</h1>
-     <div class="game-container">
+    <div class="game-container">
         {% for player in players %}
             <div class="player-card">
                 <img src="{{ url_for('static', filename='uploads/' + player.img_path) }}" alt="{{ player.name }}" class="player-image">
