@@ -51,6 +51,8 @@ def load_ratings():
 
 
 def save_ratings(ratings):
+    if not os.path.exists('static/tmp'):
+        os.makedirs('static/tmp')
     np.savetxt('static/tmp/ratings.csv', ratings, delimiter=',')
 
 
@@ -61,6 +63,8 @@ def load_ratings_history():
 
 
 def save_ratings_history(ratings_history):
+    if not os.path.exists('static/tmp'):
+        os.makedirs('static/tmp')
     with open('static/tmp/ratings_history.json', 'w') as json_file:
         json.dump(ratings_history, json_file)
 
