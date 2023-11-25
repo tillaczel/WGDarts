@@ -4,19 +4,9 @@
     <meta charset="UTF-8">
     <title>WG Darts</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <style>
-        .selected {
-            border: 20px solid #3498db; /* Change border color to indicate selection */
-            background-color: #ecf0f1; /* Change background color to indicate selection */
-        }
-
-        #start-game-button {
-            margin-top: 50px; /* Add some top margin for spacing */
-            font-size: 20px; /* Adjust the font size to make it bigger */
-            padding: 10px 20px; /* Add padding for better visual appearance */
-        }
-    </style>
-    <script>
+    <script src="static/js/script.js"></script> <!-- Include your JavaScript file here -->
+</head>
+<script>
         var selectedPlayers = {};
 
         function toggleSelection(playerId) {
@@ -91,7 +81,6 @@
         }
         window.onload = toggleGuestPlayers;
     </script>
-</head>
 <body>
     <h1>WG Darts</h1>
 
@@ -138,3 +127,4 @@
     <button onclick="window.location.href='{{ url_for('admin_page') }}'">Go to Admin Page</button>
 </body>
 </html>
+

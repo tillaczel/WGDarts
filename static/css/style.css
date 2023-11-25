@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
 body {
-    font-family: 'Roboto', serif; /* This is a placeholder, replace with 'Castellar' if available */
-    background-color: #75E6DA; /* Blue Green for body background */
-    color: #05445E; /* Navy Blue for text */
+    font-family: 'Roboto', serif;
+    background-color: #2c3e50;
+    color: #FFFFFF;
     margin: 0;
     padding: 0;
     display: flex;
@@ -13,78 +13,58 @@ body {
 }
 
 h1, h2 {
-    color: #05445E; /* Navy Blue */
+    color: #FFFFFF;
 }
 
-.player-container {
+/* Combine .player-container and .game-container styles */
+.player-container, .game-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px; /* Space between the cards */
+    gap: 20px;
     padding: 20px;
 }
 
-.versus-image {
-    display: block;
-    margin: 20px auto; /* Center the VS image */
-    width: 100px; /* Adjust as needed */
-    height: auto;
-}
-
-.game-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px; /* Space between the cards */
-    padding: 20px;
-}
-
+/* Combine .player-card and .player-card.selected styles */
 .player-card {
-    background-color: #189AB4; /* Blue Grotto for card background */
-    border: 3px solid #D4F1F4; /* Baby Blue for borders */
-    border-radius: 20px; /* Rounded corners for the card */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #189AB4;
+    border: 3px solid #D4F1F4;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 180px; /* Adjust width as needed */
-    transition: transform 0.3s ease; /* Smooth transformation on hover */
+    width: 180px;
+    transition: transform 0.3s ease;
     cursor: pointer;
-    margin-bottom: 1rem; /* Space below each card */
+    margin-bottom: 1rem;
+    color: #05445E;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.player-card:hover, .player-card.selected {
-    transform: translateY(-5px); /* Lift effect on hover and selection */
-    border-color: #05445E; /* Navy Blue border when card is selected or hovered */
-}
+/* .player-card:hover, .player-card.selected {
+    transform: translateY(-5px);
+    border-color: #05445E;
+} */
 
 .player-image-container {
     width: 120px;
     height: 120px;
-    margin: 10px auto; /* Center the image container */
-    border-radius: 50%; /* Make it circular */
-    overflow: hidden; /* Hide overflow to maintain the circle shape */
-    border: 5px solid #D4F1F4; /* Baby Blue border around the image */
-    background: url('path_to_your_default_player_image') no-repeat center; /* Default image */
+    margin: 5px auto;
+    border-radius: 10px; /* Add border-radius for rounded edges */
+    overflow: hidden;
+    border: 5px solid #D4F1F4;
+    background: url('path_to_your_default_player_image') no-repeat center;
     background-size: cover;
 }
 
 .player-card img {
-    width: 100%; /* Make the image fill the container */
-    height: 100%; /* Make the image fill the container */
-    object-fit: cover; /* Ensure the image covers the area without distortion */
-}
-
-.player-name {
-    color: #05445E; /* Navy Blue */
-    font-size: 1.5rem; /* Slightly larger font size for name */
-    font-weight: bold; /* Bold font weight for name */
-    margin: 1px 0 1px; /* Spacing around the name */
+    width: 80%;
+    height: 60%;
+    object-fit: cover;
 }
 
 .player-rating {
-    color: #05445E; /* Navy Blue */
-    font-size: 1.5rem; /* Larger font size for rating */
-    font-weight: bold; /* Bold font weight for rating */
-    margin: 1px 0 1px; /* Spacing below the rating */
+    font-size: 1.5rem;
 }
 
 /* Styles for form and buttons */
@@ -92,20 +72,20 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px; /* Space between form elements */
+    gap: 10px;
 }
 
 .form-container input[type="text"],
 .form-container input[type="file"] {
     padding: 10px;
-    border: 2px solid #D4F1F4; /* Baby Blue */
+    border: 2px solid #D4F1F4;
     border-radius: 5px;
     font-size: 1rem;
 }
 
 .form-container button {
     padding: 10px 20px;
-    background-color: #05445E; /* Navy Blue */
+    background-color: #05445E;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -115,11 +95,22 @@ h1, h2 {
 }
 
 .form-container button:hover {
-    background-color: #189AB4; /* Blue Grotto */
+    background-color: #189AB4;
 }
 
 /* Adjustments for 'Finish Game' button */
 .finish-game-btn {
-    /* ... existing styles ... */
-    font-size: 1.2rem; /* Larger font size for better readability */
+    font-size: 1.2rem;
+}
+
+/* New styles for selected players */
+.selected {
+    border: 5px solid #000000;
+    background-color: #2c3e50;
+}
+
+#start-game-button {
+    margin-top: 50px;
+    font-size: 20px;
+    padding: 10px 20px;
 }

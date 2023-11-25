@@ -1,278 +1,559 @@
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\app.py
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\filelist.txt
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\Info
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\requirements.txt
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\templates
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\utils.py
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\__pycache__
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\COMMIT_EDITMSG
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\config
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\description
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\FETCH_HEAD
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\HEAD
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\index
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\info
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\ORIG_HEAD
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\packed-refs
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\refs
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\applypatch-msg.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\commit-msg.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\fsmonitor-watchman.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\post-update.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\pre-applypatch.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\pre-commit.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\pre-merge-commit.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\pre-push.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\pre-rebase.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\pre-receive.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\prepare-commit-msg.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\push-to-checkout.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\sendemail-validate.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\hooks\update.sample
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\info\exclude
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs\HEAD
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs\refs
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs\refs\heads
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs\refs\remotes
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs\refs\heads\main
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs\refs\remotes\origin
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs\refs\remotes\origin\HEAD
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\logs\refs\remotes\origin\main
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\00
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\04
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\09
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\0e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\11
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\14
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\18
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1b
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\20
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\22
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\26
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\28
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\29
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\2a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\2e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\2f
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\34
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\36
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\39
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\3d
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\3f
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\40
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\41
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\43
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\46
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\48
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\49
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\4a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\4b
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\4c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\4f
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\50
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\51
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\52
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\53
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\55
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\57
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\5a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\5c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\5d
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\60
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\63
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\64
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\66
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\69
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\6b
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\6e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\74
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\75
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\76
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\77
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\80
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\81
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\82
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\86
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\87
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\8f
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\90
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\91
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\92
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\93
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\94
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\98
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\9c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\9f
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\a1
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\a5
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\a7
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\a8
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\aa
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\b4
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\b5
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\c5
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\cc
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d3
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d4
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d5
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d6
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d9
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\e6
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\e9
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\ea
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\f4
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\f6
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\f7
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\f9
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\fa
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\fb
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\fd
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\info
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\pack
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\00\fbbf91719dce3474bd5af795317b0d2fa5dece
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\04\5043728dd87faa82ecade4c013e8e3eb57706c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\09\c628d350c431435580bf16df3f8ff022b85c7a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\0e\7d52fa36e4b98036609313f056e958928a604c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\11\5985c98a6ac7cec17b6b676dd4b8bf5f54a872
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\14\b19b9eea90baa678380826025e47c5bd47fbfc
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\14\dfd61c9b0b59f5422fe289895ef07379635a58
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\18\4ab5689426126327d0f107009971cd7c41c7ec
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1a\b8ff1386fe62957fe96573a829f425a3581452
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1b\2db00c1be1ea361b4ad97bbef30a5dcccfd6ae
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1b\6364148053b03265505832adeeab18f010f1db
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1c\c6e390c4a5e4737cdfa8f4e6fbd990e03ff28d
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\1e\8ad93f71e8e2d8944460b7abe6595489d3c36e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\20\798781d313bfa8e3bb207a99fb263385fa138e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\22\ac1470d628dc1e27084aa513ee839d0af60953
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\26\b023921b1120770dd7531ed3d2ad64178ca078
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\26\e2f6c5d6daa336a2076fc31996be0b1e6cb049
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\28\741971268efad16785c1165c76116e3bb4660a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\29\64bcb34bdaeadda0daab2a7db3bc906f0b877a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\2a\62fda72afbc46a9c9d11c722afc97726fac37e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\2e\b821b0ddac4d598e3e7f9e97117e837053f7c9
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\2f\7debfa938719a4804e7d6e22e4ec6b89f1253a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\34\e11655bee083b516591391c76f41f1ab22d855
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\36\cf6d953864709606696047c1da0de7c944d573
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\39\6fde384effeb2c36d0c394a6e6e624585f3193
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\3d\1fa8bbc5226e0c385e5484e0e33bb6349a5479
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\3f\4c0fc62028c3dfd496489c4ac53fabdc96d082
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\40\6b5b16b5a602e65a0354006d8fa79c5cdef6eb
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\41\3a77e8f44aba27c3bd7b6c22d38214e9b22c81
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\43\b26b0c5950d8cddcf4507b9e9d4427f7e9d31a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\46\808f57ad7b894a3498d1a13e590f0770eea800
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\48\1c75c95c7a3d176bb5d1e178610e6d845502f4
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\49\a2592c5560d6ff81a8423bb8a0140de5962887
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\4a\325e24dcf68dfa6b47f6e7b09012982d898eef
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\4b\d676fa65bd7c4d1249cdc32c7af98a34be69c3
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\4c\090eecafccf5e45e08197d6742c0894eb646f9
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\4f\0aa741c602db0280b2873c869b0ec581ab526e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\50\4ab7ca4e93122e94edc0d91aa6be6a6700282c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\51\185676ebdb3888508bc3215c298ce7d18b50e6
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\52\faec52eba211aeecedd758b7abe86342159cce
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\53\339361fbecfcfd7d982d78dbc0192633ed78b0
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\53\8e69893d90f63e372f5ff319e71a535158ee13
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\55\64813134d0db7ea9c49c6a3de040461b5b05d7
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\57\0986d087d84960fbe847b518c0e341dc8f5da9
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\57\93ecf6ec9643101cdd38693db6a0783a23c5bb
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\5a\367d3e25b7ccdec4de7e4a68623c833dd744b5
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\5c\fa8e9d361998cabf0d67d071c907351961cb60
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\5d\215c15bfd9dfcabb348a40dfe37504f878a59c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\60\71e05d5ed8ca4d83d859a5b431546061fb5988
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\63\f0df9f68d11d1ca354a69152f1bcd24fc23095
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\64\99032159937ac9f017bb129f86b8034fb5c771
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\66\5f29556ce8b3420488fbc83729a6e54e503741
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\66\ebcc7ae4c1774c2c73216c205e094eb43d914d
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\69\90d883182cebabe5c450194b86bd4a1eedd49b
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\6b\364bc433fcb18636b5121d759a46d350020c98
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\6e\700e341abe18a387b37b2544e3d0b798640aa4
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\74\d515a027de98657e9d3d5f0f1831882fd81374
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\75\2b747ae4a12d287af3fed22e4a68c02c2d1c5c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\76\7cf52e6d4e725a86026f2f3382611b230fa635
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\77\ae07a0c0e5d3b1046ab61a643b1d483dcd82c1
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\77\ae917c0cffaacb1f58b65a1d69b1882dbe9fb4
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\80\775954497d578f9309761181f13426136ea1ee
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\81\2f01c563d78cfdb4dc3140cb0998bde80f4b87
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\82\5833bcda83715ea17eb0d0dc00d0f50ee7c465
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\86\8fbe8bcef38ae3fd936e9891cdc3cc423d9b2b
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\87\e4702b594af0a27bce7e9b3d834102ec6d2f68
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\8f\4e2ebcc807e218f7aebcd9e45ab543bd94858e
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\8f\c5bdeb0d35dc9569842f5e51a46fcb8a618736
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\90\a6c4e80702fbef9cc5b5063fa38c4bcb00cc43
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\91\d4c7a480ec78d3f63961397e3da3264a01b9c5
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\92\9d77aba2f88734daad69bc9d922c2105e35289
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\93\1b854bc7adbaa6ff160e88b3ebba20224a3cbf
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\94\8cb3a4c5b16497e91864077dadd425e0a9ec95
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\98\92412f14782d254e3d2a4c1359c002deabc7c3
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\9c\f16e78ec10ccdd400c1fb65de55cceafeedece
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\9f\a63aff18a14ee52c8ddee45f8d98830737f082
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\a1\bd13b467fa004aea3ea4a41ead1f4ef4167950
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\a5\c9cfdffbac578d9ab2253a970057faf6394cc3
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\a7\4df29f3dea230a839306d64331683322185d9c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\a8\76a95d76a35ad26f75ece52b27374da555c0fb
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\aa\0aade335df2399cea4a4cbb2780b3d09a9565f
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\b4\6a100ad1100ce76e11fc014c12308747deb6d0
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\b5\5f4bd85da41534d6ddd122ae4d238bad2bfa82
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\c5\4fa7737d9fd39f42674c4446c049fc78be1967
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\c5\709bcd27ca875c1d205d844a3de49734782ceb
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\cc\2fa52307487429c0e30cfef1bc55281faea347
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d3\f33d6148d3bf1a7438232c0bcff4c071be3fd2
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d4\f5a5bbd76d27f9bf39bd2c958ff49b9a40dd17
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d5\2820de108970443f80552819241819718c3e7c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d6\798ae659a75a75473000535550735a5f83a16a
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\d9\65ecf35f454bfdbd9f66c2b6abcb7be26f66a0
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\e6\185d80738d8141950ddc6ab57c031de19b82b8
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\e6\1d55222e75ffcdf42656396b51ad7a96a88223
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\e9\4de49ed559e149f0363104e1bad39f620cf07c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\ea\39ccab01e18c0778c8df30ee9c408df0e721fb
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\f4\e00237bb0514c7d56340cf0c24eaea70c0425c
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\f6\414930419b024357746242c846e8e00c90ca6b
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\f7\32150046a339849e0e813c8ec7abe0aa5fe168
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\f9\8c96109a9fbbc648bd25fc90f3eb0efc7dc174
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\fa\b9669e7929e97f5b88611f26f87e403613fcb3
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\fb\6bfc0e3bd0221f02ab39f9fe93fa9fa5033c67
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\fb\89b2acee7c873c95701d1ea605d47c3671c1ae
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\fd\ae52b16d9612894acd8892d30a774f6dd6fe35
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\fd\c40cf7d61c46786f85f1f1e3e9f73fb11d2809
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\pack\pack-04a3251f6b959e3fd0a179824f5871ce49eb493e.idx
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\pack\pack-04a3251f6b959e3fd0a179824f5871ce49eb493e.pack
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\objects\pack\pack-04a3251f6b959e3fd0a179824f5871ce49eb493e.rev
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\refs\heads
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\refs\remotes
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\refs\tags
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\refs\heads\main
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\refs\remotes\origin
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\refs\remotes\origin\HEAD
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.git\refs\remotes\origin\main
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea\.gitignore
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea\DartChampions.iml
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea\inspectionProfiles
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea\misc.xml
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea\modules.xml
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea\vcs.xml
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea\workspace.xml
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\.idea\inspectionProfiles\profiles_settings.xml
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\Info\README.md
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\css
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\games.json
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\players.csv
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\tmp
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\uploads
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\css\style.css
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\tmp\ratings.csv
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\uploads\0.png
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\uploads\1.png
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\static\uploads\vs.png
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\templates\App Front.jpg
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\templates\game.html
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\templates\index.html
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\templates\players.html
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\templates\record_game.html
-C:\Users\leandro.costanzo\PycharmProjects\DartChampions1\__pycache__\utils.cpython-311.pyc
+Auflistung der Ordnerpfade für Volume Windows
+Volumeseriennummer : 4E8B-8824
+C:.
++---.idea
+¦   +---inspectionProfiles
+¦   +---shelf
+¦       +---Uncommitted_changes_before_Update_at_21_11_2023_17_55_[Changes]
+¦       +---Uncommitted_changes_before_Update_at_21_11_2023_18_19_[Changes]
+¦       +---Uncommitted_changes_before_Update_at_21_11_2023_18_19_[Changes]1
+¦       +---Uncommitted_changes_before_Update_at_23_11_2023_20_49_[Changes]
+¦       +---Uncommitted_changes_before_Update_at_25_11_2023_14_10_[Changes]
++---Info
++---static
+¦   +---css
+¦   +---js
+¦   +---tmp
+¦   +---uploads
++---templates
++---venv
+¦   +---Lib
+¦   ¦   +---site-packages
+¦   ¦       +---click
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---click-8.0.4.dist-info
+¦   ¦       +---colorama
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---colorama-0.4.5.dist-info
+¦   ¦       +---dataclasses-0.8.dist-info
+¦   ¦       +---dateutil
+¦   ¦       ¦   +---parser
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---tz
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---zoneinfo
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---flask
+¦   ¦       ¦   +---json
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---Flask-2.0.3.dist-info
+¦   ¦       +---importlib_metadata
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---importlib_metadata-4.8.3.dist-info
+¦   ¦       +---itsdangerous
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---itsdangerous-2.0.1.dist-info
+¦   ¦       +---jinja2
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---Jinja2-3.0.3.dist-info
+¦   ¦       +---markupsafe
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---MarkupSafe-2.0.1.dist-info
+¦   ¦       +---numpy
+¦   ¦       ¦   +---.libs
+¦   ¦       ¦   +---compat
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---core
+¦   ¦       ¦   ¦   +---include
+¦   ¦       ¦   ¦   ¦   +---numpy
+¦   ¦       ¦   ¦   ¦       +---random
+¦   ¦       ¦   ¦   +---lib
+¦   ¦       ¦   ¦   ¦   +---npy-pkg-config
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---data
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---distutils
+¦   ¦       ¦   ¦   +---command
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---fcompiler
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---mingw
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---doc
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---f2py
+¦   ¦       ¦   ¦   +---src
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---src
+¦   ¦       ¦   ¦   ¦   ¦   +---array_from_pyobj
+¦   ¦       ¦   ¦   ¦   ¦   +---assumed_shape
+¦   ¦       ¦   ¦   ¦   ¦   +---common
+¦   ¦       ¦   ¦   ¦   ¦   +---kind
+¦   ¦       ¦   ¦   ¦   ¦   +---mixed
+¦   ¦       ¦   ¦   ¦   ¦   +---parameter
+¦   ¦       ¦   ¦   ¦   ¦   +---regression
+¦   ¦       ¦   ¦   ¦   ¦   +---size
+¦   ¦       ¦   ¦   ¦   ¦   +---string
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---fft
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---lib
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---data
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---linalg
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---ma
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---matrixlib
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---polynomial
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---random
+¦   ¦       ¦   ¦   +---lib
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---data
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---_examples
+¦   ¦       ¦   ¦   ¦   +---cffi
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---cython
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---numba
+¦   ¦       ¦   ¦   ¦       +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---testing
+¦   ¦       ¦   ¦   +---tests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---_private
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---tests
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---numpy-1.19.5.dist-info
+¦   ¦       +---pandas
+¦   ¦       ¦   +---api
+¦   ¦       ¦   ¦   +---extensions
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---indexers
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---types
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---arrays
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---compat
+¦   ¦       ¦   ¦   +---numpy
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---core
+¦   ¦       ¦   ¦   +---arrays
+¦   ¦       ¦   ¦   ¦   +---sparse
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---array_algos
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---computation
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---dtypes
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---groupby
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---indexes
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---internals
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---ops
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---reshape
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---sparse
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---tools
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---util
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---window
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---errors
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---io
+¦   ¦       ¦   ¦   +---clipboard
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---excel
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---formats
+¦   ¦       ¦   ¦   ¦   +---templates
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---json
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---sas
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---plotting
+¦   ¦       ¦   ¦   +---_matplotlib
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---tests
+¦   ¦       ¦   ¦   +---api
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---arithmetic
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---arrays
+¦   ¦       ¦   ¦   ¦   +---boolean
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---categorical
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---integer
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---interval
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---masked
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---sparse
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---string_
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---base
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---computation
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---config
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---dtypes
+¦   ¦       ¦   ¦   ¦   +---cast
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---extension
+¦   ¦       ¦   ¦   ¦   +---arrow
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---base
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---decimal
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---json
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---list
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---frame
+¦   ¦       ¦   ¦   ¦   +---apply
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---methods
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---generic
+¦   ¦       ¦   ¦   ¦   +---methods
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---groupby
+¦   ¦       ¦   ¦   ¦   +---aggregate
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---transform
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---indexes
+¦   ¦       ¦   ¦   ¦   +---base_class
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---categorical
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---datetimes
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---interval
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---multi
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---numeric
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---period
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---ranges
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---timedeltas
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---indexing
+¦   ¦       ¦   ¦   ¦   +---interval
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---multiindex
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---internals
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---io
+¦   ¦       ¦   ¦   ¦   +---excel
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---formats
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---json
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---parser
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---pytables
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---sas
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---plotting
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---reductions
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---resample
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---reshape
+¦   ¦       ¦   ¦   ¦   +---merge
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---scalar
+¦   ¦       ¦   ¦   ¦   +---interval
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---period
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---timedelta
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---timestamp
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---series
+¦   ¦       ¦   ¦   ¦   +---apply
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---indexing
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---methods
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---tools
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---tseries
+¦   ¦       ¦   ¦   ¦   +---frequencies
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---holiday
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---offsets
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---tslibs
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---util
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---window
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---tseries
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---util
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---_config
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---_libs
+¦   ¦       ¦   ¦   +---tslibs
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---window
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---pandas-1.1.5.dist-info
+¦   ¦       +---PIL
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---Pillow-8.2.0.dist-info
+¦   ¦       +---pip
+¦   ¦       ¦   +---_internal
+¦   ¦       ¦   ¦   +---cli
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---commands
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---distributions
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---index
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---locations
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---metadata
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---models
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---network
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---operations
+¦   ¦       ¦   ¦   ¦   +---build
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---install
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---req
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---resolution
+¦   ¦       ¦   ¦   ¦   +---legacy
+¦   ¦       ¦   ¦   ¦   +---resolvelib
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---utils
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---vcs
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---_vendor
+¦   ¦       ¦   ¦   +---cachecontrol
+¦   ¦       ¦   ¦   ¦   +---caches
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---certifi
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---chardet
+¦   ¦       ¦   ¦   ¦   +---cli
+¦   ¦       ¦   ¦   ¦   +---metadata
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---colorama
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---distlib
+¦   ¦       ¦   ¦   ¦   +---_backport
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---html5lib
+¦   ¦       ¦   ¦   ¦   +---filters
+¦   ¦       ¦   ¦   ¦   +---treeadapters
+¦   ¦       ¦   ¦   ¦   +---treebuilders
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---treewalkers
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---_trie
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---idna
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---msgpack
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---packaging
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---pep517
+¦   ¦       ¦   ¦   ¦   +---in_process
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---pkg_resources
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---platformdirs
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---progress
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---requests
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---resolvelib
+¦   ¦       ¦   ¦   ¦   +---compat
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---tenacity
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---tomli
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---urllib3
+¦   ¦       ¦   ¦   ¦   +---contrib
+¦   ¦       ¦   ¦   ¦   ¦   +---_securetransport
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---packages
+¦   ¦       ¦   ¦   ¦   ¦   +---backports
+¦   ¦       ¦   ¦   ¦   ¦   +---ssl_match_hostname
+¦   ¦       ¦   ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---util
+¦   ¦       ¦   ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---webencodings
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---pip-21.3.1.dist-info
+¦   ¦       +---pkg_resources
+¦   ¦       ¦   +---extern
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---tests
+¦   ¦       ¦   ¦   +---data
+¦   ¦       ¦   ¦       +---my-test-package-source
+¦   ¦       ¦   +---_vendor
+¦   ¦       ¦   ¦   +---packaging
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---python_dateutil-2.8.2.dist-info
+¦   ¦       +---pytz
+¦   ¦       ¦   +---zoneinfo
+¦   ¦       ¦   ¦   +---Africa
+¦   ¦       ¦   ¦   +---America
+¦   ¦       ¦   ¦   ¦   +---Argentina
+¦   ¦       ¦   ¦   ¦   +---Indiana
+¦   ¦       ¦   ¦   ¦   +---Kentucky
+¦   ¦       ¦   ¦   ¦   +---North_Dakota
+¦   ¦       ¦   ¦   +---Antarctica
+¦   ¦       ¦   ¦   +---Arctic
+¦   ¦       ¦   ¦   +---Asia
+¦   ¦       ¦   ¦   +---Atlantic
+¦   ¦       ¦   ¦   +---Australia
+¦   ¦       ¦   ¦   +---Brazil
+¦   ¦       ¦   ¦   +---Canada
+¦   ¦       ¦   ¦   +---Chile
+¦   ¦       ¦   ¦   +---Etc
+¦   ¦       ¦   ¦   +---Europe
+¦   ¦       ¦   ¦   +---Indian
+¦   ¦       ¦   ¦   +---Mexico
+¦   ¦       ¦   ¦   +---Pacific
+¦   ¦       ¦   ¦   +---US
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---pytz-2023.3.post1.dist-info
+¦   ¦       +---setuptools
+¦   ¦       ¦   +---command
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---extern
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---_distutils
+¦   ¦       ¦   ¦   +---command
+¦   ¦       ¦   +---_vendor
+¦   ¦       ¦   ¦   +---more_itertools
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---packaging
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---setuptools-59.6.0.dist-info
+¦   ¦       +---six-1.16.0.dist-info
+¦   ¦       +---trueskill
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---trueskill-0.4.5.dist-info
+¦   ¦       +---typing_extensions-4.1.1.dist-info
+¦   ¦       +---werkzeug
+¦   ¦       ¦   +---debug
+¦   ¦       ¦   ¦   +---shared
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---middleware
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---sansio
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---wrappers
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---Werkzeug-2.0.3.dist-info
+¦   ¦       +---wheel
+¦   ¦       ¦   +---cli
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---vendored
+¦   ¦       ¦   ¦   +---packaging
+¦   ¦       ¦   ¦   ¦   +---__pycache__
+¦   ¦       ¦   ¦   +---__pycache__
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---wheel-0.37.1.dist-info
+¦   ¦       +---zipp-3.6.0.dist-info
+¦   ¦       +---_distutils_hack
+¦   ¦       ¦   +---__pycache__
+¦   ¦       +---__pycache__
+¦   +---Scripts
++---__pycache__
