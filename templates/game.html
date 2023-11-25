@@ -2,6 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <style>
+        /* Added CSS styles for larger buttons */
+        .action-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .action-buttons button {
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+    </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <style>
          body {
@@ -13,6 +25,85 @@
         }
     </style>
     <script>
+        function toggleFinishButton(button) {
+            var playerId = button.getAttribute('data-player-id');
+            var finishButton = document.getElementById('finish-button-' + playerId);
+            var finishPosition = document.getElementById('finish-position-' + playerId);
+            var finishedCount = 1;
+
+            if (finishButton.innerText === 'Finished') {
+                finishButton.innerText = '';  // Set the finishing position as needed
+
+                {% for other_player in players %}
+                    if ({{ other_player.id }} !== playerId) {
+                        var otherFinishButton = document.getElementById('finish-button-' + {{ other_player.id }});
+
+                        if (otherFinishButton.style.display === 'none') {
+                            finishedCount++;
+                        }
+                    }
+                {% endfor %}
+
+                finishPosition.innerText = finishedCount + getOrdinalSuffix(finishedCount);
+
+                // Add code to send the finish position to the server using AJAX
+                sendFinishPositionToServer(playerId, finishedCount);
+            }
+
+            // Hide the button when it is pressed
+            finishButton.style.display = 'none';
+        }
+
+        function sendFinishPositionToServer(playerId, finishPosition) {
+            // You can use AJAX to send the finish position to the server
+            // Here's a basic example using the fetch API
+            fetch('/record_finish_position', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    playerId: playerId,
+                    finishPosition: finishPosition,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Finish position sent to server:', data);
+            })
+            .catch(error => {
+                console.error('Error sending finish position:', error);
+            });
+        }
+
+        function getOrdinalSuffix(number) {
+            if (number === 11 || number === 12 || number === 13) {
+                return 'th';
+            }
+            var lastDigit = number % 10;
+            switch (lastDigit) {
+                case 1:
+                    return 'st';
+                case 2:
+                    return 'nd';
+                case 3:
+                    return 'rd';
+                default:
+                    return 'th';
+            }
+        }
+
+        function clearResults() {
+            // Show all finish buttons
+            {% for player in players %}
+                var finishButton = document.getElementById('finish-button-{{ player.id }}');
+                finishButton.style.display = 'inline-block';
+                finishButton.innerText = 'Finished'; // Reset button text
+
+                var finishPosition = document.getElementById('finish-position-{{ player.id }}');
+                finishPosition.innerText = ''; // Clear finish position
+            {% endfor %}
+        }
 
         function onSubmit() {
             // Get values from the selects and perform your desired actions
@@ -32,9 +123,11 @@
     <div class="game-container">
         {% for player in players %}
             <div class="player-card">
+                <h4 class="finish-position" id="finish-position-{{ player.id }}"></h4> <!-- Added line -->
                 <img src="{{ url_for('static', filename='uploads/' + player.img_path) }}" alt="{{ player.name }}" class="player-image">
                 <h3 class="player-name">{{ player.name }}</h3>
                 <h3 class="player-rating">{{ player.rating }}</h3>
+                <button id="finish-button-{{ player.id }}" data-player-id="{{ player.id }}" onclick="toggleFinishButton(this)">Finished</button>
             </div>
             {% if not loop.last %}
                 <img src="{{ url_for('static', filename='uploads/vs.png') }}" alt="VS" class="versus-image">
@@ -42,17 +135,14 @@
         {% endfor %}
     </div>
 
-    <form action="{{ url_for('record_results') }}" method="post" onsubmit="onSubmit()">
-        <h3>Game Results</h3>
-        {% for player in players %}
-            <label for="finish-order-{{ player.id }}">{{ player.name }} finished:</label>
-            <select name="finish_order_{{ player.id }}" id="finish-order-{{ player.id }}">
-                {% for i in range(1, players|length + 1) %}
-                    <option value="{{ i }}">{{ i }}</option>
-                {% endfor %}
-            </select>
-        {% endfor %}
-        <button type="submit">Submit Results</button>
-    </form>
+    <div class="action-buttons" style="margin-top: 60px;">
+        <form action="{{ url_for('record_results') }}" method="post" onsubmit="onSubmit()">
+            <button type="button" onclick="clearResults()">Clear Results</button>
+        </form>
+        <div style="margin-top: 20px;"></div>
+        <form action="{{ url_for('record_results') }}" method="post" onsubmit="onSubmit()">
+            <button type="submit">Submit Results</button>
+        </form>
+    </div>
 </body>
 </html>
