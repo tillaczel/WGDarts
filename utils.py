@@ -23,7 +23,7 @@ def add_player(name, default_img=False):
         img_path = f"default.png"
     else:
         img_path = f"{len(players)}.png"
-    new_row = {"name": name, "img_path": img_path}
+    new_row = {"name": name, "img_path": img_path, 'guest': True}
     new_player = pd.DataFrame([new_row])
     players = pd.concat([players, new_player], ignore_index=True)
     save_players(players)
@@ -151,24 +151,19 @@ def load_players_ordered_list():
     return players_all
 
 
-def resize_and_center_crop(original_image):
-    target_size = (512, 512)
+def crop_to_square(img):
+    width, height = img.size
 
-    # Resize the image to the target size
-    resized_image = original_image.resize(target_size, Image.ANTIALIAS)
+    min_dimension = min(width, height)
 
-    # Get the size of the resized image
-    resized_width, resized_height = resized_image.size
-
-    # Calculate the crop box
-    left = (resized_width - target_size[0]) / 2
-    top = (resized_height - target_size[1]) / 2
-    right = (resized_width + target_size[0]) / 2
-    bottom = (resized_height + target_size[1]) / 2
+    left = (width - min_dimension) // 2
+    top = (height - min_dimension) // 2
+    right = (width + min_dimension) // 2
+    bottom = (height + min_dimension) // 2
 
     # Crop the image
-    cropped_image = resized_image.crop((left, top, right, bottom))
+    img_cropped = img.crop((left, top, right, bottom))
+    return img_cropped.resize((512, 512), Image.ANTIALIAS)
 
-    return cropped_image
 
 

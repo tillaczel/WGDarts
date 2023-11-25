@@ -30,7 +30,7 @@ def add_player():
     if len(file.filename) > 0:
         image_path = utils.add_player(player_name)
         img = Image.open(file.stream)
-        img = utils.resize_and_center_crop(img)
+        img = utils.crop_to_square(img)
         img.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
     else:
         utils.add_player(player_name, default_img=True)
