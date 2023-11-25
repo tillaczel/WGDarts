@@ -20,7 +20,7 @@ def allowed_file(filename):
 @app.route('/')
 def index():
     players_list = utils.load_players_ordered_list()
-    return render_template('index.html', players=players_list)
+    return render_template('index.html', players_wg=players_list, players_guest=players_list)
 
 @app.route('/add_player', methods=['POST'])
 def add_player():
@@ -66,6 +66,12 @@ def player_statistics(player_id):
     players = utils.load_players_dict()
     ratings_history = utils.load_ratings_history()
     return render_template('player_statistics.html', player_id=player_id, player=players[player_id], ratings_history=ratings_history[player_id])
+
+
+@app.route('/admin')
+def admin_page():
+    return render_template('admin.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)

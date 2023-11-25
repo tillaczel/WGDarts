@@ -1,0 +1,22 @@
+<!-- admin.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WG Darts Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Additional styles specific to the admin page can be added here -->
+</head>
+<body>
+    <h1>WG Darts Admin</h1>
+
+    <!-- Form to Add a New Player (moved to admin page) -->
+    <h2>Add New Player</h2>
+    <form action="{{ url_for('add_player') }}" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Player Name" required>
+        <input type="file" name="image" accept="image/*">
+        <input type="submit" value="Add Player">
+    </form>
+</body>
+</html>
