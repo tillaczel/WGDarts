@@ -1,5 +1,6 @@
-name,img_path
-Leandro,0.png
-Aurora,1.png
-Pierre,2.png
-Till,3.png
+name,img_path,guest
+Leandro,0.png,False
+Aurora,1.png,False
+Pierre,2.png,False
+Till,3.png,False
+Guest,default.png,True

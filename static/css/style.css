@@ -32,7 +32,11 @@ h1, h2 {
 }
 
 .game-container {
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Space between the cards */
+    padding: 20px;
 }
 
 .player-card {

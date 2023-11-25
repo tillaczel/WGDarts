@@ -146,7 +146,9 @@ def load_players_dict():
 def load_players_ordered_list():
     players = load_players_dict()
     ratings = load_ratings()
-    return [players[i] for i in np.argsort(ratings)[::-1]]
+    players_all = [players[i] for i in np.argsort(ratings)[::-1]]
+    return players_all
+
 
 
 

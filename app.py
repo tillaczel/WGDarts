@@ -20,7 +20,7 @@ def allowed_file(filename):
 @app.route('/')
 def index():
     players_list = utils.load_players_ordered_list()
-    return render_template('index.html', players_wg=players_list, players_guest=players_list)
+    return render_template('index.html', players=players_list)
 
 @app.route('/add_player', methods=['POST'])
 def add_player():

@@ -72,15 +72,24 @@
     <script>
         function toggleGuestPlayers() {
             var checkbox = document.getElementById('show-guest-players');
-            var elementToToggle = document.getElementById('player-container-all');
 
-            // Check the state of the checkbox
-            if (checkbox.checked) {
-                elementToToggle.style.display = 'block'; // Show the element
-            } else {
-                elementToToggle.style.display = 'none'; // Hide the element
-            }
+            {% for player in players %}
+                var player_id = '{{ player.id }}';
+                var isGuest = '{{ player.guest }}';
+                var elementToToggle = document.getElementById('player-card-' + player_id);
+
+                console.log('Player ID:', player_id);
+                console.log('Is Guest:', isGuest);
+
+                // Check the state of the checkbox and if the player is not a guest
+                if (!checkbox.checked && isGuest.toLowerCase() === 'true') {
+                    elementToToggle.style.display = 'none'; // Hide the element
+                } else {
+                    elementToToggle.style.display = 'block'; // Show the element
+                }
+            {% endfor %}
         }
+        window.onload = toggleGuestPlayers;
     </script>
 </head>
 <body>
@@ -90,7 +99,7 @@
     <h2>Players List</h2>
     <div class="player-container" id="player-container-all">
         <!-- "wg" players -->
-        {% for player in players_wg %}
+        {% for player in players %}
             <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleSelection('{{ player.id }}')">
                 <img src="static/uploads/{{ player.img_path }}" alt="Player Image" class="player-image">
                 <h3 class="player-name">{{ player.name }}</h3>
@@ -104,9 +113,10 @@
         {% endfor %}
     </div>
 
+
     <!-- Form to Start Game -->
     <form id="start-game-form" action="{{ url_for('start_game') }}" method="post">
-        {% for player in players_wg %}
+        {% for player in players %}
             <input type="hidden">
         {% endfor %}
     </form>
