@@ -6,6 +6,7 @@ import json
 import numpy as np
 import os
 import trueskill
+from PIL import Image
 
 
 def calculate_expected_score(rating_a, rating_b):
@@ -150,6 +151,24 @@ def load_players_ordered_list():
     return players_all
 
 
+def resize_and_center_crop(original_image):
+    target_size = (512, 512)
 
+    # Resize the image to the target size
+    resized_image = original_image.resize(target_size, Image.ANTIALIAS)
+
+    # Get the size of the resized image
+    resized_width, resized_height = resized_image.size
+
+    # Calculate the crop box
+    left = (resized_width - target_size[0]) / 2
+    top = (resized_height - target_size[1]) / 2
+    right = (resized_width + target_size[0]) / 2
+    bottom = (resized_height + target_size[1]) / 2
+
+    # Crop the image
+    cropped_image = resized_image.crop((left, top, right, bottom))
+
+    return cropped_image
 
 

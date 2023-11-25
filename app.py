@@ -4,6 +4,7 @@ from werkzeug.utils import secure_filename
 import utils
 import numpy as np
 import random
+from PIL import Image
 
 # Configure your application and upload folder
 app = Flask(__name__)
@@ -28,7 +29,9 @@ def add_player():
     file = request.files['image']
     if len(file.filename) > 0:
         image_path = utils.add_player(player_name)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
+        img = Image.open(file.stream)
+        img = utils.resize_and_center_crop(img)
+        img.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
     else:
         utils.add_player(player_name, default_img=True)
     return redirect(url_for('index'))
