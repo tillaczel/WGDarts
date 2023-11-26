@@ -19,18 +19,18 @@
 </head>
 <body>
     <h1>Game On!</h1>
-    <div class="game-container">
-        {% for player in players %}
-            <div class="player-card">
-                <img src="{{ url_for('static', filename='uploads/' + player.img_path) }}" alt="{{ player.name }}" class="player-image">
-                <h3 class="player-name">{{ player.name }}</h3>
-                <h3 class="player-rating">{{ player.rating }}</h3>
-            </div>
-            {% if not loop.last %}
-                <img src="{{ url_for('static', filename='uploads/vs.png') }}" alt="VS" class="versus-image">
-            {% endif %}
-        {% endfor %}
-    </div>
+<div class="game-container">
+    {% for player in players %}
+        <div class="player-card">
+            <img src="{{ url_for('static', filename='uploads/' + player.img_path) }}" alt="{{ player.name }}" class="player-image">
+            <h3 class="player-name">{{ player.name }}</h3>
+            <h3 class="player-rating">{{ player.rounded_rating }}</h3>
+        </div>
+        {% if not loop.last %}
+            <img src="{{ url_for('static', filename='uploads/vs.png') }}" alt="VS" class="versus-image">
+        {% endif %}
+    {% endfor %}
+</div>
 
     <form action="{{ url_for('record_results') }}" method="post" onsubmit="onSubmit()">
         <h3>Game Results</h3>
