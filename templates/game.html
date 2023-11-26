@@ -45,35 +45,32 @@
                 {% endfor %}
 
                 finishPosition.innerText = finishedCount + getOrdinalSuffix(finishedCount);
-
-                // Add code to send the finish position to the server using AJAX
-                sendFinishPositionToServer(playerId, finishedCount);
             }
 
             // Hide the button when it is pressed
             finishButton.style.display = 'none';
         }
 
-        function sendFinishPositionToServer(playerId, finishPosition) {
-            // You can use AJAX to send the finish position to the server
-            // Here's a basic example using the fetch API
-            fetch('/record_finish_position', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    playerId: playerId,
-                    finishPosition: finishPosition,
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Finish position sent to server:', data);
-            })
-            .catch(error => {
-                console.error('Error sending finish position:', error);
-            });
+        function recordResults() {
+            // Find the form element by its ID
+            var form = document.getElementById('record-game-form');
+
+            // var formData = new FormData();
+            {% for player in players %}
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'playerId';
+                input.value = "{{ player.id }}";
+                form.appendChild(input);
+
+                var input = document.createElement('input');
+                var finishPosition = document.getElementById('finish-position-{{ player.id }}');
+                input.type = 'hidden';
+                input.name = 'finishPosition';
+                input.value = finishPosition.innerText;
+                form.appendChild(input);
+            {% endfor %}
+            form.submit()
         }
 
         function getOrdinalSuffix(number) {
@@ -104,18 +101,6 @@
                 finishPosition.innerText = ''; // Clear finish position
             {% endfor %}
         }
-
-        function onSubmit() {
-            // Get values from the selects and perform your desired actions
-            {% for player in players %}
-                var finishOrder{{ player.id }} = document.getElementById('finish-order-{{ player.id }}').value;
-                // Perform actions with the value, for example, log it
-                console.log('{{ player.name }} finished: ' + finishOrder{{ player.id }});
-            {% endfor %}
-
-            // Optionally, prevent the form from submitting (useful if you want to handle submission with AJAX)
-            // return false;
-        }
     </script>
 </head>
 <body>
@@ -136,13 +121,16 @@
     </div>
 
     <div class="action-buttons" style="margin-top: 60px;">
-        <form action="{{ url_for('record_results') }}" method="post" onsubmit="onSubmit()">
-            <button type="button" onclick="clearResults()">Clear Results</button>
-        </form>
+        <button type="button" onclick="clearResults()">Clear Results</button>
         <div style="margin-top: 20px;"></div>
-        <form action="{{ url_for('record_results') }}" method="post" onsubmit="onSubmit()">
-            <button type="submit">Submit Results</button>
+        <form id="record-game-form" action="{{ url_for('record_results') }}" method="post" enctype="multipart/form-data">
+            <!-- Add hidden input fields to pass playerId and finishPosition -->
+            {% for player in players %}
+                <input type="hidden">
+            {% endfor %}
+             <button id="record-results-button" type="button" onclick="recordResults()">Submit Results</button>
         </form>
+
     </div>
 </body>
 </html>

@@ -18,21 +18,6 @@
                 selectedPlayers[playerId] = true;
                 card.classList.add('selected');
             }
-            // Call the function to update the form inputs
-            updateFormInputs();
-        }
-
-        function updateFormInputs() {
-        var form = document.getElementById('start-game-form');
-        // Clear any previous inputs
-        form.innerHTML = '';
-
-        Object.keys(selectedPlayers).forEach(function (id) {
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.value = id;
-            form.appendChild(input);
-        });
         }
 
 
