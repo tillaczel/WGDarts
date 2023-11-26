@@ -10,14 +10,32 @@
         var selectedPlayers = {};
 
         function toggleSelection(playerId) {
-            var card = document.getElementById('player-card-' + playerId);
-            if (selectedPlayers[playerId]) {
-                delete selectedPlayers[playerId];
-                card.classList.remove('selected');
-            } else {
-                selectedPlayers[playerId] = true;
-                card.classList.add('selected');
-            }
+        var card = document.getElementById('player-card-' + playerId);
+        if (selectedPlayers[playerId]) {
+            delete selectedPlayers[playerId];
+            card.classList.remove('selected');
+        } else {
+            selectedPlayers[playerId] = true;
+            card.classList.add('selected');
+        }
+        // Call the function to update the form inputs
+        updateFormInputs();
+
+        // Prevent default behavior to avoid any element within the card gaining focus
+        event.preventDefault();
+        }
+
+        function updateFormInputs() {
+        var form = document.getElementById('start-game-form');
+        // Clear any previous inputs
+        form.innerHTML = '';
+
+        Object.keys(selectedPlayers).forEach(function (id) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.value = id;
+            form.appendChild(input);
+        });
         }
 
 
@@ -67,7 +85,6 @@
     </script>
 <body>
     <h1>WG Darts</h1>
-
     <!-- Players List -->
     <h2>Players List</h2>
     <div class="player-container" id="player-container-all">
@@ -108,7 +125,7 @@
 
     <!-- Link to the Admin Page -->
     <div style="margin-top: 20px;"></div>
-    <button onclick="window.location.href='{{ url_for('admin_page') }}'">Go to Admin Page</button>
+    <button id="admin-page-button" onclick="window.location.href='{{ url_for('admin_page') }}'">Go to Admin Page</button>
 </body>
 </html>
 

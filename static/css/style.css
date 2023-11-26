@@ -12,8 +12,19 @@ body {
     height: 100vh;
 }
 
-h1, h2 {
+h1 {
+    font-size: 2.5rem; /* Larger font size for h1 */
+    margin-bottom: 0.5rem; /* Space below h1 before the next element */
     color: #FFFFFF;
+    /* Add any additional styles you need */
+}
+
+h2 {
+    font-size: 1.7rem; /* Slightly smaller than h1 */
+    margin-top: 0.25rem; /* Space above h2 */
+    margin-bottom: 0.5rem; /* Space below h2 before the next element */
+    color: #FFFFFF;
+    /* Add any additional styles you need */
 }
 
 .game-container {
@@ -28,19 +39,21 @@ h1, h2 {
     justify-content: center;
     gap: 20px; /* Space between the cards */
     padding: 20px;
+    max-width: calc(4 * 180px + 3 * 20px); /* 4 cards and 3 gaps */
 }
 
 /* Combine .player-card and .player-card.selected styles */
 .player-card {
-    background-color: #189AB4;
-    border: 5px solid #D4F1F4;
+    background-color: #8fb0d0;
+    /* border: 5px solid #D4F1F4; */
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 180px;
     transition: transform 0.3s ease;
     cursor: pointer;
-    margin-bottom: 1rem;
+    user-select: none; /* Prevents text selection */
+    margin-bottom: 40px; /* Add 20px space below each card */
     color: #05445E;
     font-size: 1.5rem;
     font-weight: bold;
@@ -111,15 +124,29 @@ h1, h2 {
 
 /* New styles for selected players */
 .selected {
-    border: 5px solid #000000;
-    background-color: #2c3e50;
+     /* border: 5px solid #000000; */
+    background-color:  #647B91;
     color: #FFFFFF; /* Change text color to white when selected */
 }
 
 #start-game-button {
-    margin-top: 50px;
-    font-size: 20px;
+    background-color: #8fb0d0;
+    color: #05445E;
+    margin-top: 0px;
+    width: 180px; /* Fixed width */
+    font-size: 1.5rem;
+    font-weight: bold;
     padding: 10px 20px;
+    border-radius: 10px; /* Rounded corners with 15px radius */
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#start-game-button:hover {
+    background-color: #647B91; /* Darker shade for hover */
+    color: #FFFFFF;
 }
 
 .player-info {
@@ -135,3 +162,35 @@ h1, h2 {
     filter: invert(1); /* Inverts the colors of the image */
 }
 
+.player-card button {
+    background-color: #8fb0d0;
+    color: #05445E;
+    font-size: 1rem; /* Reduced font size */
+    padding: 10px 20px;
+    border-radius: 20px;
+    width: 180px;
+    margin-top: 15px; /* Added margin to the top */
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#admin-page-button {
+    background-color: #8fb0d0; /* Same as other buttons */
+    color: #05445E;
+    font-size: 1rem; /* Reduced font size */
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: 180px; /* Fixed width */
+    margin-top: 10px; /* Spacing from the content above */
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#admin-page-button:hover {
+    background-color: #647B91; /* Darker shade for hover */
+    color: #FFFFFF;
+}
