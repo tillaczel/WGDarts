@@ -59,35 +59,13 @@
         }
 
     </script>
-    <script>
-        function toggleGuestPlayers() {
-            var checkbox = document.getElementById('show-guest-players');
-
-            {% for player in players %}
-                var player_id = '{{ player.id }}';
-                var isGuest = '{{ player.guest }}';
-                var elementToToggle = document.getElementById('player-card-' + player_id);
-
-                console.log('Player ID:', player_id);
-                console.log('Is Guest:', isGuest);
-
-                // Check the state of the checkbox and if the player is not a guest
-                if (!checkbox.checked && isGuest.toLowerCase() === 'true') {
-                    elementToToggle.style.display = 'none'; // Hide the element
-                } else {
-                    elementToToggle.style.display = 'block'; // Show the element
-                }
-            {% endfor %}
-        }
-        window.onload = toggleGuestPlayers;
-    </script>
+</head>
 <body>
     <h1>WG Darts</h1>
 
     <!-- Players List -->
     <h2>Players List</h2>
-    <div class="player-container" id="player-container-all">
-        <!-- "wg" players -->
+    <div class="player-container">
         {% for player in players %}
             <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleSelection('{{ player.id }}')">
                 <img src="static/uploads/{{ player.img_path }}" alt="Player Image" class="player-image">
@@ -102,7 +80,6 @@
         {% endfor %}
     </div>
 
-
     <!-- Form to Start Game -->
     <form id="start-game-form" action="{{ url_for('start_game') }}" method="post">
         {% for player in players %}
@@ -111,20 +88,14 @@
     </form>
 
     <!-- "Start Game" button at the bottom of the page -->
-    <div style="margin-top: 20px;"></div>
     <button id="start-game-button" type="button" onclick="startGame()">Start Game</button>
 
-    <!-- Single checkbox to show/hide all guest players -->
-    <div style="margin-top: 20px;">
-        <label>
-            <input type="checkbox" id="show-guest-players" onchange="toggleGuestPlayers()">
-            Show Guest Players
-        </label>
-    </div>
-
-    <!-- Link to the Admin Page -->
-    <div style="margin-top: 20px;"></div>
-    <button onclick="window.location.href='{{ url_for('admin_page') }}'">Go to Admin Page</button>
+        <!-- Form to Add a New Player -->
+    <h2>Add New Player</h2>
+    <form action="{{ url_for('add_player') }}" method="post" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Player Name" required>
+        <input type="file" name="image" accept="image/*">
+        <input type="submit" value="Add Player">
+    </form>
 </body>
 </html>
-
