@@ -84,7 +84,7 @@ def register_game(player_ids, result):
 def calculate_ratings():
     players = load_players()
     ratings = [trueskill.Rating() for _ in range(len(players))]
-    ratings_history = [[1000] for _ in range(len(players))]
+    ratings_history = [[0] for _ in range(len(players))]
     games = load_games()
 
     for game in games:
@@ -97,7 +97,8 @@ def calculate_ratings():
             ratings[player_id] = new_ratings[i][0]
 
         for player_id in player_ids:
-            ratings_history[player_id].append(ratings[player_id].mu * 40)
+            # ratings_history[player_id].append((ratings[player_id].mu) * 40)
+            ratings_history[player_id].append((ratings[player_id].mu - 3 * ratings[player_id].sigma) * 40)
 
     save_ratings([x[-1] for x in ratings_history])
     save_ratings_history(ratings_history)
