@@ -44,10 +44,14 @@
         // Extract the player's rating history from the ratings_history variable
         var playerRatingHistory = {{ ratings_history | tojson }};
 
+        // Limit the displayed games to the last 30
+        var startIndex = Math.max(0, playerRatingHistory.length - 30);
+        var limitedRatingHistory = playerRatingHistory.slice(startIndex);
+
         // Create a simple line plot using Plotly
         var trace = {
-            x: Array.from({ length: playerRatingHistory.length }, (_, i) => i),
-            y: playerRatingHistory,
+            x: Array.from({ length: limitedRatingHistory.length }, (_, i) => startIndex + i),
+            y: limitedRatingHistory,
             type: 'line',
             mode: 'lines+markers',
             marker: {color: '#fff'}, // Blue color
