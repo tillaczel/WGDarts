@@ -7,6 +7,8 @@ import numpy as np
 import os
 import trueskill
 from PIL import Image
+import pprint
+from datetime import datetime
 
 
 def calculate_expected_score(rating_a, rating_b):
@@ -45,8 +47,11 @@ def load_games():
 
 
 def save_games(games):
-    with open('static/games.json', 'w') as json_file:
-        json.dump(games, json_file)
+    pprint.pprint(games, width=120, compact=True)
+    pretty_json_str = pprint.pformat(games, width=120, compact=True, sort_dicts=False).replace("'", '"')
+
+    with open('static/games.json', 'w') as f:
+        f.write(pretty_json_str)
 
 
 def load_ratings():
@@ -76,7 +81,10 @@ def save_ratings_history(ratings_history):
 def register_game(player_ids, result):
     assert len(player_ids) == len(result)
     games = load_games()
-    games.append({"player_ids": player_ids, "result": result})
+
+    current_time = datetime.now()
+    formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    games.append({"time": formatted_time, "player_ids": player_ids, "result": result})
     save_games(games)
     calculate_ratings()
 
