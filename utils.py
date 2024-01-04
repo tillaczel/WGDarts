@@ -95,17 +95,40 @@ def calculate_ratings():
     ratings_history = [[0] for _ in range(len(players))]
     games = load_games()
 
+    # for game in games:
+    #     player_ids = game["player_ids"]
+    #     result = game["result"]
+    #
+    #     new_ratings = trueskill.rate([[ratings[id]] for id in player_ids], ranks=result)
+    #
+    #     for i, player_id in enumerate(player_ids):
+    #         ratings[player_id] = new_ratings[i][0]
+    #
+    #     for player_id in player_ids:
+    #         ratings_history[player_id].append((ratings[player_id].mu - 3 * ratings[player_id].sigma) * 40)
+
     for game in games:
         player_ids = game["player_ids"]
         result = game["result"]
 
-        new_ratings = trueskill.rate([[ratings[id]] for id in player_ids], ranks=result)
+        new_ratings = [[ratings[id].mu, ratings[id].sigma] for id in player_ids]
+        for player_a in range(len(player_ids) - 1):
+            for player_b in range(player_a + 1, len(player_ids)):
+                rating_a, rating_b = ratings[player_ids[player_a]], ratings[player_ids[player_b]]
+                if result[player_a] < result[player_b]:
+                    tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b)
+                else:
+                    tmp_ratings = trueskill.rate_1vs1(rating_b, rating_a)[::-1]
+
+                new_ratings[player_a][0] += (tmp_ratings[0].mu - rating_a.mu) / (len(player_ids)-1)
+                new_ratings[player_a][1] += (tmp_ratings[0].sigma - rating_a.sigma) / (len(player_ids)-1)
+                new_ratings[player_b][0] += (tmp_ratings[1].mu - rating_b.mu) / (len(player_ids)-1)
+                new_ratings[player_b][1] += (tmp_ratings[1].sigma - rating_b.sigma) / (len(player_ids)-1)
 
         for i, player_id in enumerate(player_ids):
-            ratings[player_id] = new_ratings[i][0]
+            ratings[player_id] = trueskill.Rating(mu=new_ratings[i][0], sigma=new_ratings[i][1])
 
         for player_id in player_ids:
-            # ratings_history[player_id].append((ratings[player_id].mu) * 40)
             ratings_history[player_id].append((ratings[player_id].mu - 3 * ratings[player_id].sigma) * 40)
 
     save_ratings([x[-1] for x in ratings_history])
