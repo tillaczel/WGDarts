@@ -77,6 +77,13 @@ def save_ratings_history(ratings_history):
         json.dump(ratings_history, json_file)
 
 
+def save_csv(data, file_name):
+    np.savetxt(os.path.join('static', 'tmp', file_name), data, delimiter=',')
+
+
+def load_csv(file_name):
+    return np.genfromtxt(os.path.join('static', 'tmp', file_name), delimiter=',')
+
 
 def register_game(player_ids, result):
     assert len(player_ids) == len(result)
@@ -92,7 +99,6 @@ def register_game(player_ids, result):
 def calculate_ratings():
     players = load_players()
     ratings = [trueskill.Rating() for _ in range(len(players))]
-    ratings_history = [[0] for _ in range(len(players))]
     games = load_games()
 
     # for game in games:
@@ -107,6 +113,11 @@ def calculate_ratings():
     #     for player_id in player_ids:
     #         ratings_history[player_id].append((ratings[player_id].mu - 3 * ratings[player_id].sigma) * 40)
 
+    ratings_history = [[0] for _ in range(len(players))]
+    net_point_gains = np.zeros(shape=(len(players), len(players)))
+    games_won = np.zeros(shape=(len(players), len(players)), dtype=int)
+    games_played = np.zeros(shape=(len(players), len(players)), dtype=int)
+
     for game in games:
         player_ids = game["player_ids"]
         result = game["result"]
@@ -114,7 +125,8 @@ def calculate_ratings():
         new_ratings = [[ratings[id].mu, ratings[id].sigma] for id in player_ids]
         for player_a in range(len(player_ids) - 1):
             for player_b in range(player_a + 1, len(player_ids)):
-                rating_a, rating_b = ratings[player_ids[player_a]], ratings[player_ids[player_b]]
+                player_a_id, player_b_id = player_ids[player_a], player_ids[player_b]
+                rating_a, rating_b = ratings[player_a_id], ratings[player_b_id]
                 if result[player_a] < result[player_b]:
                     tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b)
                 else:
@@ -125,6 +137,15 @@ def calculate_ratings():
                 new_ratings[player_b][0] += (tmp_ratings[1].mu - rating_b.mu) / (len(player_ids)-1)
                 new_ratings[player_b][1] += (tmp_ratings[1].sigma - rating_b.sigma) / (len(player_ids)-1)
 
+                net_point_gains[player_a_id, player_b_id] += (tmp_ratings[0].mu - rating_a.mu) / (len(player_ids)-1)
+                net_point_gains[player_b_id, player_a_id] += (tmp_ratings[1].mu - rating_b.mu) / (len(player_ids)-1)
+
+                won = int(result[player_a] < result[player_b])
+                games_won[player_a_id, player_b_id] += won
+                games_won[player_b_id, player_a_id] += 1-won
+                games_played[player_a_id, player_b_id] += 1
+                games_played[player_b_id, player_a_id] += 1
+
         for i, player_id in enumerate(player_ids):
             ratings[player_id] = trueskill.Rating(mu=new_ratings[i][0], sigma=new_ratings[i][1])
 
@@ -133,6 +154,12 @@ def calculate_ratings():
 
     save_ratings([x[-1] for x in ratings_history])
     save_ratings_history(ratings_history)
+    save_csv(net_point_gains, 'net_point_gains.csv')
+    save_csv(games_won, 'games_won.csv')
+    save_csv(games_played, 'games_played.csv')
+
+    players_mu_sigma = np.array([[rating.mu*40, rating.sigma*40] for rating in ratings])
+    save_csv(players_mu_sigma, 'players_mu_sigma.csv')
 
 
 # def calculate_ratings():

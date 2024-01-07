@@ -35,9 +35,33 @@
         <!-- Plot the player's rating history -->
         <div id="rating-history-plot"></div>
 
+        <table style="width:100%; margin-top:20px; color:#fff;">
+            <tr>
+                <td><strong>Player Name</strong></td>
+                <td>{{ player.name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Number of challengers</strong></td>
+                <td>{{ player.num_challengers }}</td>
+            </tr>
+            <tr>
+                <td><strong>Win Rate</strong></td>
+                <td>{{ player.win_rate }}</td>
+            </tr>
+            <tr>
+                <td><strong>Mean Score</strong></td>
+                <td>{{ player.mu }}</td>
+            </tr>
+            <tr>
+                <td><strong>Standard Deviation</strong></td>
+                <td>{{ player.sigma }}</td>
+            </tr>
+        </table>
+
         <a href="{{ url_for('index') }}" style="color: #fff;">Back to Home</a>
         <!-- You might want to provide a link to navigate back to the home page or another relevant page -->
     </div>
+
 
     <!-- Add script to plot the rating history -->
     <script>

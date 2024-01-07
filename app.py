@@ -61,8 +61,17 @@ def record_results():
 def player_statistics(player_id):
     # Add your logic to fetch and display player statistics here
     players = utils.load_players_dict()
+    player = players[player_id]
+    players_mu_sigma = utils.load_csv('players_mu_sigma.csv')
+    games_won = utils.load_csv('games_won.csv')
+    games_played = utils.load_csv('games_played.csv')
+
+    player['num_challengers'] = int(np.sum(games_played[player_id]))
+    player['win_rate'] = f"{np.sum(games_won[player_id])/player['num_challengers']:.2%}"
+    player['mu'] = round(players_mu_sigma[player_id][0])
+    player['sigma'] = round(players_mu_sigma[player_id][1])
     ratings_history = utils.load_ratings_history()
-    return render_template('player_statistics.html', player_id=player_id, player=players[player_id], ratings_history=ratings_history[player_id])
+    return render_template('player_statistics.html', player_id=player_id, player=player, ratings_history=ratings_history[player_id])
 
 
 @app.route('/admin')
