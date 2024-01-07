@@ -27,6 +27,18 @@ h2 {
     /* Add any additional styles you need */
 }
 
+@keyframes zoomIn {
+    from {
+        transform: scale(4); /* Start at 300% size */
+        opacity: 0; /* Optionally start from transparent */
+    }
+    to {
+        transform: scale(1); /* Scale down to the original size */
+        opacity: 1; /* End with full opacity */
+    }
+}
+
+
 .game-container {
     display: flex;
     align-items: center;
@@ -160,6 +172,10 @@ h2 {
     border: none;
     align-self: center; /* Center aligns the image vertically */
     filter: invert(1); /* Inverts the colors of the image */
+    animation-name: zoomIn; /* Name of the keyframe animation */
+    animation-duration: 1s; /* Duration of the animation */
+    animation-timing-function: ease-out; /* Speed curve of the animation */
+    animation-fill-mode: forwards; /* State of the animation after completion */
 }
 
 .player-card button {

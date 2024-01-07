@@ -48,7 +48,7 @@ def load_games():
 
 def save_games(games):
     pprint.pprint(games, width=120, compact=True)
-    pretty_json_str = pprint.pformat(games, width=120, compact=True).replace("'", '"')
+    pretty_json_str = pprint.pformat(games, width=120, compact=True, sort_dicts=False).replace("'", '"')
 
     with open('static/games.json', 'w') as f:
         f.write(pretty_json_str)

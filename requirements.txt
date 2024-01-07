@@ -1,6 +1,6 @@
 Flask
 Werkzeug
-Pillow==8.2.
+Pillow==8.2
 pandas
 trueskill
 

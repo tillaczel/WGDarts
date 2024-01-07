@@ -130,7 +130,14 @@
             {% endfor %}
              <button id="record-results-button" type="button" onclick="recordResults()">Submit Results</button>
         </form>
+<script>
+    window.addEventListener('load', function() {
+        var vsSound = document.getElementById('vsSound');
+        vsSound.play();
+    });
+</script>
 
     </div>
+<audio id="vsSound" src="static/sfx/sfx_VS_Explosion.wav" preload="auto"></audio>
 </body>
 </html>
