@@ -25,32 +25,28 @@
         }
     </style>
     <script>
-        function toggleFinishButton(button) {
-            var playerId = button.getAttribute('data-player-id');
-            var finishButton = document.getElementById('finish-button-' + playerId);
-            var finishPosition = document.getElementById('finish-position-' + playerId);
-            var finishedCount = 1;
+    function toggleFinish(playerCard, playerId) {
+        var finishPosition = document.getElementById('finish-position-' + playerId);
+        var finishedCount = 1;
 
-            if (finishButton.innerText === 'Finished') {
-                finishButton.innerText = '';  // Set the finishing position as needed
+        // Count how many players have finished
+        {% for other_player in players %}
+            if ({{ other_player.id }} !== playerId) {
+                var otherFinishPosition = document.getElementById('finish-position-' + {{ other_player.id }});
 
-                {% for other_player in players %}
-                    if ({{ other_player.id }} !== playerId) {
-                        var otherFinishButton = document.getElementById('finish-button-' + {{ other_player.id }});
-
-                        if (otherFinishButton.style.display === 'none') {
-                            finishedCount++;
-                        }
-                    }
-                {% endfor %}
-
-                finishPosition.innerText = finishedCount + getOrdinalSuffix(finishedCount);
+                if (otherFinishPosition.innerText !== '') {
+                    finishedCount++;
+                }
             }
+        {% endfor %}
 
-            // Hide the button when it is pressed
-            finishButton.style.display = 'none';
+        // Update the finish position text
+        if (finishPosition.innerText === '') {
+            finishPosition.innerText = finishedCount + getOrdinalSuffix(finishedCount);
         }
 
+        // Additional code to handle other aspects of the finish action (if needed)
+    }
         function recordResults() {
             // Find the form element by its ID
             var form = document.getElementById('record-game-form');
@@ -90,29 +86,25 @@
             }
         }
 
-        function clearResults() {
-            // Show all finish buttons
-            {% for player in players %}
-                var finishButton = document.getElementById('finish-button-{{ player.id }}');
-                finishButton.style.display = 'inline-block';
-                finishButton.innerText = 'Finished'; // Reset button text
+    function clearResults() {
+        // Reset all the finish positions
+        {% for player in players %}
+            var finishPosition = document.getElementById('finish-position-{{ player.id }}');
+            finishPosition.innerText = ''; // Clear finish position
+        {% endfor %}
+    }
+</script>
 
-                var finishPosition = document.getElementById('finish-position-{{ player.id }}');
-                finishPosition.innerText = ''; // Clear finish position
-            {% endfor %}
-        }
-    </script>
 </head>
 <body>
     <h1>Game On!</h1>
     <div class="game-container">
         {% for player in players %}
-            <div class="player-card">
-                <h4 class="finish-position" id="finish-position-{{ player.id }}"></h4> <!-- Added line -->
+            <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleFinish(this, {{ player.id }})">
                 <img src="{{ url_for('static', filename='uploads/' + player.img_path) }}" alt="{{ player.name }}" class="player-image">
                 <h3 class="player-name">{{ player.name }}</h3>
                 <h3 class="player-rating">{{ player.rounded_rating }}</h3>
-                <button id="finish-button-{{ player.id }}" data-player-id="{{ player.id }}" onclick="toggleFinishButton(this)">Finished</button>
+                <h4 class="finish-position" id="finish-position-{{ player.id }}"></h4> <!-- Added line -->
             </div>
             {% if not loop.last %}
                 <img src="{{ url_for('static', filename='uploads/vs.png') }}" alt="VS" class="versus-image">
