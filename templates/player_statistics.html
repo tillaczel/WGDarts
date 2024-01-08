@@ -35,28 +35,42 @@
         <!-- Plot the player's rating history -->
         <div id="rating-history-plot"></div>
 
-        <table style="width:100%; margin-top:20px; color:#fff;">
+        <!-- Table for Player Details -->
+        <table style="width:50%; margin-top:20px; color:#fff; border-collapse: collapse;">
             <tr>
-                <td><strong>Player Name</strong></td>
-                <td>{{ player.name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Number of challengers</strong></td>
+                <td style="text-align:right;"><strong>Number of Challengers:</strong></td>
                 <td>{{ player.num_challengers }}</td>
             </tr>
             <tr>
-                <td><strong>Win Rate</strong></td>
+                <td style="text-align:right;"><strong>Win Rate:</strong></td>
                 <td>{{ player.win_rate }}</td>
             </tr>
             <tr>
-                <td><strong>Mean Score</strong></td>
+                <td style="text-align:right;"><strong>Mean Score:</strong></td>
                 <td>{{ player.mu }}</td>
             </tr>
             <tr>
-                <td><strong>Standard Deviation</strong></td>
+                <td style="text-align:right;"><strong>Standard Deviation:</strong></td>
                 <td>{{ player.sigma }}</td>
             </tr>
         </table>
+
+        <!-- Table for Win Rate -->
+        <table style="width:60%; margin-top:20px; color:#fff; border-collapse: collapse;">
+            <tr>
+                <th style="width:40%;">Player</th>
+                <th style="width:30%;">Games Played</th>
+                <th>Win Rate</th>
+            </tr>
+            {% for row in win_rate %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
 
         <a href="{{ url_for('index') }}" style="color: #fff;">Back to Home</a>
         <!-- You might want to provide a link to navigate back to the home page or another relevant page -->

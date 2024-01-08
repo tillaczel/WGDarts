@@ -65,13 +65,19 @@ def player_statistics(player_id):
     players_mu_sigma = utils.load_csv('players_mu_sigma.csv')
     games_won = utils.load_csv('games_won.csv')
     games_played = utils.load_csv('games_played.csv')
+    win_rate = []
+    sort_index = np.argsort(-games_played[player_id])
+    for i in sort_index:
+        if games_played[player_id][i] < 1:
+            continue
+        win_rate.append([players[i]["name"], int(games_played[player_id][i]), f"{games_won[player_id][i]/games_played[player_id][i]:.2%}" if games_played[player_id][i] > 0 else "-"])
 
     player['num_challengers'] = int(np.sum(games_played[player_id]))
     player['win_rate'] = f"{np.sum(games_won[player_id])/player['num_challengers']:.2%}"
     player['mu'] = round(players_mu_sigma[player_id][0])
     player['sigma'] = round(players_mu_sigma[player_id][1])
     ratings_history = utils.load_ratings_history()
-    return render_template('player_statistics.html', player_id=player_id, player=player, ratings_history=ratings_history[player_id])
+    return render_template('player_statistics.html', player_id=player_id, player=player, ratings_history=ratings_history[player_id], win_rate=win_rate, players=players)
 
 
 @app.route('/admin')
