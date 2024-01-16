@@ -98,7 +98,8 @@ def register_game(player_ids, result):
 
 def calculate_ratings():
     players = load_players()
-    ratings = [trueskill.Rating() for _ in range(len(players))]
+    trueskill_env = trueskill.TrueSkill(draw_probability=0.0, tau=25/3/100)
+    ratings = [trueskill_env.create_rating() for _ in range(len(players))]
     games = load_games()
 
     # for game in games:
@@ -128,9 +129,9 @@ def calculate_ratings():
                 player_a_id, player_b_id = player_ids[player_a], player_ids[player_b]
                 rating_a, rating_b = ratings[player_a_id], ratings[player_b_id]
                 if result[player_a] < result[player_b]:
-                    tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b)
+                    tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b, env=trueskill_env)
                 else:
-                    tmp_ratings = trueskill.rate_1vs1(rating_b, rating_a)[::-1]
+                    tmp_ratings = trueskill.rate_1vs1(rating_b, rating_a, env=trueskill_env)[::-1]
 
                 new_ratings[player_a][0] += (tmp_ratings[0].mu - rating_a.mu) / (len(player_ids)-1)
                 new_ratings[player_a][1] += (tmp_ratings[0].sigma - rating_a.sigma) / (len(player_ids)-1)
@@ -147,7 +148,7 @@ def calculate_ratings():
                 games_played[player_b_id, player_a_id] += 1
 
         for i, player_id in enumerate(player_ids):
-            ratings[player_id] = trueskill.Rating(mu=new_ratings[i][0], sigma=new_ratings[i][1])
+            ratings[player_id] = trueskill_env.create_rating(mu=new_ratings[i][0], sigma=new_ratings[i][1])
 
         for player_id in player_ids:
             ratings_history[player_id].append((ratings[player_id].mu - 3 * ratings[player_id].sigma) * 40)
