@@ -18,5 +18,20 @@
         <input type="file" name="image" accept="image/*">
         <input type="submit" value="Add Player">
     </form>
+
+    <h2>Reupload Photo</h2>
+    <form id="reupload_photo_form" action="{{ url_for('reupload_photo') }}" method="post" enctype="multipart/form-data">
+        <label for="player_id">Select Player:</label>
+        <select name="player_id" id="player_id" required>
+            {% for player in player_list %}
+                <option value="{{ player.id }}">{{ player.name }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Hidden input to store the selected player ID -->
+        <input type="hidden" name="selected_player_id" id="selected_player_id" value="">
+        <input type="file" name="image" accept="image/*">
+        <input type="submit" value="Reupload Photo">
+    </form>
 </body>
 </html>

@@ -5,6 +5,7 @@ import utils
 import numpy as np
 import random
 from PIL import Image
+import time
 
 # Configure your application and upload folder
 app = Flask(__name__)
@@ -21,20 +22,10 @@ def allowed_file(filename):
 @app.route('/')
 def index():
     players_list = utils.load_players_ordered_list()
-    return render_template('index.html', players=players_list)
+    timestamp = int(time.time())
+    return render_template('index.html', players=players_list, timestamp=timestamp)
 
-@app.route('/add_player', methods=['POST'])
-def add_player():
-    player_name = request.form['name']
-    file = request.files['image']
-    if len(file.filename) > 0:
-        image_path = utils.add_player(player_name)
-        img = Image.open(file.stream)
-        img = utils.crop_to_square(img)
-        img.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
-    else:
-        utils.add_player(player_name, default_img=True)
-    return redirect(url_for('index'))
+
 
 
 @app.route('/start_game', methods=['POST'])
@@ -82,7 +73,38 @@ def player_statistics(player_id):
 
 @app.route('/admin')
 def admin_page():
-    return render_template('admin.html')
+    players = utils.load_players_dict()
+    players = sorted(players, key=lambda d: d['name'])
+    return render_template('admin.html', player_list=players)
+
+
+@app.route('/add_player', methods=['POST'])
+def add_player():
+    player_name = request.form['name']
+    file = request.files['image']
+    if len(file.filename) > 0:
+        image_path = utils.add_player(player_name)
+        img = Image.open(file.stream)
+        img = utils.crop_to_square(img)
+        img.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
+    else:
+        utils.add_player(player_name, default_img=True)
+    return redirect(url_for('index'))
+
+
+@app.route('/reupload_photo', methods=['POST'])
+def reupload_photo():
+    selected_player_id = request.form['player_id']
+    # player_name = request.form['name']
+    print(request.form)
+    file = request.files['image']
+
+    image_path = f"{selected_player_id}.png"
+    img = Image.open(file.stream)
+    img = utils.crop_to_square(img)
+    print(image_path)
+    img.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
