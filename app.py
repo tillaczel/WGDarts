@@ -96,14 +96,19 @@ def add_player():
 def reupload_photo():
     selected_player_id = request.form['player_id']
     # player_name = request.form['name']
-    print(request.form)
+    # print(request.form)
     file = request.files['image']
 
     image_path = f"{selected_player_id}.png"
     img = Image.open(file.stream)
     img = utils.crop_to_square(img)
-    print(image_path)
     img.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
+
+    players = utils.load_players()
+    print(players['img_path'].iloc[int(selected_player_id)])
+    players['img_path'].iloc[int(selected_player_id)] = image_path
+    utils.save_players(players)
+
     return redirect(url_for('index'))
 
 
