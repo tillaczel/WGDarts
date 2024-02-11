@@ -7,24 +7,24 @@
     <script src="static/js/script.js"></script> <!-- Include your JavaScript file here -->
 </head>
 <script>
-    // Function to set the checkbox state to localStorage
+    // Function to set the checkbox state to sessionStorage
     function setCheckboxState(checked) {
-        localStorage.setItem('showGuestPlayers', checked);
+        sessionStorage.setItem('showGuestPlayers', checked);
     }
 
-    // Function to get the checkbox state from localStorage
+    // Function to get the checkbox state from sessionStorage
     function getCheckboxState() {
-        return localStorage.getItem('showGuestPlayers') === 'true';
+        return sessionStorage.getItem('showGuestPlayers') === 'true';
     }
 
-    // Function to set the selected players to localStorage
+    // Function to set the selected players to sessionStorage
     function setSelectedPlayers(players) {
-        localStorage.setItem('selectedPlayers', JSON.stringify(players));
+        sessionStorage.setItem('selectedPlayers', JSON.stringify(players));
     }
 
-    // Function to get the selected players from localStorage
+    // Function to get the selected players from sessionStorage
     function getSelectedPlayers() {
-        var playersJson = localStorage.getItem('selectedPlayers');
+        var playersJson = sessionStorage.getItem('selectedPlayers');
         return playersJson ? JSON.parse(playersJson) : {};
     }
 
@@ -33,7 +33,7 @@
         var checkbox = document.getElementById('show-guest-players');
         var showGuestPlayers = checkbox.checked;
 
-        // Set the state to localStorage
+        // Set the state to sessionStorage
         setCheckboxState(showGuestPlayers);
 
         // Toggle guest players based on the checkbox state
@@ -72,7 +72,7 @@
             card.classList.add('selected');
         }
 
-        // Update form inputs and set selected players to localStorage
+        // Update form inputs and set selected players to sessionStorage
         updateFormInputs();
         setSelectedPlayers(selectedPlayers);
     }
@@ -115,9 +115,10 @@
 
     // Initialize checkbox state and selected players on page load
     window.onload = function () {
+        // Toggle guest players based on the initial checkbox state
         var checkbox = document.getElementById('show-guest-players');
         checkbox.checked = getCheckboxState();
-        toggleGuestPlayers(); // Toggle guest players based on the initial checkbox state
+        toggleGuestPlayers();
 
         // Initialize selected players
         var selectedPlayers = getSelectedPlayers();
