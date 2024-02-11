@@ -62,9 +62,25 @@
         form.submit();
     }
 
+    // Function to set the checkbox state to localStorage
+    function setCheckboxState(checked) {
+        localStorage.setItem('showGuestPlayers', checked);
+    }
+
+    // Function to get the checkbox state from localStorage
+    function getCheckboxState() {
+        return localStorage.getItem('showGuestPlayers') === 'true';
+    }
+
+    // Function to toggle guest players based on checkbox state
     function toggleGuestPlayers() {
         var checkbox = document.getElementById('show-guest-players');
+        var showGuestPlayers = checkbox.checked;
 
+        // Set the state to localStorage
+        setCheckboxState(showGuestPlayers);
+
+        // Toggle guest players based on the checkbox state
         {% for player in players %}
             var player_id = '{{ player.id }}';
             var isGuest = '{{ player.guest }}';
@@ -73,14 +89,20 @@
             console.log('Player ID:', player_id);
             console.log('Is Guest:', isGuest);
 
-            if (!checkbox.checked && isGuest.toLowerCase() === 'true') {
+            if (!showGuestPlayers && isGuest.toLowerCase() === 'true') {
                 elementToToggle.style.display = 'none';
             } else {
                 elementToToggle.style.display = 'block';
             }
         {% endfor %}
     }
-    window.onload = toggleGuestPlayers;
+
+    // Initialize checkbox state on page load
+    window.onload = function () {
+        var checkbox = document.getElementById('show-guest-players');
+        checkbox.checked = getCheckboxState();
+        toggleGuestPlayers(); // Toggle guest players based on the initial checkbox state
+    };
 </script>
 
 <body>
