@@ -35,6 +35,7 @@
 
         // Set the state to sessionStorage
         setCheckboxState(showGuestPlayers);
+        var selectedPlayers = getSelectedPlayers();
 
         // Toggle guest players based on the checkbox state
         {% for player in players %}
@@ -47,12 +48,15 @@
 
             if (!showGuestPlayers && isGuest.toLowerCase() === 'true') {
                 elementToToggle.style.display = 'none';
+                delete selectedPlayers[player_id];
                 elementToToggle.classList.remove('selected');
             } else {
                 elementToToggle.style.display = 'block';
 
             }
         {% endfor %}
+        updateFormInputs();
+        setSelectedPlayers(selectedPlayers);
     }
 
     // Function to handle player selection toggle
