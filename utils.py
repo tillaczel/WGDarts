@@ -9,6 +9,8 @@ import trueskill
 from PIL import Image
 import pprint
 from datetime import datetime
+from collections import defaultdict
+import jsonlines
 
 
 def calculate_expected_score(rating_a, rating_b):
@@ -54,35 +56,11 @@ def save_games(games):
         f.write(pretty_json_str)
 
 
-def load_ratings():
-    return np.genfromtxt('static/tmp/ratings.csv', delimiter=',')
-
-
-def save_ratings(ratings):
-    if not os.path.exists('static/tmp'):
-        os.makedirs('static/tmp')
-    np.savetxt('static/tmp/ratings.csv', ratings, delimiter=',')
-
-
-def load_ratings_history():
-    with open('static/tmp/ratings_history.json', 'r') as json_file:
-        ratings_history = json.load(json_file)
-    return ratings_history
-
-
-def save_ratings_history(ratings_history):
-    if not os.path.exists('static/tmp'):
-        os.makedirs('static/tmp')
-    with open('static/tmp/ratings_history.json', 'w') as json_file:
-        json.dump(ratings_history, json_file)
-
-
-def save_csv(data, file_name):
-    np.savetxt(os.path.join('static', 'tmp', file_name), data, delimiter=',')
-
-
-def load_csv(file_name):
-    return np.genfromtxt(os.path.join('static', 'tmp', file_name), delimiter=',')
+def get_ratings(all_ratings, player2games):
+    ratings = defaultdict(float)
+    for player_id in player2games.keys():
+        ratings[player_id] = all_ratings[player2games[player_id][-1]][player_id]
+    return ratings
 
 
 def register_game(player_ids, result):
@@ -96,118 +74,107 @@ def register_game(player_ids, result):
     calculate_ratings()
 
 
+def calculate_game_ratings(ratings, result):
+    trueskill_env = trueskill.TrueSkill(draw_probability=0.0, tau=25 / 3 / 100)
+
+    for player_a in range(len(ratings) - 1):
+        for player_b in range(player_a + 1, len(ratings)):
+            rating_a = trueskill_env.create_rating(mu=ratings[player_a]['mu']/40, sigma=ratings[player_a]['sigma']/40)
+            rating_b = trueskill_env.create_rating(mu=ratings[player_b]['mu']/40, sigma=ratings[player_b]['sigma']/40)
+            if result[player_a] < result[player_b]:
+                tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b, env=trueskill_env)
+            else:
+                tmp_ratings = trueskill.rate_1vs1(rating_b, rating_a, env=trueskill_env)[::-1]
+
+            ratings[player_a]['mu'] += (tmp_ratings[0].mu - rating_a.mu) / (len(ratings) - 1) * 40
+            ratings[player_a]['sigma'] += (tmp_ratings[0].sigma - rating_a.sigma) / (len(ratings) - 1) * 40
+            ratings[player_b]['mu'] += (tmp_ratings[1].mu - rating_b.mu) / (len(ratings) - 1) * 40
+            ratings[player_b]['sigma'] += (tmp_ratings[1].sigma - rating_b.sigma) / (len(ratings) - 1) * 40
+
+    return ratings
+
+
+class NewPlayer(dict):
+    def __missing__(self, key):
+        default_entries = {'mu': 1000., 'sigma': 1000/3}
+        return default_entries.get(key, None)
+
+
 def calculate_ratings():
-    players = load_players()
-    trueskill_env = trueskill.TrueSkill(draw_probability=0.0, tau=25/3/100)
-    ratings = [trueskill_env.create_rating() for _ in range(len(players))]
     games = load_games()
+    ratings = defaultdict(NewPlayer)
 
-    # for game in games:
-    #     player_ids = game["player_ids"]
-    #     result = game["result"]
-    #
-    #     new_ratings = trueskill.rate([[ratings[id]] for id in player_ids], ranks=result)
-    #
-    #     for i, player_id in enumerate(player_ids):
-    #         ratings[player_id] = new_ratings[i][0]
-    #
-    #     for player_id in player_ids:
-    #         ratings_history[player_id].append((ratings[player_id].mu - 3 * ratings[player_id].sigma) * 40)
+    if not os.path.exists('static'):
+        os.makedirs('static')
+    games_ratings_path = os.path.join("static", "ratings.jsonl")
+    games_ratings_before_path = os.path.join("static", "ratings_before.jsonl")
+    if os.path.exists(games_ratings_path):
+        os.remove(games_ratings_path)
 
-    ratings_history = [[0] for _ in range(len(players))]
-    net_point_gains = np.zeros(shape=(len(players), len(players)))
-    games_won = np.zeros(shape=(len(players), len(players)), dtype=int)
-    games_played = np.zeros(shape=(len(players), len(players)), dtype=int)
+    player2games = defaultdict(list)
 
+    for game_idx, game in enumerate(games):
+        player_ids = game["player_ids"]
+        result = game["result"]
+        game_ratings = [ratings[id] for id in player_ids]
+
+        with jsonlines.open(games_ratings_before_path, 'a') as writer:
+            writer.write(game_ratings)
+        new_game_ratings = calculate_game_ratings(game_ratings, result)
+        new_game_ratings = {id: r for id, r in zip(player_ids, new_game_ratings)}
+        with jsonlines.open(games_ratings_path, 'a') as writer:
+            writer.write(new_game_ratings)
+        [player2games[p_id].append(game_idx) for p_id in player_ids]
+
+    with open('static/player2games.json', 'w') as f:
+        json.dump(dict(player2games), f)
+
+
+class WinRatio(dict):
+    def __missing__(self, key):
+        default_entries = {'won': 0, 'played': 0}
+        return default_entries.get(key, None)
+
+
+def games_2_win_ratios(games, main_player_id):
+    win_ratio = defaultdict(WinRatio)
     for game in games:
         player_ids = game["player_ids"]
         result = game["result"]
-
-        new_ratings = [[ratings[id].mu, ratings[id].sigma] for id in player_ids]
-        for player_a in range(len(player_ids) - 1):
-            for player_b in range(player_a + 1, len(player_ids)):
-                player_a_id, player_b_id = player_ids[player_a], player_ids[player_b]
-                rating_a, rating_b = ratings[player_a_id], ratings[player_b_id]
-                if result[player_a] < result[player_b]:
-                    tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b, env=trueskill_env)
-                else:
-                    tmp_ratings = trueskill.rate_1vs1(rating_b, rating_a, env=trueskill_env)[::-1]
-
-                new_ratings[player_a][0] += (tmp_ratings[0].mu - rating_a.mu) / (len(player_ids)-1)
-                new_ratings[player_a][1] += (tmp_ratings[0].sigma - rating_a.sigma) / (len(player_ids)-1)
-                new_ratings[player_b][0] += (tmp_ratings[1].mu - rating_b.mu) / (len(player_ids)-1)
-                new_ratings[player_b][1] += (tmp_ratings[1].sigma - rating_b.sigma) / (len(player_ids)-1)
-
-                net_point_gains[player_a_id, player_b_id] += (tmp_ratings[0].mu - rating_a.mu) / (len(player_ids)-1)
-                net_point_gains[player_b_id, player_a_id] += (tmp_ratings[1].mu - rating_b.mu) / (len(player_ids)-1)
-
-                won = int(result[player_a] < result[player_b])
-                games_won[player_a_id, player_b_id] += won
-                games_won[player_b_id, player_a_id] += 1-won
-                games_played[player_a_id, player_b_id] += 1
-                games_played[player_b_id, player_a_id] += 1
-
-        for i, player_id in enumerate(player_ids):
-            ratings[player_id] = trueskill_env.create_rating(mu=new_ratings[i][0], sigma=new_ratings[i][1])
-
-        for player_id in player_ids:
-            ratings_history[player_id].append((ratings[player_id].mu - 3 * ratings[player_id].sigma) * 40)
-
-    save_ratings([x[-1] for x in ratings_history])
-    save_ratings_history(ratings_history)
-    save_csv(net_point_gains, 'net_point_gains.csv')
-    save_csv(games_won, 'games_won.csv')
-    save_csv(games_played, 'games_played.csv')
-
-    players_mu_sigma = np.array([[rating.mu*40, rating.sigma*40] for rating in ratings])
-    save_csv(players_mu_sigma, 'players_mu_sigma.csv')
-
-
-# def calculate_ratings():
-#     players = load_players()
-#     ratings = [1000 for _ in range(len(players))]
-#     ratings_history = [[1000] for _ in range(len(players))]
-#     games = load_games()
-#
-#     for game in games:
-#         player_ids = game["player_ids"]
-#         result = game["result"]
-#         n_players = len(player_ids)
-#         for i in range(n_players-1):
-#             for j in range(i+1, n_players):
-#                 if result[i] == result[j]:
-#                     actual_score = 0.5
-#                 elif result[i] > result[j]:
-#                     actual_score = 1
-#                 else:
-#                     actual_score = 0
-#
-#                 player_id_i, player_id_j = player_ids[i], player_ids[j]
-#                 rating_i, rating_j = ratings[player_id_i], ratings[player_id_j]
-#                 exp_score = calculate_expected_score(rating_i, rating_j)
-#                 ratings[player_id_i] = update_rating(rating_i, 1-exp_score, 1-actual_score)
-#                 ratings[player_id_j] = update_rating(rating_j, exp_score, actual_score)
-#         for player_id in player_ids:
-#             ratings_history[player_id].append(ratings[player_id])
-#
-#     save_ratings(ratings)
-#     save_ratings_history(ratings_history)
+        main_player_idx = player_ids.index(main_player_id)
+        main_player_result = result[main_player_idx]
+        for p_id, r in zip(player_ids, result):
+            if p_id == main_player_id:
+                continue
+            win_ratio[p_id]['played'] += 1
+            if main_player_result < r:
+                win_ratio[p_id]['won'] += 1
+    return win_ratio
 
 
 def load_players_dict():
     players = load_players()
-    ratings = load_ratings()
+    all_ratings = []
+    with jsonlines.open(os.path.join('static', 'ratings.jsonl'), 'r') as reader:
+        for line in reader:
+            all_ratings.append(line)
+    with open(os.path.join('static', 'player2games.json'), 'r') as json_file:
+        player2games = json.load(json_file)
+    final_ratings = get_ratings(all_ratings, player2games)
     players = players.to_dict(orient='records')
-    for id, (player, rating) in enumerate(zip(players, ratings)):
+    for id, player in enumerate(players):
+        rating = final_ratings[str(id)]
         player['id'] = id
-        player['rounded_rating'] = round(rating)
+        player['mu'] = round(rating['mu'])
+        player['sigma'] = round(rating['sigma'])
+        player['rating'] = rating['mu'] - 3 * rating['sigma']
+        player['rounded_rating'] = round(player['rating'])
     return players
 
 
 def load_players_ordered_list():
     players = load_players_dict()
-    ratings = load_ratings()
-    players_all = [players[i] for i in np.argsort(ratings)[::-1]]
+    players_all = sorted(players, key=lambda x: -x['rating'])
     return players_all
 
 

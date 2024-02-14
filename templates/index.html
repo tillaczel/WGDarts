@@ -149,7 +149,7 @@
                 <h3 class="player-rating">{{ player.rounded_rating }}</h3>
 
                 <!-- Button to go to player statistics -->
-                <form action="{{ url_for('player_statistics', player_id=player.id) }}" method="get">
+                <form action="{{ url_for('player_statistics', player_id=player.id) }}" method="get" target="_blank">
                     <button type="submit" data-statistics-button>View Statistics</button>
                 </form>
             </div>

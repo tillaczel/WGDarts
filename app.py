@@ -6,6 +6,7 @@ import numpy as np
 import random
 from PIL import Image
 import time
+import json
 
 # Configure your application and upload folder
 app = Flask(__name__)
@@ -53,22 +54,28 @@ def player_statistics(player_id):
     # Add your logic to fetch and display player statistics here
     players = utils.load_players_dict()
     player = players[player_id]
-    players_mu_sigma = utils.load_csv('players_mu_sigma.csv')
-    games_won = utils.load_csv('games_won.csv')
-    games_played = utils.load_csv('games_played.csv')
-    win_rate = []
-    sort_index = np.argsort(-games_played[player_id])
-    for i in sort_index:
-        if games_played[player_id][i] < 1:
-            continue
-        win_rate.append([players[i]["name"], int(games_played[player_id][i]), f"{games_won[player_id][i]/games_played[player_id][i]:.2%}" if games_played[player_id][i] > 0 else "-"])
+    # players_mu_sigma = utils.load_csv('players_mu_sigma.csv')
+    # games_won = utils.load_csv('games_won.csv')
+    # games_played = utils.load_csv('games_played.csv')
 
-    player['num_challengers'] = int(np.sum(games_played[player_id]))
-    player['win_rate'] = f"{np.sum(games_won[player_id])/player['num_challengers']:.2%}"
-    player['mu'] = round(players_mu_sigma[player_id][0])
-    player['sigma'] = round(players_mu_sigma[player_id][1])
-    ratings_history = utils.load_ratings_history()
-    return render_template('player_statistics.html', player_id=player_id, player=player, ratings_history=ratings_history[player_id], win_rate=win_rate, players=players)
+    with open(os.path.join('static', 'games.json'), 'r') as json_file:
+        games = json.load(json_file)
+    with open(os.path.join('static', 'player2games.json'), 'r') as json_file:
+        player2games = json.load(json_file)
+    player_games = [games[index] for index in player2games[str(player_id)]]
+    win_ratio = utils.games_2_win_ratios(player_games, player_id)
+    sorted_keys = sorted(win_ratio, key=lambda k: -win_ratio[k]['played'])
+    win_ratio_print = []
+    for player_id in sorted_keys:
+        games_played, games_won = win_ratio[player_id]['played'], win_ratio[player_id]['won']
+        ratio = games_won/games_played
+        win_ratio_print.append([players[player_id]["name"], int(games_played), f"{ratio:.2%}"])
+
+    total_played, total_won = int(np.sum([v['played'] for v in win_ratio.values()])), int(np.sum([v['won'] for v in win_ratio.values()]))
+    player['num_challengers'] = total_played
+    player['win_rate'] = f"{total_won/total_played:.2%}"
+    # ratings_history = utils.load_ratings_history()
+    return render_template('player_statistics.html', player_id=player_id, player=player, ratings_history=[], win_rate=win_ratio_print, players=players)
 
 
 @app.route('/admin')
