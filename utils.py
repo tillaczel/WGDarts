@@ -11,6 +11,7 @@ import pprint
 from datetime import datetime
 from collections import defaultdict
 import jsonlines
+import copy
 
 
 def calculate_expected_score(rating_a, rating_b):
@@ -77,10 +78,11 @@ def register_game(player_ids, result):
 def calculate_game_ratings(ratings, result):
     trueskill_env = trueskill.TrueSkill(draw_probability=0.0, tau=25 / 3 / 100)
 
-    for player_a in range(len(ratings) - 1):
+    new_ratings = copy.deepcopy(ratings)
+    for player_a in range(len(new_ratings) - 1):
         for player_b in range(player_a + 1, len(ratings)):
-            rating_a = trueskill_env.create_rating(mu=ratings[player_a]['mu']/40, sigma=ratings[player_a]['sigma']/40)
-            rating_b = trueskill_env.create_rating(mu=ratings[player_b]['mu']/40, sigma=ratings[player_b]['sigma']/40)
+            rating_a = trueskill_env.create_rating(mu=new_ratings[player_a]['mu']/40, sigma=new_ratings[player_a]['sigma']/40)
+            rating_b = trueskill_env.create_rating(mu=new_ratings[player_b]['mu']/40, sigma=new_ratings[player_b]['sigma']/40)
             if result[player_a] < result[player_b]:
                 tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b, env=trueskill_env)
             else:
@@ -120,10 +122,10 @@ def calculate_ratings():
 
         with jsonlines.open(games_ratings_before_path, 'a') as writer:
             writer.write(game_ratings)
-        new_game_ratings = calculate_game_ratings(game_ratings, result)
-        new_game_ratings = {id: r for id, r in zip(player_ids, new_game_ratings)}
+        game_ratings = calculate_game_ratings(game_ratings, result)
+        game_ratings = {id: r for id, r in zip(player_ids, game_ratings)}
         with jsonlines.open(games_ratings_path, 'a') as writer:
-            writer.write(new_game_ratings)
+            writer.write(game_ratings)
         [player2games[p_id].append(game_idx) for p_id in player_ids]
 
     with open('static/player2games.json', 'w') as f:
