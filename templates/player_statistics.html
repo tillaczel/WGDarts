@@ -39,53 +39,54 @@
         <div id="range-history-plot"></div>
         <button id="toggleButton" onclick="togglePlots()">Toggle Plots</button>
 
-        <!-- Table for Player Details -->
-        <table style="width:50%; margin-top:20px; color:#fff; border-collapse: collapse;">
-            <tr>
-                <td style="text-align:right;"><strong>Rating:</strong></td>
-                <td>{{ player.rating | round | int}}</td>
-            </tr>
-            <tr>
-                <td style="text-align:right;"><strong>Maximum Rating:</strong></td>
-                <td>{{ player.ratings | max | round | int}}</td>
-            </tr>
-            <tr>
-                <td style="text-align:right;"><strong>Minimum Rating:</strong></td>
-                <td>{{ player.ratings | min | round | int}}</td>
-            </tr>
-            <tr>
-                <td style="text-align:right;"><strong>Number of Challengers:</strong></td>
-                <td>{{ player.num_challengers }}</td>
-            </tr>
-            <tr>
-                <td style="text-align:right;"><strong>Win Rate:</strong></td>
-                <td>{{ player.win_rate }}</td>
-            </tr>
-            <tr>
-                <td style="text-align:right;"><strong>Mean Score:</strong></td>
-                <td>{{ player.mu }}</td>
-            </tr>
-            <tr>
-                <td style="text-align:right;"><strong>Standard Deviation:</strong></td>
-                <td>{{ player.sigma }}</td>
-            </tr>
-        </table>
+    <!-- Table for Player Details -->
+    <table style="width:20%; margin-top:20px; color:#fff; border-collapse: collapse;">
+        <tr>
+            <td style="text-align:left;"><strong>Rating:</strong></td>
+            <td style="text-align:left;">{{ player.rating | round | int}}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;"><strong>Maximum Rating:</strong></td>
+            <td style="text-align:left;">{{ player.ratings | max | round | int}}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;"><strong>Minimum Rating:</strong></td>
+            <td style="text-align:left;">{{ player.ratings | min | round | int}}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;"><strong>Number of Challengers:</strong></td>
+            <td style="text-align:left;">{{ player.num_challengers }}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;"><strong>Win Rate:</strong></td>
+            <td style="text-align:left;">{{ player.win_rate }}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;"><strong>Mean Score:</strong></td>
+            <td style="text-align:left;">{{ player.mu }}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;"><strong>Standard Deviation:</strong></td>
+            <td style="text-align:left;">{{ player.sigma }}</td>
+        </tr>
+    </table>
 
-        <!-- Table for Win Rate -->
-        <table style="width:60%; margin-top:20px; color:#fff; border-collapse: collapse;">
+    <!-- Table for Win Rate -->
+    <table style="width:30%; margin-top:20px; color:#fff; border-collapse: collapse;">
+        <tr>
+            <th style="width:40%; text-align:left;">Player</th>
+            <th style="width:30%; text-align:left;">Games Played</th>
+            <th style="text-align:left;">Win Rate</th>
+        </tr>
+        {% for row in win_rate %}
             <tr>
-                <th style="width:40%;">Player</th>
-                <th style="width:30%;">Games Played</th>
-                <th>Win Rate</th>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
             </tr>
-            {% for row in win_rate %}
-                <tr>
-                    <td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+        {% endfor %}
+    </table>
+
 
     </div>
 
