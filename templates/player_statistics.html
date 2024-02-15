@@ -36,7 +36,7 @@
         <!-- Plot the player's rating history -->
 
         <div id="rating-history-plot"></div>
-        <div id="mu-history-plot"></div>
+        <div id="range-history-plot"></div>
         <button id="toggleButton" onclick="togglePlots()">Toggle Plots</button>
 
         <!-- Table for Player Details -->
@@ -97,17 +97,17 @@
     function togglePlots() {
         // Toggle the visibility of the plots
         var ratingPlot = document.getElementById('rating-history-plot');
-        var muPlot = document.getElementById('mu-history-plot');
+        var rangePlot = document.getElementById('range-history-plot');
 
         if (ratingPlot.style.display === 'none') {
             ratingPlot.style.display = 'block';
-            muPlot.style.display = 'none';
+            rangePlot.style.display = 'none';
         } else {
             ratingPlot.style.display = 'none';
-            muPlot.style.display = 'block';
+            rangePlot.style.display = 'block';
         }
         Plotly.Plots.resize(ratingPlot);
-        Plotly.Plots.resize(muPlot);
+        Plotly.Plots.resize(rangePlot);
     }
 
     // Rating History Plot
@@ -205,10 +205,10 @@
         height: 600, // Adjust the height as needed
     };
 
-    Plotly.newPlot('mu-history-plot', [traceMax, traceMin], layoutMu, config);
+    Plotly.newPlot('range-history-plot', [traceMax, traceMin], layoutMu, config);
 
     // Initially hide the mu plot
-    document.getElementById('mu-history-plot').style.display = 'none';
+    document.getElementById('range-history-plot').style.display = 'none';
 </script>
 
 <!--    <script>-->
