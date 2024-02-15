@@ -46,20 +46,20 @@
             <td style="text-align:left;">{{ player.rating | round | int}}</td>
         </tr>
         <tr>
-            <td style="text-align:left;"><strong>Maximum Rating:</strong></td>
-            <td style="text-align:left;">{{ player.ratings | max | round | int}}</td>
-        </tr>
-        <tr>
-            <td style="text-align:left;"><strong>Minimum Rating:</strong></td>
-            <td style="text-align:left;">{{ player.ratings | min | round | int}}</td>
-        </tr>
-        <tr>
             <td style="text-align:left;"><strong>Mean Score:</strong></td>
             <td style="text-align:left;">{{ player.mu }}</td>
         </tr>
         <tr>
             <td style="text-align:left;"><strong>Standard Deviation:</strong></td>
             <td style="text-align:left;">{{ player.sigma }}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;"><strong>Maximum Rating:</strong></td>
+            <td style="text-align:left;">{{ player.ratings | max | round | int}}</td>
+        </tr>
+        <tr>
+            <td style="text-align:left;"><strong>Minimum Rating:</strong></td>
+            <td style="text-align:left;">{{ player.ratings | min | round | int}}</td>
         </tr>
     </table>
 
