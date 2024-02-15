@@ -154,22 +154,38 @@ def games_2_win_ratios(games, main_player_id):
     return win_ratio
 
 
+def get_game_history(all_ratings, player2games, main_player_id):
+    game_idxs = player2games[main_player_id]
+    ratings = {'mu': [], 'sigma': []}
+    for game_idx in game_idxs:
+        rating = all_ratings[game_idx][main_player_id]
+        ratings['mu'].append(rating['mu'])
+        ratings['sigma'].append(rating['sigma'])
+    return ratings
+
+
 def load_players_dict():
     players = load_players()
     all_ratings = []
     with jsonlines.open(os.path.join('static', 'ratings.jsonl'), 'r') as reader:
         for line in reader:
+            line = {int(k): v for k, v in line.items()}
             all_ratings.append(line)
     with open(os.path.join('static', 'player2games.json'), 'r') as json_file:
         player2games = json.load(json_file)
+    player2games = {int(k): v for k, v in player2games.items()}
     final_ratings = get_ratings(all_ratings, player2games)
     players = players.to_dict(orient='records')
     for id, player in enumerate(players):
-        rating = final_ratings[str(id)]
+        ratings_player = get_game_history(all_ratings, player2games, id)
+        rating = final_ratings[id]
         player['id'] = id
         player['mu'] = round(rating['mu'])
         player['sigma'] = round(rating['sigma'])
         player['rating'] = rating['mu'] - 3 * rating['sigma']
+        player['mus'] = ratings_player['mu']
+        player['sigmas'] = ratings_player['sigma']
+        player['ratings'] = (np.array(player['mus']) - 3 * np.array(ratings_player['sigma'])).tolist()
         player['rounded_rating'] = round(player['rating'])
     return players
 

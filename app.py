@@ -75,7 +75,7 @@ def player_statistics(player_id):
     player['num_challengers'] = total_played
     player['win_rate'] = f"{total_won/total_played:.2%}"
     # ratings_history = utils.load_ratings_history()
-    return render_template('player_statistics.html', player_id=player_id, player=player, ratings_history=[], win_rate=win_ratio_print, players=players)
+    return render_template('player_statistics.html', player_id=player_id, player=player, win_rate=win_ratio_print, players=players)
 
 
 @app.route('/admin')
