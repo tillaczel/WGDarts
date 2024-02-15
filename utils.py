@@ -156,7 +156,7 @@ def games_2_win_ratios(games, main_player_id):
 
 def get_game_history(all_ratings, player2games, main_player_id):
     game_idxs = player2games[main_player_id]
-    ratings = {'mu': [], 'sigma': []}
+    ratings = {'mu': [1000], 'sigma': [1000/3]}
     for game_idx in game_idxs:
         rating = all_ratings[game_idx][main_player_id]
         ratings['mu'].append(rating['mu'])
