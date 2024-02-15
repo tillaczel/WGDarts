@@ -54,14 +54,6 @@
             <td style="text-align:left;">{{ player.ratings | min | round | int}}</td>
         </tr>
         <tr>
-            <td style="text-align:left;"><strong>Number of Challengers:</strong></td>
-            <td style="text-align:left;">{{ player.num_challengers }}</td>
-        </tr>
-        <tr>
-            <td style="text-align:left;"><strong>Win Rate:</strong></td>
-            <td style="text-align:left;">{{ player.win_rate }}</td>
-        </tr>
-        <tr>
             <td style="text-align:left;"><strong>Mean Score:</strong></td>
             <td style="text-align:left;">{{ player.mu }}</td>
         </tr>
@@ -85,6 +77,11 @@
                 <td>{{ row[2] }}</td>
             </tr>
         {% endfor %}
+        <tr>
+            <td>Total</td>
+            <td>{{ player.num_challengers }}</td>
+            <td>{{ player.win_rate }}</td>
+        </tr>
     </table>
 
 
