@@ -42,3 +42,12 @@ def get_player_rating(ratings, player_id):
     for ratings_i in ratings[::-1]:
         if player_id in ratings_i.keys():
             return ratings_i[player_id]
+
+
+def player2game_idxs(games, player_id):
+    game_idxs = []
+    for i, game in enumerate(games):
+        if player_id in game['player_ids']:
+            game_idxs.append(i)
+    return game_idxs
+

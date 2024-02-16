@@ -35,9 +35,3 @@ def append_data(data, name):
     with jsonlines.open(f_path, 'a') as writer:
         writer.write(data)
 
-
-def load_player2games():
-    with open(os.path.join('static', 'data', 'player2games.json'), 'r') as json_file:
-        player2games = json.load(json_file)
-    return defaultdict(list, player2games)
-

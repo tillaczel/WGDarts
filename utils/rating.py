@@ -78,8 +78,6 @@ def calculate_ratings(games):
             writer.write(_game_ratings)
         [player2games[p_id].append(game_idx) for p_id in player_ids]
 
-    with open('static/data/player2games.json', 'w') as f:
-        json.dump(dict(player2games), f)
 
 
 def register_game(ratings, player_ids, result):

@@ -18,10 +18,10 @@ app.config['IMAGE_FOLDER'] = IMAGE_FOLDER
 @app.route('/')
 def index():
     players_df = utils.load_players()
+    games = utils.load_data('games.jsonl')
     ratings = utils.load_data('ratings.jsonl', key2int=True)
-    player2games = utils.load_player2games()
 
-    players = utils.process_players_dict(players_df, ratings, player2games)
+    players = utils.process_players_dict(players_df, games, ratings)
     players_list = utils.order_players(players)
     timestamp = int(time.time())
     return render_template('index.html', players=players_list, timestamp=timestamp)
@@ -30,10 +30,10 @@ def index():
 @app.route('/start_game', methods=['POST'])
 def start_game():
     players_df = utils.load_players()
+    games = utils.load_data('games.jsonl')
     ratings = utils.load_data('ratings.jsonl', key2int=True)
-    player2games = utils.load_player2games()
 
-    players = utils.process_players_dict(players_df, ratings, player2games)
+    players = utils.process_players_dict(players_df, games, ratings)
     selected_player_ids = [int(i) for i in request.form.getlist('selected_players')]
 
     players_list = utils.order_players(players)
@@ -47,14 +47,12 @@ def start_game():
 def record_results():
     games = utils.load_data('games.jsonl')
     ratings = utils.load_data('ratings.jsonl', key2int=True)
-    player2games = utils.load_player2games()
 
     positions = [int(p[:-2]) for p in request.form.getlist('finishPosition')]
     player_ids = [int(id) for id in request.form.getlist('playerId')]
     game, rating, rating_before = utils.rating.register_game(ratings, player_ids, positions)
 
     game_idx = len(games)
-    [player2games[p_id].append(game_idx) for p_id in player_ids]
     utils.append_data(game, 'games.jsonl'), games.append(game)
     utils.append_data(rating, 'ratings.jsonl'), ratings.append(rating)
     utils.append_data(rating_before, 'ratings_before.jsonl'), ratings.append(rating_before)
@@ -66,12 +64,11 @@ def player_statistics(player_id):
     players_df = utils.load_players()
     games = utils.load_data('games.jsonl')
     ratings = utils.load_data('ratings.jsonl', key2int=True)
-    player2games = utils.load_player2games()
 
-    players = utils.process_players_dict(players_df, ratings, player2games)
+    players = utils.process_players_dict(players_df, games, ratings)
     player = players[player_id]
 
-    player_games = [games[index] for index in player2games[str(player_id)]]
+    player_games = [games[index] for index in player['game_idxs']]
     win_ratio = utils.games_2_win_ratios(player_games, player_id)
     sorted_keys = sorted(win_ratio, key=lambda k: -win_ratio[k]['played'])
     win_ratio_print = []
@@ -91,10 +88,10 @@ def player_statistics(player_id):
 @app.route('/admin')
 def admin_page():
     players_df = utils.load_players()
+    games = utils.load_data('games.jsonl')
     ratings = utils.load_data('ratings.jsonl', key2int=True)
-    player2games = utils.load_player2games()
 
-    players = utils.process_players_dict(players_df, ratings, player2games)
+    players = utils.process_players_dict(players_df, games, ratings)
     players = sorted(players, key=lambda d: d['name'])
     return render_template('admin.html', player_list=players)
 

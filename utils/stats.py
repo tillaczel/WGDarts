@@ -11,7 +11,7 @@ from PIL import Image
 from collections import defaultdict
 from datetime import datetime
 
-from .utils import get_player_rating
+from .utils import get_player_rating, player2game_idxs
 
 
 class WinRatio(dict):
@@ -37,25 +37,24 @@ def games_2_win_ratios(games, main_player_id):
     return win_ratio
 
 
-def get_game_history(all_ratings, player2games, main_player_id):
-    game_idxs = player2games[main_player_id]
-    ratings = {'mu': [1000], 'sigma': [1000 / 3]}
+def get_ratings_history(game_idxs, ratings, player_id):
+    ratings_i = {'mu': [1000], 'sigma': [1000 / 3]}
     for game_idx in game_idxs:
-        rating = all_ratings[game_idx][main_player_id]
-        ratings['mu'].append(rating['mu'])
-        ratings['sigma'].append(rating['sigma'])
-    return ratings
+        rating = ratings[game_idx][player_id]
+        ratings_i['mu'].append(rating['mu'])
+        ratings_i['sigma'].append(rating['sigma'])
+    return ratings_i
 
 
-def process_players_dict(players, all_ratings, player2games):
-    player2games = {int(k): v for k, v in player2games.items()}
-    final_ratings = [get_player_rating(all_ratings, player_id) for player_id in range(len(players))]
+def process_players_dict(players, games, ratings):
+    final_ratings = [get_player_rating(ratings, player_id) for player_id in range(len(players))]
     players = players.to_dict(orient='records')
     for id, player in enumerate(players):
-        id = int(id)
-        ratings_player = get_game_history(all_ratings, player2games, id)
+        game_idxs = player2game_idxs(games, id)
+        ratings_player = get_ratings_history(game_idxs, ratings, id)
         rating = final_ratings[id]
         player['id'] = id
+        player['game_idxs'] = game_idxs
         player['mu'] = round(rating['mu'])
         player['sigma'] = round(rating['sigma'])
         player['rating'] = rating['mu'] - 3 * rating['sigma']
