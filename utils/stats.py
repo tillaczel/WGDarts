@@ -11,8 +11,7 @@ from PIL import Image
 from collections import defaultdict
 from datetime import datetime
 
-from utils.data import load_players
-from utils.rating import get_ratings
+from .utils import get_player_rating
 
 
 class WinRatio(dict):
@@ -50,7 +49,7 @@ def get_game_history(all_ratings, player2games, main_player_id):
 
 def process_players_dict(players, all_ratings, player2games):
     player2games = {int(k): v for k, v in player2games.items()}
-    final_ratings = get_ratings(all_ratings, player2games)
+    final_ratings = [get_player_rating(all_ratings, player_id) for player_id in range(len(players))]
     players = players.to_dict(orient='records')
     for id, player in enumerate(players):
         id = int(id)

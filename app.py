@@ -20,8 +20,6 @@ ratings = utils.load_data('ratings.jsonl', key2int=True)
 ratings_before = utils.load_data('ratings_before.jsonl', key2int=True)
 player2games = utils.load_player2games()
 
-utils.rating.calculate_ratings(games)
-
 
 @app.route('/')
 def index():
@@ -36,7 +34,7 @@ def index():
 def start_game():
     global players_df, ratings, player2games
     players = utils.process_players_dict(players_df, ratings, player2games)
-    selected_player_ids = request.form.getlist('selected_players')
+    selected_player_ids = [int(i) for i in request.form.getlist('selected_players')]
 
     players_list = utils.order_players(players)
     selected_players = [player for player in players_list if player['id'] in selected_player_ids]
@@ -49,13 +47,14 @@ def start_game():
 def record_results():
     global games, ratings, ratings_before, player2games
     positions = [int(p[:-2]) for p in request.form.getlist('finishPosition')]
-    ids = [int(id) for id in request.form.getlist('playerId')]
-    game, rating, rating_before = utils.rating.register_game(ratings, ids, positions)
+    player_ids = [int(id) for id in request.form.getlist('playerId')]
+    game, rating, rating_before = utils.rating.register_game(ratings, player_ids, positions)
 
+    game_idx = len(games)
     [player2games[p_id].append(game_idx) for p_id in player_ids]
-    utils.append_data(games, 'games.jsonl')
-    utils.append_data(rating, 'rating.jsonl')
-    utils.append_data(rating_before, 'rating_before.jsonl')
+    utils.append_data(game, 'games.jsonl'), games.append(game)
+    utils.append_data(rating, 'ratings.jsonl'), ratings.append(rating)
+    utils.append_data(rating_before, 'ratings_before.jsonl'), ratings.append(rating_before)
     return redirect(url_for('index'))
 
 
@@ -116,7 +115,6 @@ def reupload_photo():
     img = utils.crop_to_square(img)
     img.save(os.path.join(app.config['IMAGE_FOLDER'], image_path))
 
-    print(players_df['img_path'].iloc[int(selected_player_id)])
     players_df['img_path'].iloc[int(selected_player_id)] = image_path
     utils.save_players(players_df)
 

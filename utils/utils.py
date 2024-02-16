@@ -36,3 +36,9 @@ def crop_to_square(img):
     # Crop the image
     img_cropped = img.crop((left, top, right, bottom))
     return img_cropped.resize((512, 512), Image.ANTIALIAS)
+
+
+def get_player_rating(ratings, player_id):
+    for ratings_i in ratings[::-1]:
+        if player_id in ratings_i.keys():
+            return ratings_i[player_id]

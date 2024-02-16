@@ -12,6 +12,8 @@ from collections import defaultdict
 from datetime import datetime
 import copy
 
+from .utils import get_player_rating
+
 
 def get_ratings(all_ratings, player2games):
     ratings = defaultdict(float)
@@ -23,13 +25,13 @@ def get_ratings(all_ratings, player2games):
 def calculate_game_ratings(ratings, result):
     trueskill_env = trueskill.TrueSkill(draw_probability=0.0, tau=25 / 3 / 100)
 
-    new_ratings = copy.deepcopy(ratings)
-    for player_a in range(len(new_ratings) - 1):
+    old_ratings = copy.deepcopy(ratings)
+    for player_a in range(len(old_ratings) - 1):
         for player_b in range(player_a + 1, len(ratings)):
-            rating_a = trueskill_env.create_rating(mu=new_ratings[player_a]['mu'] / 40,
-                                                   sigma=new_ratings[player_a]['sigma'] / 40)
-            rating_b = trueskill_env.create_rating(mu=new_ratings[player_b]['mu'] / 40,
-                                                   sigma=new_ratings[player_b]['sigma'] / 40)
+            rating_a = trueskill_env.create_rating(mu=old_ratings[player_a]['mu'] / 40,
+                                                   sigma=old_ratings[player_a]['sigma'] / 40)
+            rating_b = trueskill_env.create_rating(mu=old_ratings[player_b]['mu'] / 40,
+                                                   sigma=old_ratings[player_b]['sigma'] / 40)
             if result[player_a] < result[player_b]:
                 tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b, env=trueskill_env)
             else:
@@ -83,11 +85,14 @@ def calculate_ratings(games):
 def register_game(ratings, player_ids, result):
     assert len(player_ids) == len(result)
 
-    rating_before = [ratings[id] for id in player_ids]
-    rating = calculate_game_ratings(copy.deepcopy(ratings_before), result)
+    rating_before = [get_player_rating(ratings, id) for id in player_ids]
+    rating = calculate_game_ratings(copy.deepcopy(rating_before), result)
 
     current_time = datetime.now()
     formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
     game = {"time": formatted_time, "player_ids": player_ids, "result": result}
+
+    rating = {id: r for id, r in zip(player_ids, rating)}
+    rating_before = {id: r for id, r in zip(player_ids, rating_before)}
 
     return game, rating, rating_before
