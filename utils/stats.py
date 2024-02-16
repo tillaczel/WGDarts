@@ -48,19 +48,12 @@ def get_game_history(all_ratings, player2games, main_player_id):
     return ratings
 
 
-def load_players_dict():
-    players = load_players()
-    all_ratings = []
-    with jsonlines.open(os.path.join('static', 'data', 'ratings.jsonl'), 'r') as reader:
-        for line in reader:
-            line = {int(k): v for k, v in line.items()}
-            all_ratings.append(line)
-    with open(os.path.join('static', 'data', 'player2games.json'), 'r') as json_file:
-        player2games = json.load(json_file)
+def process_players_dict(players, all_ratings, player2games):
     player2games = {int(k): v for k, v in player2games.items()}
     final_ratings = get_ratings(all_ratings, player2games)
     players = players.to_dict(orient='records')
     for id, player in enumerate(players):
+        id = int(id)
         ratings_player = get_game_history(all_ratings, player2games, id)
         rating = final_ratings[id]
         player['id'] = id
@@ -74,7 +67,6 @@ def load_players_dict():
     return players
 
 
-def load_players_ordered_list():
-    players = load_players_dict()
+def order_players(players):
     players_all = sorted(players, key=lambda x: -x['rating'])
     return players_all

@@ -10,8 +10,7 @@ import trueskill
 from PIL import Image
 from collections import defaultdict
 from datetime import datetime
-
-from utils.data import load_games, save_games
+import copy
 
 
 def get_ratings(all_ratings, player2games):
@@ -19,17 +18,6 @@ def get_ratings(all_ratings, player2games):
     for player_id in player2games.keys():
         ratings[player_id] = all_ratings[player2games[player_id][-1]][player_id]
     return ratings
-
-
-def register_game(player_ids, result):
-    assert len(player_ids) == len(result)
-    games = load_games()
-
-    current_time = datetime.now()
-    formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
-    games.append({"time": formatted_time, "player_ids": player_ids, "result": result})
-    save_games(games)
-    calculate_ratings()
 
 
 def calculate_game_ratings(ratings, result):
@@ -62,8 +50,7 @@ class NewPlayer(dict):
         self['sigma'] = sigma
 
 
-def calculate_ratings():
-    games = load_games()
+def calculate_ratings(games):
     ratings = defaultdict(NewPlayer)
 
     games_ratings_path = os.path.join('static', 'data', "ratings.jsonl")
@@ -80,13 +67,27 @@ def calculate_ratings():
         result = game["result"]
         game_ratings = [ratings[id] for id in player_ids]
 
+        _game_ratings = {id: r for id, r in zip(player_ids, game_ratings)}
         with jsonlines.open(games_ratings_before_path, 'a') as writer:
-            writer.write(game_ratings)
+            writer.write(_game_ratings)
         game_ratings = calculate_game_ratings(game_ratings, result)
-        game_ratings = {id: r for id, r in zip(player_ids, game_ratings)}
+        _game_ratings = {id: r for id, r in zip(player_ids, game_ratings)}
         with jsonlines.open(games_ratings_path, 'a') as writer:
-            writer.write(game_ratings)
+            writer.write(_game_ratings)
         [player2games[p_id].append(game_idx) for p_id in player_ids]
 
     with open('static/data/player2games.json', 'w') as f:
         json.dump(dict(player2games), f)
+
+
+def register_game(ratings, player_ids, result):
+    assert len(player_ids) == len(result)
+
+    rating_before = [ratings[id] for id in player_ids]
+    rating = calculate_game_ratings(copy.deepcopy(ratings_before), result)
+
+    current_time = datetime.now()
+    formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    game = {"time": formatted_time, "player_ids": player_ids, "result": result}
+
+    return game, rating, rating_before

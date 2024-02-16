@@ -1,5 +1,3 @@
-# Define any utility functions for Elo rating calculations or other purposes
-
 import copy
 import json
 import jsonlines
@@ -13,12 +11,8 @@ from PIL import Image
 from collections import defaultdict
 from datetime import datetime
 
-from utils.data import load_players, save_players, load_games, save_games
-from utils.rating import get_ratings, calculate_game_ratings
 
-
-def add_player(name, default_img=False):
-    players = load_players()
+def add_player(players, name, default_img=False):
     if default_img:
         img_path = f"default.png"
     else:
@@ -26,8 +20,7 @@ def add_player(name, default_img=False):
     new_row = {"name": name, "img_path": img_path, 'guest': True}
     new_player = pd.DataFrame([new_row])
     players = pd.concat([players, new_player], ignore_index=True)
-    save_players(players)
-    return img_path
+    return players, img_path
 
 
 def crop_to_square(img):

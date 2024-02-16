@@ -17,18 +17,27 @@ def load_players():
 
 
 def save_players(players):
-    players.to_csv('data/players.csv', index=False)
+    players.to_csv('static/data/players.csv', index=False)
 
 
-def load_games():
-    with open('static/data/games.json', 'r') as json_file:
-        games = json.load(json_file)
-    return games
+def load_data(name, key2int=False):
+    f_path = os.path.join('static', 'data', name)
+    with jsonlines.open(f_path, 'r') as reader:
+        if key2int:
+            data = [{int(k): v for k, v in line.items()} for line in reader]
+        else:
+            data = [line for line in reader]
+    return data
 
 
-def save_games(games):
-    pprint.pprint(games, width=120, compact=True)
-    pretty_json_str = pprint.pformat(games, width=120, compact=True, sort_dicts=False).replace("'", '"')
+def append_data(data, name):
+    f_path = os.path.join('static', 'data', name)
+    with jsonlines.open(f_path, 'a') as writer:
+        writer.write(data)
 
-    with open('static/data/games.json', 'w') as f:
-        f.write(pretty_json_str)
+
+def load_player2games():
+    with open(os.path.join('static', 'data', 'player2games.json'), 'r') as json_file:
+        player2games = json.load(json_file)
+    return defaultdict(list, player2games)
+

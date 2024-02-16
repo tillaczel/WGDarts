@@ -14,22 +14,32 @@ app = Flask(__name__)
 IMAGE_FOLDER = 'static/data/uploads'
 app.config['IMAGE_FOLDER'] = IMAGE_FOLDER
 
-utils.rating.calculate_ratings()
+players_df = utils.load_players()
+games = utils.load_data('games.jsonl')
+ratings = utils.load_data('ratings.jsonl', key2int=True)
+ratings_before = utils.load_data('ratings_before.jsonl', key2int=True)
+player2games = utils.load_player2games()
+
+utils.rating.calculate_ratings(games)
 
 
 @app.route('/')
 def index():
-    players_list = utils.load_players_ordered_list()
+    global players_df, ratings, player2games
+    players = utils.process_players_dict(players_df, ratings, player2games)
+    players_list = utils.order_players(players)
     timestamp = int(time.time())
     return render_template('index.html', players=players_list, timestamp=timestamp)
 
 
 @app.route('/start_game', methods=['POST'])
 def start_game():
+    global players_df, ratings, player2games
+    players = utils.process_players_dict(players_df, ratings, player2games)
     selected_player_ids = request.form.getlist('selected_players')
 
-    players_list = utils.load_players_ordered_list()
-    selected_players = [player for player in players_list if str(player['id']) in selected_player_ids]
+    players_list = utils.order_players(players)
+    selected_players = [player for player in players_list if player['id'] in selected_player_ids]
     random.shuffle(selected_players)
 
     return render_template('game.html', players=selected_players)
@@ -37,24 +47,25 @@ def start_game():
 
 @app.route('/record_results', methods=['POST'])
 def record_results():
-    print(request.form)
+    global games, ratings, ratings_before, player2games
     positions = [int(p[:-2]) for p in request.form.getlist('finishPosition')]
     ids = [int(id) for id in request.form.getlist('playerId')]
-    print(ids, positions)
-    utils.rating.register_game(ids, positions)
+    game, rating, rating_before = utils.rating.register_game(ratings, ids, positions)
+
+    [player2games[p_id].append(game_idx) for p_id in player_ids]
+    utils.append_data(games, 'games.jsonl')
+    utils.append_data(rating, 'rating.jsonl')
+    utils.append_data(rating_before, 'rating_before.jsonl')
     return redirect(url_for('index'))
 
 
 @app.route('/player_statistics/<int:player_id>')
 def player_statistics(player_id):
     # Add your logic to fetch and display player statistics here
-    players = utils.load_players_dict()
+    global games, players_df, ratings, player2games
+    players = utils.process_players_dict(players_df, ratings, player2games)
     player = players[player_id]
 
-    with open(os.path.join('static/data', 'games.json'), 'r') as json_file:
-        games = json.load(json_file)
-    with open(os.path.join('static/data', 'player2games.json'), 'r') as json_file:
-        player2games = json.load(json_file)
     player_games = [games[index] for index in player2games[str(player_id)]]
     win_ratio = utils.games_2_win_ratios(player_games, player_id)
     sorted_keys = sorted(win_ratio, key=lambda k: -win_ratio[k]['played'])
@@ -74,30 +85,30 @@ def player_statistics(player_id):
 
 @app.route('/admin')
 def admin_page():
-    players = utils.load_players_dict()
+    global players_df, ratings, player2games
+    players = utils.process_players_dict(players_df, ratings, player2games)
     players = sorted(players, key=lambda d: d['name'])
     return render_template('admin.html', player_list=players)
 
 
 @app.route('/add_player', methods=['POST'])
 def add_player():
+    global players_df
     player_name = request.form['name']
     file = request.files['image']
-    if len(file.filename) > 0:
-        image_path = utils.add_player(player_name)
+    players_df, image_path = utils.add_player(players_df, player_name, default_img=len(file.filename) == 0)
+    if len(file.filename) != 0:
         img = Image.open(file.stream)
         img = utils.crop_to_square(img)
         img.save(os.path.join(app.config['IMAGE_FOLDER'], image_path))
-    else:
-        utils.add_player(player_name, default_img=True)
+    utils.save_players(players_df)
     return redirect(url_for('index'))
 
 
 @app.route('/reupload_photo', methods=['POST'])
 def reupload_photo():
+    global players_df
     selected_player_id = request.form['player_id']
-    # player_name = request.form['name']
-    # print(request.form)
     file = request.files['image']
 
     image_path = f"{selected_player_id}.png"
@@ -105,10 +116,9 @@ def reupload_photo():
     img = utils.crop_to_square(img)
     img.save(os.path.join(app.config['IMAGE_FOLDER'], image_path))
 
-    players = utils.load_players()
-    print(players['img_path'].iloc[int(selected_player_id)])
-    players['img_path'].iloc[int(selected_player_id)] = image_path
-    utils.save_players(players)
+    print(players_df['img_path'].iloc[int(selected_player_id)])
+    players_df['img_path'].iloc[int(selected_player_id)] = image_path
+    utils.save_players(players_df)
 
     return redirect(url_for('index'))
 
