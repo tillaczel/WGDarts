@@ -1,12 +1,13 @@
-from flask import Flask, request, redirect, url_for, render_template
-import os
-from werkzeug.utils import secure_filename
-import utils
-import numpy as np
-import random
-from PIL import Image
-import time
 import json
+import numpy as np
+import os
+import random
+import time
+from PIL import Image
+from flask import Flask, request, redirect, url_for, render_template
+from werkzeug.utils import secure_filename
+
+import utils
 
 # Configure your application and upload folder
 app = Flask(__name__)
@@ -14,19 +15,18 @@ UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
 utils.calculate_ratings()
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/')
 def index():
     players_list = utils.load_players_ordered_list()
     timestamp = int(time.time())
     return render_template('index.html', players=players_list, timestamp=timestamp)
-
-
 
 
 @app.route('/start_game', methods=['POST'])
@@ -38,6 +38,7 @@ def start_game():
     random.shuffle(selected_players)
 
     return render_template('game.html', players=selected_players)
+
 
 @app.route('/record_results', methods=['POST'])
 def record_results():
@@ -68,14 +69,16 @@ def player_statistics(player_id):
     win_ratio_print = []
     for player_id in sorted_keys:
         games_played, games_won = win_ratio[player_id]['played'], win_ratio[player_id]['won']
-        ratio = games_won/games_played
+        ratio = games_won / games_played
         win_ratio_print.append([players[player_id]["name"], int(games_played), f"{ratio:.2%}"])
 
-    total_played, total_won = int(np.sum([v['played'] for v in win_ratio.values()])), int(np.sum([v['won'] for v in win_ratio.values()]))
+    total_played, total_won = int(np.sum([v['played'] for v in win_ratio.values()])), int(
+        np.sum([v['won'] for v in win_ratio.values()]))
     player['num_challengers'] = total_played
-    player['win_rate'] = f"{total_won/total_played:.2%}"
+    player['win_rate'] = f"{total_won / total_played:.2%}"
     # ratings_history = utils.load_ratings_history()
-    return render_template('player_statistics.html', player_id=player_id, player=player, win_rate=win_ratio_print, players=players)
+    return render_template('player_statistics.html', player_id=player_id, player=player, win_rate=win_ratio_print,
+                           players=players)
 
 
 @app.route('/admin')
@@ -121,4 +124,3 @@ def reupload_photo():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

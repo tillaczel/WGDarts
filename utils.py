@@ -1,17 +1,17 @@
 # Define any utility functions for Elo rating calculations or other purposes
 
-import math
-import pandas as pd
+import copy
 import json
+import jsonlines
+import math
 import numpy as np
 import os
+import pandas as pd
+import pprint
 import trueskill
 from PIL import Image
-import pprint
-from datetime import datetime
 from collections import defaultdict
-import jsonlines
-import copy
+from datetime import datetime
 
 
 def calculate_expected_score(rating_a, rating_b):
@@ -81,8 +81,10 @@ def calculate_game_ratings(ratings, result):
     new_ratings = copy.deepcopy(ratings)
     for player_a in range(len(new_ratings) - 1):
         for player_b in range(player_a + 1, len(ratings)):
-            rating_a = trueskill_env.create_rating(mu=new_ratings[player_a]['mu']/40, sigma=new_ratings[player_a]['sigma']/40)
-            rating_b = trueskill_env.create_rating(mu=new_ratings[player_b]['mu']/40, sigma=new_ratings[player_b]['sigma']/40)
+            rating_a = trueskill_env.create_rating(mu=new_ratings[player_a]['mu'] / 40,
+                                                   sigma=new_ratings[player_a]['sigma'] / 40)
+            rating_b = trueskill_env.create_rating(mu=new_ratings[player_b]['mu'] / 40,
+                                                   sigma=new_ratings[player_b]['sigma'] / 40)
             if result[player_a] < result[player_b]:
                 tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b, env=trueskill_env)
             else:
@@ -97,7 +99,7 @@ def calculate_game_ratings(ratings, result):
 
 
 class NewPlayer(dict):
-    def __init__(self, mu=1000., sigma=1000/3, **kwargs):
+    def __init__(self, mu=1000., sigma=1000 / 3, **kwargs):
         super().__init__(**kwargs)
         self['mu'] = mu
         self['sigma'] = sigma
@@ -160,7 +162,7 @@ def games_2_win_ratios(games, main_player_id):
 
 def get_game_history(all_ratings, player2games, main_player_id):
     game_idxs = player2games[main_player_id]
-    ratings = {'mu': [1000], 'sigma': [1000/3]}
+    ratings = {'mu': [1000], 'sigma': [1000 / 3]}
     for game_idx in game_idxs:
         rating = all_ratings[game_idx][main_player_id]
         ratings['mu'].append(rating['mu'])
@@ -213,6 +215,3 @@ def crop_to_square(img):
     # Crop the image
     img_cropped = img.crop((left, top, right, bottom))
     return img_cropped.resize((512, 512), Image.ANTIALIAS)
-
-
-
