@@ -12,6 +12,7 @@ from collections import defaultdict
 from datetime import datetime
 
 from .utils import get_player_rating, player2game_idxs
+from .titles import get_titles
 
 
 class WinRatio(dict):
@@ -55,6 +56,7 @@ def process_players_dict(players, games, ratings):
         rating = final_ratings[id]
         player['id'] = id
         player['game_idxs'] = game_idxs
+        player['games'] = [games[index] for index in player['game_idxs']]
         player['mu'] = round(rating['mu'])
         player['sigma'] = round(rating['sigma'])
         player['rating'] = rating['mu'] - 3 * rating['sigma']
@@ -62,6 +64,7 @@ def process_players_dict(players, games, ratings):
         player['sigmas'] = ratings_player['sigma']
         player['ratings'] = (np.array(player['mus']) - 3 * np.array(ratings_player['sigma'])).tolist()
         player['rounded_rating'] = round(player['rating'])
+        player['titles'] = get_titles(player)
     return players
 
 

@@ -63,7 +63,7 @@
             <th style="width:30%; text-align:left;">Games Played</th>
             <th style="text-align:left;">Win Rate</th>
         </tr>
-        {% for row in win_rate %}
+        {% for row in player.win_ratio_print %}
             <tr>
                 <td>{{ row[0] }}</td>
                 <td>{{ row[1] }}</td>
@@ -73,7 +73,7 @@
         <tr>
             <td>Total</td>
             <td>{{ player.num_challengers }}</td>
-            <td>{{ player.win_rate }}</td>
+            <td>{{ player.total_win_rate }}</td>
         </tr>
     </table>
 

@@ -68,21 +68,20 @@ def player_statistics(player_id):
     players = utils.process_players_dict(players_df, games, ratings)
     player = players[player_id]
 
-    player_games = [games[index] for index in player['game_idxs']]
-    win_ratio = utils.games_2_win_ratios(player_games, player_id)
+    win_ratio = utils.games_2_win_ratios(player['games'], player_id)
     sorted_keys = sorted(win_ratio, key=lambda k: -win_ratio[k]['played'])
     win_ratio_print = []
     for player_id in sorted_keys:
         games_played, games_won = win_ratio[player_id]['played'], win_ratio[player_id]['won']
         ratio = games_won / games_played
         win_ratio_print.append([players[player_id]["name"], int(games_played), f"{ratio:.2%}"])
+    player['win_ratio_print'] = win_ratio_print
 
     total_played, total_won = int(np.sum([v['played'] for v in win_ratio.values()])), int(
         np.sum([v['won'] for v in win_ratio.values()]))
     player['num_challengers'] = total_played
-    player['win_rate'] = f"{total_won / total_played:.2%}"
-    return render_template('player_statistics.html', player_id=player_id, player=player, win_rate=win_ratio_print,
-                           players=players)
+    player['total_win_rate'] = f"{total_won / total_played:.2%}"
+    return render_template('player_statistics.html', player_id=player_id, player=player)
 
 
 @app.route('/admin')
