@@ -14,16 +14,13 @@ app = Flask(__name__)
 IMAGE_FOLDER = 'static/data/uploads'
 app.config['IMAGE_FOLDER'] = IMAGE_FOLDER
 
-players_df = utils.load_players()
-games = utils.load_data('games.jsonl')
-ratings = utils.load_data('ratings.jsonl', key2int=True)
-ratings_before = utils.load_data('ratings_before.jsonl', key2int=True)
-player2games = utils.load_player2games()
-
 
 @app.route('/')
 def index():
-    global players_df, ratings, player2games
+    players_df = utils.load_players()
+    ratings = utils.load_data('ratings.jsonl', key2int=True)
+    player2games = utils.load_player2games()
+
     players = utils.process_players_dict(players_df, ratings, player2games)
     players_list = utils.order_players(players)
     timestamp = int(time.time())
@@ -32,7 +29,10 @@ def index():
 
 @app.route('/start_game', methods=['POST'])
 def start_game():
-    global players_df, ratings, player2games
+    players_df = utils.load_players()
+    ratings = utils.load_data('ratings.jsonl', key2int=True)
+    player2games = utils.load_player2games()
+
     players = utils.process_players_dict(players_df, ratings, player2games)
     selected_player_ids = [int(i) for i in request.form.getlist('selected_players')]
 
@@ -45,7 +45,10 @@ def start_game():
 
 @app.route('/record_results', methods=['POST'])
 def record_results():
-    global games, ratings, ratings_before, player2games
+    games = utils.load_data('games.jsonl')
+    ratings = utils.load_data('ratings.jsonl', key2int=True)
+    player2games = utils.load_player2games()
+
     positions = [int(p[:-2]) for p in request.form.getlist('finishPosition')]
     player_ids = [int(id) for id in request.form.getlist('playerId')]
     game, rating, rating_before = utils.rating.register_game(ratings, player_ids, positions)
@@ -60,8 +63,11 @@ def record_results():
 
 @app.route('/player_statistics/<int:player_id>')
 def player_statistics(player_id):
-    # Add your logic to fetch and display player statistics here
-    global games, players_df, ratings, player2games
+    players_df = utils.load_players()
+    games = utils.load_data('games.jsonl')
+    ratings = utils.load_data('ratings.jsonl', key2int=True)
+    player2games = utils.load_player2games()
+
     players = utils.process_players_dict(players_df, ratings, player2games)
     player = players[player_id]
 
@@ -84,7 +90,10 @@ def player_statistics(player_id):
 
 @app.route('/admin')
 def admin_page():
-    global players_df, ratings, player2games
+    players_df = utils.load_players()
+    ratings = utils.load_data('ratings.jsonl', key2int=True)
+    player2games = utils.load_player2games()
+
     players = utils.process_players_dict(players_df, ratings, player2games)
     players = sorted(players, key=lambda d: d['name'])
     return render_template('admin.html', player_list=players)
@@ -92,7 +101,8 @@ def admin_page():
 
 @app.route('/add_player', methods=['POST'])
 def add_player():
-    global players_df
+    players_df = utils.load_players()
+
     player_name = request.form['name']
     file = request.files['image']
     players_df, image_path = utils.add_player(players_df, player_name, default_img=len(file.filename) == 0)
@@ -106,7 +116,8 @@ def add_player():
 
 @app.route('/reupload_photo', methods=['POST'])
 def reupload_photo():
-    global players_df
+    players_df = utils.load_players()
+
     selected_player_id = request.form['player_id']
     file = request.files['image']
 
