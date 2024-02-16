@@ -27,17 +27,10 @@
     <h1>{{ player.name }}</h1>
     <div class="game-container">
 
-        <!-- Add more content to display specific player statistics -->
-        <!-- For example: -->
-        <!-- <p>Player Name: {{ player_name }}</p> -->
-        <!-- <p>Player Score: {{ player_score }}</p> -->
-        <!-- <p>Other Stats: {{ other_stats }}</p> -->
-
-        <!-- Plot the player's rating history -->
-
-        <div id="rating-history-plot"></div>
-        <div id="range-history-plot"></div>
-        <button id="toggleButton" onclick="togglePlots()">Toggle Plots</button>
+    <!-- Plot the player's rating history -->
+    <div id="range-history-plot"></div>
+    <div id="rating-history-plot"></div>
+    <button id="toggleButton" onclick="togglePlots()">Toggle Plots</button>
 
     <!-- Table for Player Details -->
     <table style="width:20%; margin-top:20px; color:#fff; border-collapse: collapse;">
@@ -92,6 +85,7 @@
     <!-- Add a button for toggling plots -->
 
 <script>
+
     function togglePlots() {
         // Toggle the visibility of the plots
         var ratingPlot = document.getElementById('rating-history-plot');
@@ -104,8 +98,6 @@
             ratingPlot.style.display = 'none';
             rangePlot.style.display = 'block';
         }
-        Plotly.Plots.resize(ratingPlot);
-        Plotly.Plots.resize(rangePlot);
     }
 
     // Rating History Plot
@@ -209,127 +201,5 @@
     document.getElementById('range-history-plot').style.display = 'none';
 </script>
 
-<!--    <script>-->
-<!--        var playerRatingHistory = {{ player.ratings | tojson }};-->
-
-<!--        var traceRating = {-->
-<!--            x: Array.from({ length: playerRatingHistory.length }, (_, i) => i),-->
-<!--            y: playerRatingHistory,-->
-<!--            type: 'line',-->
-<!--            mode: 'lines+markers',-->
-<!--            marker: {color: '#fff'}, // Blue color-->
-<!--        };-->
-
-<!--        var minLast30Entries = Math.min(...playerRatingHistory.slice(-30));-->
-<!--        var maxLast30Entries = Math.max(...playerRatingHistory.slice(-30));-->
-<!--        var rangeLast30Entries = maxLast30Entries-minLast30Entries;-->
-<!--        var minY = minLast30Entries-0.05*rangeLast30Entries;-->
-<!--        var maxY = maxLast30Entries+0.05*rangeLast30Entries;-->
-<!--        var minX = Math.max(0, playerRatingHistory.length - 30);-->
-<!--        var maxX = playerRatingHistory.length - 1;-->
-
-<!--        var layout = {-->
-<!--            title: {-->
-<!--                text: "{{ player.name }}",-->
-<!--                font: {-->
-<!--                    family: 'Arial, sans-serif',-->
-<!--                    size: 24, // Adjust the font size as needed-->
-<!--                    color: '#fff',-->
-<!--                    weight: 'bold',-->
-<!--                },-->
-<!--            },-->
-<!--            xaxis: {-->
-<!--                title: 'Game Number',-->
-<!--                color: '#fff',-->
-<!--                range: [minX, maxX],-->
-<!--            },-->
-<!--            yaxis: {-->
-<!--                title: 'Rating',-->
-<!--                color: '#fff',-->
-<!--                range: [minY, maxY],-->
-<!--            },-->
-<!--            plot_bgcolor: '#2c3e50', // Darker background color-->
-<!--            paper_bgcolor: '#2c3e50', // Darker background color-->
-<!--            width: 1600,  // Adjust the width as needed-->
-<!--            height: 600,  // Adjust the height as needed-->
-<!--        };-->
-
-<!--        var config = {-->
-<!--            toImageButtonOptions: false,-->
-<!--            scrollZoom: true,-->
-<!--            modeBarButtonsToRemove: ['toImage', 'lasso2d', 'select2d', 'toggleSpikelines', 'hoverClosestCartesian', 'hoverCompareCartesian']-->
-<!--        };-->
-
-<!--        Plotly.newPlot('rating-history-plot', [traceRating], layout, config);-->
-<!--    </script>-->
-
-<!--    <script>-->
-<!--        var playerMuHistory = {{ player.mus | tojson }};-->
-<!--        var playerSigmaHistory = {{ player.sigmas | tojson }};-->
-<!--        var minHistory = playerMuHistory.map((mu, i) => mu - 3 * playerSigmaHistory[i]);-->
-<!--        var maxHistory = playerMuHistory.map((mu, i) => mu + 3 * playerSigmaHistory[i]);-->
-
-<!--        var traceMin = {-->
-<!--            x: Array.from({ length: playerMuHistory.length }, (_, i) => i),-->
-<!--            y: minHistory,-->
-<!--            type: 'scatter',-->
-<!--            mode: 'lines', // Remove markers-->
-<!--            line: { color: 'rgba(0, 0, 0, 0)', width: 2 }, // Set line color and width-->
-<!--            fill: 'tonexty',-->
-<!--            fillcolor: 'rgba(255, 255, 255, 0.3)',-->
-<!--            name: 'Player Ratings'-->
-<!--        };-->
-
-<!--        var traceMax = {-->
-<!--            x: Array.from({ length: playerMuHistory.length }, (_, i) => i),-->
-<!--            y: maxHistory,-->
-<!--            type: 'scatter',-->
-<!--            mode: 'lines', // Remove markers-->
-<!--            line: { color: 'rgba(0, 0, 0, 0)', width: 2 }, // Set transparent line color and width-->
-<!--            name: 'Player Mu'-->
-<!--        };-->
-
-<!--        var minLast30Entries = Math.min(...minHistory.slice(-30));-->
-<!--        var maxLast30Entries = Math.max(...maxHistory.slice(-30));-->
-<!--        var rangeLast30Entries = maxLast30Entries-minLast30Entries;-->
-<!--        var minY = minLast30Entries-0.05*rangeLast30Entries;-->
-<!--        var maxY = maxLast30Entries+0.05*rangeLast30Entries;-->
-<!--        var minX = Math.max(0, playerMuHistory.length - 30);-->
-<!--        var maxX = playerMuHistory.length - 1;-->
-
-<!--        var layout = {-->
-<!--            title: {-->
-<!--                text: "{{ player.name }}",-->
-<!--                font: {-->
-<!--                    family: 'Arial, sans-serif',-->
-<!--                    size: 24, // Adjust the font size as needed-->
-<!--                    color: '#fff',-->
-<!--                    weight: 'bold',-->
-<!--                },-->
-<!--            },-->
-<!--            xaxis: {-->
-<!--                title: 'Game Number',-->
-<!--                color: '#fff',-->
-<!--                range: [minX, maxX],-->
-<!--            },-->
-<!--            yaxis: {-->
-<!--                title: 'Rating',-->
-<!--                color: '#fff',-->
-<!--                range: [minY, maxY],-->
-<!--            },-->
-<!--            plot_bgcolor: '#2c3e50', // Darker background color-->
-<!--            paper_bgcolor: '#2c3e50', // Darker background color-->
-<!--            width: 1600,  // Adjust the width as needed-->
-<!--            height: 600,  // Adjust the height as needed-->
-<!--        };-->
-
-<!--        var config = {-->
-<!--            toImageButtonOptions: false,-->
-<!--            scrollZoom: true,-->
-<!--            modeBarButtonsToRemove: ['toImage', 'lasso2d', 'select2d', 'toggleSpikelines', 'hoverClosestCartesian', 'hoverCompareCartesian']-->
-<!--        };-->
-
-<!--        Plotly.newPlot('rating-history-plot', [traceMax, traceMin], layout, config);-->
-<!--    </script>-->
 </body>
 </html>

@@ -97,9 +97,10 @@ def calculate_game_ratings(ratings, result):
 
 
 class NewPlayer(dict):
-    def __missing__(self, key):
-        default_entries = {'mu': 1000., 'sigma': 1000/3}
-        return default_entries.get(key, None)
+    def __init__(self, mu=1000., sigma=1000/3, **kwargs):
+        super().__init__(**kwargs)
+        self['mu'] = mu
+        self['sigma'] = sigma
 
 
 def calculate_ratings():
@@ -112,6 +113,8 @@ def calculate_ratings():
     games_ratings_before_path = os.path.join("static", "ratings_before.jsonl")
     if os.path.exists(games_ratings_path):
         os.remove(games_ratings_path)
+    if os.path.exists(games_ratings_before_path):
+        os.remove(games_ratings_before_path)
 
     player2games = defaultdict(list)
 
@@ -133,9 +136,10 @@ def calculate_ratings():
 
 
 class WinRatio(dict):
-    def __missing__(self, key):
-        default_entries = {'won': 0, 'played': 0}
-        return default_entries.get(key, None)
+    def __init__(self, played=0, won=0, **kwargs):
+        super().__init__(**kwargs)
+        self['played'] = played
+        self['won'] = won
 
 
 def games_2_win_ratios(games, main_player_id):
