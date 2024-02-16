@@ -11,15 +11,10 @@ import utils
 
 # Configure your application and upload folder
 app = Flask(__name__)
-UPLOAD_FOLDER = 'static/uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+IMAGE_FOLDER = 'static/data/uploads'
+app.config['IMAGE_FOLDER'] = IMAGE_FOLDER
 
 utils.calculate_ratings()
-
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/')
@@ -59,9 +54,9 @@ def player_statistics(player_id):
     # games_won = utils.load_csv('games_won.csv')
     # games_played = utils.load_csv('games_played.csv')
 
-    with open(os.path.join('static', 'games.json'), 'r') as json_file:
+    with open(os.path.join('static/data', 'games.json'), 'r') as json_file:
         games = json.load(json_file)
-    with open(os.path.join('static', 'player2games.json'), 'r') as json_file:
+    with open(os.path.join('static/data', 'player2games.json'), 'r') as json_file:
         player2games = json.load(json_file)
     player_games = [games[index] for index in player2games[str(player_id)]]
     win_ratio = utils.games_2_win_ratios(player_games, player_id)
@@ -96,7 +91,7 @@ def add_player():
         image_path = utils.add_player(player_name)
         img = Image.open(file.stream)
         img = utils.crop_to_square(img)
-        img.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
+        img.save(os.path.join(app.config['IMAGE_FOLDER'], image_path))
     else:
         utils.add_player(player_name, default_img=True)
     return redirect(url_for('index'))
@@ -112,7 +107,7 @@ def reupload_photo():
     image_path = f"{selected_player_id}.png"
     img = Image.open(file.stream)
     img = utils.crop_to_square(img)
-    img.save(os.path.join(app.config['UPLOAD_FOLDER'], image_path))
+    img.save(os.path.join(app.config['IMAGE_FOLDER'], image_path))
 
     players = utils.load_players()
     print(players['img_path'].iloc[int(selected_player_id)])

@@ -36,15 +36,15 @@ def add_player(name, default_img=False):
 
 
 def load_players():
-    return pd.read_csv('static/players.csv')
+    return pd.read_csv('static/data/players.csv')
 
 
 def save_players(players):
-    players.to_csv('static/players.csv', index=False)
+    players.to_csv('data/players.csv', index=False)
 
 
 def load_games():
-    with open('static/games.json', 'r') as json_file:
+    with open('static/data/games.json', 'r') as json_file:
         games = json.load(json_file)
     return games
 
@@ -53,7 +53,7 @@ def save_games(games):
     pprint.pprint(games, width=120, compact=True)
     pretty_json_str = pprint.pformat(games, width=120, compact=True, sort_dicts=False).replace("'", '"')
 
-    with open('static/games.json', 'w') as f:
+    with open('static/data/games.json', 'w') as f:
         f.write(pretty_json_str)
 
 
@@ -109,10 +109,8 @@ def calculate_ratings():
     games = load_games()
     ratings = defaultdict(NewPlayer)
 
-    if not os.path.exists('static'):
-        os.makedirs('static')
-    games_ratings_path = os.path.join("static", "ratings.jsonl")
-    games_ratings_before_path = os.path.join("static", "ratings_before.jsonl")
+    games_ratings_path = os.path.join('static', 'data', "ratings.jsonl")
+    games_ratings_before_path = os.path.join('static', 'data', "ratings_before.jsonl")
     if os.path.exists(games_ratings_path):
         os.remove(games_ratings_path)
     if os.path.exists(games_ratings_before_path):
@@ -133,7 +131,7 @@ def calculate_ratings():
             writer.write(game_ratings)
         [player2games[p_id].append(game_idx) for p_id in player_ids]
 
-    with open('static/player2games.json', 'w') as f:
+    with open('static/data/player2games.json', 'w') as f:
         json.dump(dict(player2games), f)
 
 
@@ -173,11 +171,11 @@ def get_game_history(all_ratings, player2games, main_player_id):
 def load_players_dict():
     players = load_players()
     all_ratings = []
-    with jsonlines.open(os.path.join('static', 'ratings.jsonl'), 'r') as reader:
+    with jsonlines.open(os.path.join('static', 'data', 'ratings.jsonl'), 'r') as reader:
         for line in reader:
             line = {int(k): v for k, v in line.items()}
             all_ratings.append(line)
-    with open(os.path.join('static', 'player2games.json'), 'r') as json_file:
+    with open(os.path.join('static', 'data', 'player2games.json'), 'r') as json_file:
         player2games = json.load(json_file)
     player2games = {int(k): v for k, v in player2games.items()}
     final_ratings = get_ratings(all_ratings, player2games)

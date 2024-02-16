@@ -101,13 +101,13 @@
     <div class="game-container">
         {% for player in players %}
             <div class="player-card" id="player-card-{{ player.id }}" onclick="toggleFinish(this, {{ player.id }})">
-                <img src="{{ url_for('static', filename='uploads/' + player.img_path) }}" alt="{{ player.name }}" class="player-image">
+                <img src="{{ url_for('static', filename='data/uploads/' + player.img_path) }}" alt="{{ player.name }}" class="player-image">
                 <h3 class="player-name">{{ player.name }}</h3>
                 <h3 class="player-rating">{{ player.rounded_rating }}</h3>
                 <h4 class="finish-position" id="finish-position-{{ player.id }}"></h4> <!-- Added line -->
             </div>
             {% if not loop.last %}
-                <img src="{{ url_for('static', filename='uploads/vs.png') }}" alt="VS" class="versus-image">
+                <img src="{{ url_for('static', filename='data/uploads/vs.png') }}" alt="VS" class="versus-image">
             {% endif %}
         {% endfor %}
     </div>
