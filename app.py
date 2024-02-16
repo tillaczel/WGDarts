@@ -14,7 +14,7 @@ app = Flask(__name__)
 IMAGE_FOLDER = 'static/data/uploads'
 app.config['IMAGE_FOLDER'] = IMAGE_FOLDER
 
-utils.calculate_ratings()
+utils.rating.calculate_ratings()
 
 
 @app.route('/')
@@ -41,7 +41,7 @@ def record_results():
     positions = [int(p[:-2]) for p in request.form.getlist('finishPosition')]
     ids = [int(id) for id in request.form.getlist('playerId')]
     print(ids, positions)
-    utils.register_game(ids, positions)
+    utils.rating.register_game(ids, positions)
     return redirect(url_for('index'))
 
 
@@ -50,9 +50,6 @@ def player_statistics(player_id):
     # Add your logic to fetch and display player statistics here
     players = utils.load_players_dict()
     player = players[player_id]
-    # players_mu_sigma = utils.load_csv('players_mu_sigma.csv')
-    # games_won = utils.load_csv('games_won.csv')
-    # games_played = utils.load_csv('games_played.csv')
 
     with open(os.path.join('static/data', 'games.json'), 'r') as json_file:
         games = json.load(json_file)
@@ -71,7 +68,6 @@ def player_statistics(player_id):
         np.sum([v['won'] for v in win_ratio.values()]))
     player['num_challengers'] = total_played
     player['win_rate'] = f"{total_won / total_played:.2%}"
-    # ratings_history = utils.load_ratings_history()
     return render_template('player_statistics.html', player_id=player_id, player=player, win_rate=win_ratio_print,
                            players=players)
 
