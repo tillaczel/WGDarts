@@ -42,6 +42,7 @@ def get_player_rating(ratings, player_id):
     for ratings_i in ratings[::-1]:
         if player_id in ratings_i.keys():
             return ratings_i[player_id]
+    return {'mu': 1000, 'sigma': 1000 / 3}
 
 
 def player2game_idxs(games, player_id):
