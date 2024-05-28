@@ -8,6 +8,7 @@ from flask import Flask, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 
 import utils
+import utils.stats
 
 # Configure your application and upload folder
 app = Flask(__name__)
@@ -19,6 +20,7 @@ app.config['IMAGE_FOLDER'] = IMAGE_FOLDER
 def index():
     players_df = utils.load_players()
     games = utils.load_data('games.jsonl')
+    utils.stats.recompute_ratings(players_df, games)
     ratings = utils.load_data('ratings.jsonl', key2int=True)
 
     players = utils.process_players_dict(players_df, games, ratings)
@@ -129,4 +131,4 @@ def reupload_photo():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5001, host='0.0.0.0')

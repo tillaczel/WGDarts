@@ -25,22 +25,28 @@ def get_ratings(all_ratings, player2games):
 def calculate_game_ratings(ratings, result):
     trueskill_env = trueskill.TrueSkill(draw_probability=0.0, tau=25 / 3 / 100)
 
-    old_ratings = copy.deepcopy(ratings)
-    for player_a in range(len(old_ratings) - 1):
-        for player_b in range(player_a + 1, len(ratings)):
-            rating_a = trueskill_env.create_rating(mu=old_ratings[player_a]['mu'] / 40,
-                                                   sigma=old_ratings[player_a]['sigma'] / 40)
-            rating_b = trueskill_env.create_rating(mu=old_ratings[player_b]['mu'] / 40,
-                                                   sigma=old_ratings[player_b]['sigma'] / 40)
-            if result[player_a] < result[player_b]:
-                tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b, env=trueskill_env)
-            else:
-                tmp_ratings = trueskill.rate_1vs1(rating_b, rating_a, env=trueskill_env)[::-1]
+    ratings_trueskill = [[trueskill_env.create_rating(mu=r['mu'] / 40, sigma=r['sigma'] / 40)] for r in ratings]
+    ratings_trueskill = trueskill_env.rate(ratings_trueskill, ranks=result)
+    print(ratings_trueskill)
+    ratings = [{'mu': r[0].mu*40, 'sigma': r[0].sigma*40} for r in ratings_trueskill]
 
-            ratings[player_a]['mu'] += (tmp_ratings[0].mu - rating_a.mu) / (len(ratings) - 1) * 40
-            ratings[player_a]['sigma'] += (tmp_ratings[0].sigma - rating_a.sigma) / (len(ratings) - 1) * 40
-            ratings[player_b]['mu'] += (tmp_ratings[1].mu - rating_b.mu) / (len(ratings) - 1) * 40
-            ratings[player_b]['sigma'] += (tmp_ratings[1].sigma - rating_b.sigma) / (len(ratings) - 1) * 40
+    # old_ratings = copy.deepcopy(ratings)
+    #
+    # for player_a in range(len(old_ratings) - 1):
+    #     for player_b in range(player_a + 1, len(ratings)):
+    #         rating_a = trueskill_env.create_rating(mu=old_ratings[player_a]['mu'] / 40,
+    #                                                sigma=old_ratings[player_a]['sigma'] / 40)
+    #         rating_b = trueskill_env.create_rating(mu=old_ratings[player_b]['mu'] / 40,
+    #                                                sigma=old_ratings[player_b]['sigma'] / 40)
+    #         if result[player_a] < result[player_b]:
+    #             tmp_ratings = trueskill.rate_1vs1(rating_a, rating_b, env=trueskill_env)
+    #         else:
+    #             tmp_ratings = trueskill.rate_1vs1(rating_b, rating_a, env=trueskill_env)[::-1]
+    #
+    #         ratings[player_a]['mu'] += (tmp_ratings[0].mu - rating_a.mu) / (len(ratings) - 1) * 40
+    #         ratings[player_a]['sigma'] += (tmp_ratings[0].sigma - rating_a.sigma) / (len(ratings) - 1) * 40
+    #         ratings[player_b]['mu'] += (tmp_ratings[1].mu - rating_b.mu) / (len(ratings) - 1) * 40
+    #         ratings[player_b]['sigma'] += (tmp_ratings[1].sigma - rating_b.sigma) / (len(ratings) - 1) * 40
 
     return ratings
 

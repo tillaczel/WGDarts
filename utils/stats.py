@@ -13,6 +13,8 @@ from datetime import datetime
 
 from .utils import get_player_rating, player2game_idxs
 from .titles import get_titles
+from .rating import calculate_game_ratings
+from .data import append_data
 
 
 class WinRatio(dict):
@@ -71,3 +73,24 @@ def process_players_dict(players, games, ratings):
 def order_players(players):
     players_all = sorted(players, key=lambda x: -x['rating'])
     return players_all
+
+
+def recompute_ratings(players, games):
+    file_path = os.path.join('static', 'data', 'ratings.jsonl')
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+    rating = {id: {'mu': 1000, 'sigma': 1000/3} for id in range(len(players))}
+    rating_before = rating
+
+    ratings = []
+
+    for game in games:
+        rating_tmp = [copy.deepcopy(rating_before)[id] for id in game['player_ids']]
+        rating_tmp = calculate_game_ratings(rating_tmp, game['result'])
+        for p_id, r in zip(game['player_ids'], rating_tmp):
+            rating[p_id] = r
+
+        append_data(rating, 'ratings.jsonl')
+        append_data(rating_before, 'ratings_before.jsonl')
+        rating_before = rating
